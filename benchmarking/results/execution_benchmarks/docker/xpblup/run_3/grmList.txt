@@ -1,0 +1,2 @@
+/results/execution_benchmarks/xpblup/docker/xpblup_full
+/results/execution_benchmarks/xpblup/docker/xpblup_small

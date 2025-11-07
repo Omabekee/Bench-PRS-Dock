@@ -1,0 +1,100 @@
+Docker execution benchmark for 'bridgeprs'
+Command: docker run --rm   -v ~/trances-prs-dock/BridgePRS/data:/data   -v ~/trances-prs-dock/results:/results   chiomab/bridgeprs:v1.5 bash -c './bridgePRS pipeline go   -o /results/execution_benchmarks/bridgeprs/docker   --config_files /data/afr.config /data/eur.config   --phenotype y'
+Starting timed Docker run...
+Running execution in 'docker' mode...
+Command: docker run --rm   -v ~/trances-prs-dock/BridgePRS/data:/data   -v ~/trances-prs-dock/results:/results   chiomab/bridgeprs:v1.5 bash -c './bridgePRS pipeline go   -o /results/execution_benchmarks/bridgeprs/docker   --config_files /data/afr.config /data/eur.config   --phenotype y'
+BridgePRS Begins at Wed Nov  5 05:47:51 2025 
+Bridge Command-Line:  ./bridgePRS pipeline go -o /results/execution_benchmarks/bridgeprs/docker --config_files /data/afr.config /data/eur.config --phenotype y
+Checking Requirements:
+               System:  platform=linux,  cores(available)=32,        cores(used)=31
+                Plink:  found=true,      path=/usr/local/bin/plink
+                    R:  found=true,      path=/usr/bin/R,             version=4.1.2       (packages=up to date)                                            
+              Python3:  found=true,      path=/usr/bin/python3,     matplotlib=true
+
+BridgeDebugger: Verifying Sumstats File For Pop AFR
+                New Sumstats in /results/execution_benchmarks/bridgeprs/docker/save/sumstats......................Complete
+
+BridgeDebugger: Verifying Sumstats File For Pop EUR
+                New Sumstats in /results/execution_benchmarks/bridgeprs/docker/save/sumstats......................Complete
+
+Reading Population Data:
+             Target Data:
+                   Names: POP=AFR
+                          LDPOP=AFR
+                          LD_PATH=/data/1000G_sample
+                Sumstats: SOURCE_PREFIX=/data/pop_AFR/sumstats/AFR.chr
+                          SOURCE_SUFFIX=.glm.linear.gz
+                          SUMSTATS_PREFIX=/results/execution_benchmarks/bridgeprs/docker/save/sumstats/ss.AFR.
+                          SUMSTATS_SUFFIX=.out.gz
+                          SUMSTATS_FIELDS=ID,REF,A1,P,BETA
+                          SUMSTATS_SIZE=20000
+                 QC-Snps: SNP_FILE=/data/qc_snplist.txt
+      Genotype/Phenotype: GENOTYPE_PREFIX=/data/pop_AFR/genotypes/chr
+                          PHENOTYPE_FILE=/data/pop_AFR/phenotypes/AFR_test.dat
+                          VALIDATION_FILE=/data/pop_AFR/phenotypes/AFR_valid.dat
+                          CHROMOSOMES=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22
+                          PHENOTYPE_VARIABLES=y,y.binary,PC1,PC2
+                          DECLARED_PHENOTYPE=y
+                          PHENOTYPE_CLASS=continuous
+                          EFFECT_SIZE_RANGE=-0.99,1.262
+                          GWAS_Variants=[19734 (Total), 13305 (Matching), 6380 (Ref/Alt Swap)]
+    **Target Config Made: /results/execution_benchmarks/bridgeprs/docker/save/AFR.target.config
+
+               Base Data:
+                   Names: POP=EUR
+                          LDPOP=EUR
+                          LD_PATH=/data/1000G_sample
+                Sumstats: SOURCE_PREFIX=/data/pop_EUR/sumstats/EUR.chr
+                          SOURCE_SUFFIX=.glm.linear.gz
+                          SUMSTATS_PREFIX=/results/execution_benchmarks/bridgeprs/docker/save/sumstats/ss.EUR.
+                          SUMSTATS_SUFFIX=.out.gz
+                          SUMSTATS_FIELDS=ID,REF,A1,P,BETA
+                          SUMSTATS_SIZE=80000
+                 QC-Snps: SNP_FILE=/data/qc_snplist.txt
+      Genotype/Phenotype: GENOTYPE_PREFIX=/data/pop_EUR/genotypes/chr
+                          PHENOTYPE_FILE=/data/pop_EUR/phenotypes/EUR_test.dat
+                          CHROMOSOMES=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22
+                          PHENOTYPE_VARIABLES=y,y.binary,PC1,PC2
+                          DECLARED_PHENOTYPE=y
+                          PHENOTYPE_CLASS=continuous
+                          EFFECT_SIZE_RANGE=-0.431,0.413
+                          Shared_Variants=[13285 (Matching), 6377 (Ref/Alt Swap)]
+    **Base Config Made: /results/execution_benchmarks/bridgeprs/docker/save/EUR.base.config
+
+Setting Program Parameters:
+         Flags: OFF=VERBOSE,RESTART
+
+  Begin Module:  Stage1: prs-single
+     JOB1: Clumping Pop Data (prs-single clump)..........(Parallelizing Across 31 Cores)...........Complete
+     [File(s) Generated: clump_prefix=docker/prs-single_AFR/clump/AFR_clump]
+     JOB2: Calculating SNP Weights (prs-single beta)...............................................Complete
+     [File(s) Generated: beta_prefix=docker/prs-single_AFR/beta/AFR_beta]
+     JOB3: Generating Polygenic Predictions (prs-single predict)...................................Complete
+     [File(s) Generated: predict_prefix=docker/prs-single_AFR/predict/AFR_predict]
+     JOB4: Quantifying PRS Result (prs-single quantify)............................................Complete
+     [File(s) Generated: quantify_prefix=docker/prs-single_AFR/quantify/AFR_quantify]
+     JOB5: Analyzing/Plotting PRS Results (analyze result).........................................Complete
+  Begin Module:  build-model
+     JOB1: Clumping Pop Data (build-model clump).........(Parallelizing Across 31 Cores)...........Complete
+     [File(s) Generated: clump_prefix=docker/build-model_EUR/clump/EUR_clump]
+     JOB2: Calculating SNP Weights (build-model beta)..............................................Complete
+     [File(s) Generated: beta_prefix=docker/build-model_EUR/beta/EUR_beta]
+     JOB3: Generating Polygenic Predictions (build-model predict)..................................Complete
+     [File(s) Generated: predict_prefix=docker/build-model_EUR/predict/EUR_predict]
+     JOB4: Saving SNP Priors (build-model prior)...................................................Complete
+     [File(s) Generated: prior_prefix=docker/build-model_EUR/prior/EUR_prior]
+  Begin Module:  Stage2: prs-prior
+  Previously Generated: model_file=docker/build-model_EUR/bridge.eur.build-model.result
+     JOB1: Calculating SNP Weights (prs-prior beta)................................................Complete
+     [File(s) Generated: beta_prefix=docker/prs-prior_AFR-EUR/beta/AFR_beta]
+     JOB2: Generating Polygenic Predictions (prs-prior predict)....................................Complete
+     [File(s) Generated: predict_prefix=docker/prs-prior_AFR-EUR/predict/AFR_predict]
+     JOB3: Quantifying PRS Result (prs-prior quantify).............................................Complete
+     [File(s) Generated: quantify_prefix=docker/prs-prior_AFR-EUR/quantify/AFR_quantify]
+     JOB4: Analyzing/Plotting PRS Results (analyze result).........................................Complete
+  Begin Module:  analyze
+     JOB1: Combining The Results (analyze combine).................................................Complete
+     JOB2: Plotting Results........................................................................Complete
+Execution completed successfully in 69 seconds.
+Logged to /home/bonyido/trances-prs-dock/results/execution_benchmarks/runtime_log.csv
+Completed Docker execution benchmark for bridgeprs.

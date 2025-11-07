@@ -1,0 +1,44 @@
+Active Python: /home/bonyido/trances_prs_env/bin/python
+Python 3.12.3
+Clearing pip cache...
+Running setup benchmark for 'sdprx'...
+Running setup in 'manual' mode...
+Command: 
+rm -rf SDPRX &&
+git clone https://github.com/eldronzhou/SDPRX.git &&
+cd SDPRX &&
+pip install --no-cache-dir joblib numpy scipy pandas
+Cloning into 'SDPRX'...
+Collecting joblib
+  Downloading joblib-1.5.2-py3-none-any.whl.metadata (5.6 kB)
+Collecting numpy
+  Downloading numpy-2.3.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+Collecting scipy
+  Downloading scipy-1.16.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (62 kB)
+Collecting pandas
+  Downloading pandas-2.3.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+Collecting python-dateutil>=2.8.2 (from pandas)
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting pytz>=2020.1 (from pandas)
+  Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas)
+  Downloading tzdata-2025.2-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas)
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Downloading joblib-1.5.2-py3-none-any.whl (308 kB)
+Downloading numpy-2.3.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 6.9 MB/s  0:00:02
+Downloading scipy-1.16.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (35.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.7/35.7 MB 536.2 kB/s  0:00:48
+Downloading pandas-2.3.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.4/12.4 MB 558.3 kB/s  0:00:22
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading tzdata-2025.2-py2.py3-none-any.whl (347 kB)
+Installing collected packages: pytz, tzdata, six, numpy, joblib, scipy, python-dateutil, pandas
+
+Successfully installed joblib-1.5.2 numpy-2.3.4 pandas-2.3.3 python-dateutil-2.9.0.post0 pytz-2025.2 scipy-1.16.3 six-1.17.0 tzdata-2025.2
+Setup completed successfully in 87 seconds.
+Logged to /home/bonyido/trances-prs-dock/results/setup_benchmarks/setup_log.csv
+Completed run for sdprx (fresh environment created, dependencies fully reinstalled).

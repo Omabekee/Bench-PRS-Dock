@@ -1,0 +1,53 @@
+$fpath
+[1] "/home/bonyido/trances-prs-dock/BridgePRS/src/Rscripts/functions.R"
+
+$pred1
+[1] "/home/bonyido/trances-prs-dock/results/execution_benchmarks/bridgeprs/manual/prs-single_AFR/predict/AFR_predict"
+
+$pred2
+[1] "/home/bonyido/trances-prs-dock/results/execution_benchmarks/bridgeprs/manual/prs-prior_AFR-EUR/predict/AFR_predict"
+
+$models1
+[1] "/home/bonyido/trances-prs-dock/results/execution_benchmarks/bridgeprs/manual/prs-single_AFR/beta/AFR_beta"
+
+$models2
+[1] "/home/bonyido/trances-prs-dock/results/execution_benchmarks/bridgeprs/manual/prs-prior_AFR-EUR/beta/AFR_beta"
+
+$outfile
+[1] "/home/bonyido/trances-prs-dock/results/execution_benchmarks/bridgeprs/manual/prs-combined_AFR-EUR/AFR"
+
+$pop2
+[1] "AFR"
+
+$valid.data
+[1] "/home/bonyido/trances-prs-dock/BridgePRS/data/pop_AFR/phenotypes/AFR_valid.dat"
+
+$test.data
+[1] "/home/bonyido/trances-prs-dock/BridgePRS/data/pop_AFR/phenotypes/AFR_test.dat"
+
+$cov.names
+[1] "000"
+
+$pheno.name
+[1] "y"
+
+$ids.col
+[1] TRUE
+
+$n.cores
+[1] 31
+
+$plot
+[1] 0
+
+$binary
+[1] 0
+
+$help
+[1] FALSE
+
+         ---        Prob        Est        2.5%      97.5%
+s52   Stage1 0.000599578 0.01948918 0.001860369 0.03530004
+s97   Stage2 0.477636421 0.05119708 0.024195571 0.07674365
+s89 Stage1+2 0.521764001 0.05356325 0.028066701 0.07872094
+    Weighted 1.000000000 0.05414929 0.029095065 0.07864641

@@ -1,0 +1,73 @@
+Docker setup benchmark for 'prscsx'
+Command: docker pull chiomab/prscsx:v1.2
+Detected image: chiomab/prscsx:v1.2
+Removing existing image: chiomab/prscsx:v1.2
+Untagged: chiomab/prscsx:v1.2
+Untagged: chiomab/prscsx@sha256:dc1be542e5d33a06d680d4f0ff78f5f0cfdb43f7cf258463041ba91c14984a34
+Deleted: sha256:db10210798df0ae4bf55dda8b64a667de4103ee2d863f8f01a37579e006de70d
+Deleted: sha256:779609dc24acf2417027ba42b9c96db27ea236a4c80fa7cbf5df7f0f8e40dc4d
+Deleted: sha256:9cdf770ed76a11405c381a1a717038eeff192744fcc989e4d3708d3e0cdebfb9
+Deleted: sha256:23926fd2a5cd2b55a2164fedb7c505b6104653dc5bba0a15984148bf973e1c0c
+Deleted: sha256:2ceecb6416ec24d5a32e389e5fd6a1ad6489e40599a47fc8e309abce2810b90e
+Deleted: sha256:c61ea1ae44cf80c18869f8646760cd7074acca0a78e4dbde810392cdc76e4aff
+Deleted: sha256:455b3b8dc5d8dd89d2317d758269e43d8624805dfdf812bc1d79535cbe966478
+Deleted: sha256:50f0966dd8b36ed309dea25e067120b4bbad57a703b348c5e44f7b0788a4fb67
+Deleted: sha256:f9e10a090842921f8e8ec9e6605603adbb763f1f022941224c100657ac4354ea
+Deleted: sha256:a8569f9f0fac613f75ee2e86c2b36e253b5d04d508fdbd9908049dd0bd1bb4e2
+Deleted: sha256:8d853c8add5d1e7b0aafc4b68a3d9fb8e7a0da27970c2acf831fe63be4a0cd2c
+Total reclaimed space: 0B
+Starting timed docker pull...
+Running setup in 'docker' mode...
+Command: docker pull chiomab/prscsx:v1.2
+v1.2: Pulling from chiomab/prscsx
+302e3ee49805: Pulling fs layer
+030d7bdc20a6: Pulling fs layer
+a3f1dfe736c5: Pulling fs layer
+3971691a3637: Pulling fs layer
+7bf3b77d7869: Pulling fs layer
+c7b3f59c9958: Pulling fs layer
+2decbb38f79e: Pulling fs layer
+094f81388fe4: Pulling fs layer
+79817e0e6914: Pulling fs layer
+c411139017cd: Pulling fs layer
+3971691a3637: Waiting
+7bf3b77d7869: Waiting
+c7b3f59c9958: Waiting
+2decbb38f79e: Waiting
+094f81388fe4: Waiting
+79817e0e6914: Waiting
+c411139017cd: Waiting
+030d7bdc20a6: Verifying Checksum
+030d7bdc20a6: Download complete
+3971691a3637: Verifying Checksum
+3971691a3637: Download complete
+a3f1dfe736c5: Verifying Checksum
+a3f1dfe736c5: Download complete
+7bf3b77d7869: Verifying Checksum
+7bf3b77d7869: Download complete
+c7b3f59c9958: Download complete
+302e3ee49805: Verifying Checksum
+302e3ee49805: Download complete
+2decbb38f79e: Verifying Checksum
+2decbb38f79e: Download complete
+79817e0e6914: Verifying Checksum
+79817e0e6914: Download complete
+302e3ee49805: Pull complete
+030d7bdc20a6: Pull complete
+c411139017cd: Verifying Checksum
+c411139017cd: Download complete
+a3f1dfe736c5: Pull complete
+3971691a3637: Pull complete
+7bf3b77d7869: Pull complete
+c7b3f59c9958: Pull complete
+2decbb38f79e: Pull complete
+094f81388fe4: Download complete
+094f81388fe4: Pull complete
+79817e0e6914: Pull complete
+c411139017cd: Pull complete
+Digest: sha256:dc1be542e5d33a06d680d4f0ff78f5f0cfdb43f7cf258463041ba91c14984a34
+Status: Downloaded newer image for chiomab/prscsx:v1.2
+docker.io/chiomab/prscsx:v1.2
+Setup completed successfully in 17 seconds.
+Logged to /home/bonyido/trances-prs-dock/results/setup_benchmarks/setup_log.csv
+Completed Docker run for prscsx.

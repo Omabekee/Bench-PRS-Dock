@@ -1,0 +1,241 @@
+Docker execution benchmark for 'xpblup'
+Command: docker run --rm   -v ~/trances-prs-dock/XP-BLUP/example_data:/data   -v ~/trances-prs-dock/results:/results   chiomab/xpblup:v1.0 bash -c '/xpblup/xpblup.sh   --train=/data/trainN4k   --test=/data/testN2k   --snplist=/data/metaExtract.txt   --outdir=/results/execution_benchmarks/xpblup/docker   --outprefix=xpblup'
+Starting timed Docker run...
+Running execution in 'docker' mode...
+Command: docker run --rm   -v ~/trances-prs-dock/XP-BLUP/example_data:/data   -v ~/trances-prs-dock/results:/results   chiomab/xpblup:v1.0 bash -c '/xpblup/xpblup.sh   --train=/data/trainN4k   --test=/data/testN2k   --snplist=/data/metaExtract.txt   --outdir=/results/execution_benchmarks/xpblup/docker   --outprefix=xpblup'
+*******************************************************************
+* Genome-wide Complex Trait Analysis (GCTA)
+* version v1.94.4 Linux
+* Built at Apr  7 2025 11:00:19, by GCC 8.3
+* (C) 2010-present, Yang Lab, Westlake University
+* Please report bugs to Jian Yang <jian.yang@westlake.edu.cn>
+*******************************************************************
+Analysis started at 04:31:12 UTC on Wed Nov 05 2025.
+Hostname: c25b08dcb517
+
+Accepted options:
+--bfile /data/trainN4k
+--extract /data/metaExtract.txt
+--make-grm-bin
+--out /results/execution_benchmarks/xpblup/docker/xpblup_small
+
+Note: This is a multi-thread program. You could specify the number of threads by the --thread-num option to speed up the computation if there are multiple processors in your machine.
+
+Reading PLINK FAM file from [/data/trainN4k.fam].
+4000 individuals to be included from [/data/trainN4k.fam].
+Reading PLINK BIM file from [/data/trainN4k.bim].
+18000 SNPs to be included from [/data/trainN4k.bim].
+Reading a list of SNPs from [/data/metaExtract.txt].
+3583 SNPs are extracted from [/data/metaExtract.txt].
+Reading PLINK BED file from [/data/trainN4k.bed] in SNP-major format ...
+Genotype data for 4000 individuals and 3583 SNPs to be included from [/data/trainN4k.bed].
+Calculating allele frequencies ...
+Recoding genotypes (individual major mode) ...
+
+Calculating the genetic relationship matrix (GRM) ... (Note: default speed-optimized mode, may use huge RAM)
+
+Summary of the GRM:
+Mean of diagonals = 1.00045
+Variance of diagonals = 0.0030353
+Mean of off-diagonals = -0.000250172
+Variance of off-diagonals = 0.000982539
+GRM of 4000 individuals has been saved in the file [/results/execution_benchmarks/xpblup/docker/xpblup_small.grm.bin] (in binary format).
+Number of SNPs to calculate the genetic relationship between each pair of individuals has been saved in the file [/results/execution_benchmarks/xpblup/docker/xpblup_small.grm.N.bin] (in binary format).
+IDs for the GRM file [/results/execution_benchmarks/xpblup/docker/xpblup_small.grm.bin] have been saved in the file [/results/execution_benchmarks/xpblup/docker/xpblup_small.grm.id].
+
+Analysis finished at 04:31:14 UTC on Wed Nov 05 2025
+Overall computational time: 1.65 sec.
+*******************************************************************
+* Genome-wide Complex Trait Analysis (GCTA)
+* version v1.94.4 Linux
+* Built at Apr  7 2025 11:00:19, by GCC 8.3
+* (C) 2010-present, Yang Lab, Westlake University
+* Please report bugs to Jian Yang <jian.yang@westlake.edu.cn>
+*******************************************************************
+Analysis started at 04:31:14 UTC on Wed Nov 05 2025.
+Hostname: c25b08dcb517
+
+Accepted options:
+--bfile /data/trainN4k
+--make-grm-bin
+--out /results/execution_benchmarks/xpblup/docker/xpblup_full
+
+Note: This is a multi-thread program. You could specify the number of threads by the --thread-num option to speed up the computation if there are multiple processors in your machine.
+
+Reading PLINK FAM file from [/data/trainN4k.fam].
+4000 individuals to be included from [/data/trainN4k.fam].
+Reading PLINK BIM file from [/data/trainN4k.bim].
+18000 SNPs to be included from [/data/trainN4k.bim].
+Reading PLINK BED file from [/data/trainN4k.bed] in SNP-major format ...
+Genotype data for 4000 individuals and 18000 SNPs to be included from [/data/trainN4k.bed].
+Calculating allele frequencies ...
+Recoding genotypes (individual major mode) ...
+
+Calculating the genetic relationship matrix (GRM) ... (Note: default speed-optimized mode, may use huge RAM)
+
+Summary of the GRM:
+Mean of diagonals = 1.00003
+Variance of diagonals = 0.000311041
+Mean of off-diagonals = -0.00025007
+Variance of off-diagonals = 8.62547e-05
+GRM of 4000 individuals has been saved in the file [/results/execution_benchmarks/xpblup/docker/xpblup_full.grm.bin] (in binary format).
+Number of SNPs to calculate the genetic relationship between each pair of individuals has been saved in the file [/results/execution_benchmarks/xpblup/docker/xpblup_full.grm.N.bin] (in binary format).
+IDs for the GRM file [/results/execution_benchmarks/xpblup/docker/xpblup_full.grm.bin] have been saved in the file [/results/execution_benchmarks/xpblup/docker/xpblup_full.grm.id].
+
+Analysis finished at 04:31:19 UTC on Wed Nov 05 2025
+Overall computational time: 6.66 sec.
+*******************************************************************
+* Genome-wide Complex Trait Analysis (GCTA)
+* version v1.94.4 Linux
+* Built at Apr  7 2025 11:00:19, by GCC 8.3
+* (C) 2010-present, Yang Lab, Westlake University
+* Please report bugs to Jian Yang <jian.yang@westlake.edu.cn>
+*******************************************************************
+Analysis started at 04:31:19 UTC on Wed Nov 05 2025.
+Hostname: c25b08dcb517
+
+Accepted options:
+--reml
+--mgrm-bin /results/execution_benchmarks/xpblup/docker/grmList.txt
+--pheno /results/execution_benchmarks/xpblup/docker/train_.pheno
+--out /results/execution_benchmarks/xpblup/docker/xpblup
+--reml-est-fix
+--reml-pred-rand
+
+Note: This is a multi-thread program. You could specify the number of threads by the --thread-num option to speed up the computation if there are multiple processors in your machine.
+
+Reading phenotypes from [/results/execution_benchmarks/xpblup/docker/train_.pheno].
+Non-missing phenotypes of 4000 individuals are included from [/results/execution_benchmarks/xpblup/docker/train_.pheno].
+
+There are 2 GRM file names specified in the file [/results/execution_benchmarks/xpblup/docker/grmList.txt].
+Reading the GRM from the 1th file ...
+Reading IDs of the GRM from [/results/execution_benchmarks/xpblup/docker/xpblup_full.grm.id].
+4000 IDs are read from [/results/execution_benchmarks/xpblup/docker/xpblup_full.grm.id].
+Reading the GRM from [/results/execution_benchmarks/xpblup/docker/xpblup_full.grm.bin].
+GRM for 4000 individuals are included from [/results/execution_benchmarks/xpblup/docker/xpblup_full.grm.bin].
+Reading the GRM from the 2th file ...
+Reading IDs of the GRM from [/results/execution_benchmarks/xpblup/docker/xpblup_small.grm.id].
+4000 IDs are read from [/results/execution_benchmarks/xpblup/docker/xpblup_small.grm.id].
+Reading the GRM from [/results/execution_benchmarks/xpblup/docker/xpblup_small.grm.bin].
+GRM for 4000 individuals are included from [/results/execution_benchmarks/xpblup/docker/xpblup_small.grm.bin].
+4000 individuals are in common in these files.
+
+Performing  REML analysis ... (Note: may take hours depending on sample size).
+4000 observations, 1 fixed effect(s), and 3 variance component(s)(including residual variance).
+Calculating prior values of variance components by EM-REML ...
+Updated prior values: 473.856  487.04 492.513
+logL: -16261.4
+Running AI-REML algorithm ...
+Iter.	logL	V(G1)	V(G2)	V(e)	
+1	-16258.94	306.49746	541.57568	601.09930	
+2	-16239.32	197.04695	579.01282	677.95248	
+3	-16230.11	124.64734	604.74049	731.58466	
+4	-16225.83	76.35579	622.42079	768.66905	
+5	-16223.85	43.95772	634.56434	794.15544	
+6	-16222.93	22.13666	642.89952	811.59955	
+7	-16222.51	0.00143	648.74461	837.02938	(1 component(s) constrained)
+8	-16222.28	0.00143	648.58202	837.33316	(1 component(s) constrained)
+9	-16222.28	0.00143	648.56195	837.34050	(1 component(s) constrained)
+Log-likelihood ratio converged.
+
+Calculating the logLikelihood for the reduced model ...
+(variance component 1 is dropped from the model)
+Calculating prior values of variance components by EM-REML ...
+Updated prior values: 721.24091 778.66969
+logL: -16234.16684
+Running AI-REML algorithm ...
+Iter.	logL	V(G2)	V(e)	
+1	-16224.62	702.05585	793.59124	
+2	-16223.41	688.58182	804.31753	
+3	-16222.81	679.10662	811.95041	
+4	-16222.52	658.00160	829.01632	
+5	-16222.24	656.61223	829.87615	
+6	-16222.24	656.52572	829.91238	
+7	-16222.24	656.52086	829.91437	
+Log-likelihood ratio converged.
+
+Summary result of REML analysis:
+Source	Variance	SE
+V(G1)	0.001434	56.982152
+V(G2)	648.561947	44.849391
+V(e)	837.340500	51.976746
+Vp	1485.903882	40.986371
+V(G1)/Vp	0.000001	0.038348
+V(G2)/Vp	0.436476	0.021898
+
+Sum of V(G)/Vp	0.436477	0.036897
+
+Sampling variance/covariance of the estimates of variance components:
+3.246966e+03	-6.418238e+02	-2.586553e+03	
+-6.418238e+02	2.011468e+03	8.830984e+01	
+-2.586553e+03	8.830984e+01	2.701582e+03	
+
+Estimate of fixed effect:
+
+Source	Estimate	SE
+mean	0.473645	0.457531
+
+Summary result of REML analysis has been saved in the file [/results/execution_benchmarks/xpblup/docker/xpblup.hsq].
+
+BLUP solutions of the genetic effects for 4000 individuals have been saved in the file [/results/execution_benchmarks/xpblup/docker/xpblup.indi.blp].
+
+Analysis finished at 04:31:49 UTC on Wed Nov 05 2025
+Overall computational time: 31.69 sec.
+*******************************************************************
+* Genome-wide Complex Trait Analysis (GCTA)
+* version v1.94.4 Linux
+* Built at Apr  7 2025 11:00:19, by GCC 8.3
+* (C) 2010-present, Yang Lab, Westlake University
+* Please report bugs to Jian Yang <jian.yang@westlake.edu.cn>
+*******************************************************************
+Analysis started at 04:31:49 UTC on Wed Nov 05 2025.
+Hostname: c25b08dcb517
+
+Accepted options:
+--bfile /data/trainN4k
+--mgrm-bin /results/execution_benchmarks/xpblup/docker/grmList.txt
+--blup-snp /results/execution_benchmarks/xpblup/docker/xpblup.indi.blp
+--out /results/execution_benchmarks/xpblup/docker/xpblup
+
+
+Reading PLINK FAM file from [/data/trainN4k.fam].
+4000 individuals to be included from [/data/trainN4k.fam].
+BLUP solution to the total genetic effects for 4000 individuals have been read from [/results/execution_benchmarks/xpblup/docker/xpblup.indi.blp].
+Reading PLINK BIM file from [/data/trainN4k.bim].
+18000 SNPs to be included from [/data/trainN4k.bim].
+Reading PLINK BED file from [/data/trainN4k.bed] in SNP-major format ...
+Genotype data for 4000 individuals and 18000 SNPs to be included from [/data/trainN4k.bed].
+Calculating allele frequencies ...
+Calculating the BLUP solutions to SNP effects ...
+Writing BLUP solutions of SNP effects for 18000 SNPs to [/results/execution_benchmarks/xpblup/docker/xpblup.snp.blp].
+BLUP solutions of SNP effects for 18000 SNPs have been saved in the file [/results/execution_benchmarks/xpblup/docker/xpblup.snp.blp].
+
+Analysis finished at 04:31:50 UTC on Wed Nov 05 2025
+Overall computational time: 1.19 sec.
+PLINK v1.9.0-b.7.6 64-bit (13 Oct 2024)            cog-genomics.org/plink/1.9/
+(C) 2005-2024 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to /results/execution_benchmarks/xpblup/docker/xpblup.predict.log.
+Options in effect:
+  --allow-no-sex
+  --bfile /data/testN2k
+  --out /results/execution_benchmarks/xpblup/docker/xpblup.predict
+  --score /results/execution_benchmarks/xpblup/docker/xpblup.betaRecal
+
+15793 MB RAM detected; reserving 7896 MB for main workspace.
+18000 variants loaded from .bim file.
+2000 people (0 males, 0 females, 2000 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+/results/execution_benchmarks/xpblup/docker/xpblup.predict.nosex .
+2000 phenotype values loaded from .fam.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 2000 founders and 0 nonfounders present.
+Calculating allele frequencies... 0%1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99% done.
+Total genotyping rate is exactly 1.
+18000 variants and 2000 people pass filters and QC.
+Phenotype data is quantitative.
+--score: 18000 valid predictors loaded.
+--score: Results written to
+/results/execution_benchmarks/xpblup/docker/xpblup.predict.profile .
+Execution completed successfully in 38 seconds.
+Logged to /home/bonyido/trances-prs-dock/results/execution_benchmarks/runtime_log.csv
+Completed Docker execution benchmark for xpblup.

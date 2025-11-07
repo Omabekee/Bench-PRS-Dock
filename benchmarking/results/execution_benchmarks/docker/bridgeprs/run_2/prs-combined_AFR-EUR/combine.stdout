@@ -1,0 +1,53 @@
+$fpath
+[1] "/BridgePRS/src/Rscripts/functions.R"
+
+$pred1
+[1] "/results/execution_benchmarks/bridgeprs/docker/prs-single_AFR/predict/AFR_predict"
+
+$pred2
+[1] "/results/execution_benchmarks/bridgeprs/docker/prs-prior_AFR-EUR/predict/AFR_predict"
+
+$models1
+[1] "/results/execution_benchmarks/bridgeprs/docker/prs-single_AFR/beta/AFR_beta"
+
+$models2
+[1] "/results/execution_benchmarks/bridgeprs/docker/prs-prior_AFR-EUR/beta/AFR_beta"
+
+$outfile
+[1] "/results/execution_benchmarks/bridgeprs/docker/prs-combined_AFR-EUR/AFR"
+
+$pop2
+[1] "AFR"
+
+$valid.data
+[1] "/data/pop_AFR/phenotypes/AFR_valid.dat"
+
+$test.data
+[1] "/data/pop_AFR/phenotypes/AFR_test.dat"
+
+$cov.names
+[1] "000"
+
+$pheno.name
+[1] "y"
+
+$ids.col
+[1] TRUE
+
+$n.cores
+[1] 31
+
+$plot
+[1] 0
+
+$binary
+[1] 0
+
+$help
+[1] FALSE
+
+         ---         Prob        Est       2.5%      97.5%
+s53   Stage1 0.0004385521 0.01949223 0.00144908 0.03681582
+s99   Stage2 0.6052618692 0.05119034 0.02605928 0.07579983
+s66 Stage1+2 0.3942995787 0.05333617 0.02611435 0.07884547
+    Weighted 1.0000000000 0.05416949 0.02799884 0.07943386

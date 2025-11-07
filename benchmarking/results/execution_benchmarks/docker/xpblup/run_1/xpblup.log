@@ -1,0 +1,41 @@
+*******************************************************************
+* Genome-wide Complex Trait Analysis (GCTA)
+* version v1.94.4 Linux
+* Built at Apr  7 2025 11:00:19, by GCC 8.3
+* (C) 2010-present, Yang Lab, Westlake University
+* Please report bugs to Jian Yang <jian.yang@westlake.edu.cn>
+*******************************************************************
+Analysis started at 04:29:11 UTC on Wed Nov 05 2025.
+Hostname: cafee7289846
+
+Accepted options:
+--bfile /data/trainN4k
+--mgrm-bin /results/execution_benchmarks/xpblup/docker/grmList.txt
+--blup-snp /results/execution_benchmarks/xpblup/docker/xpblup.indi.blp
+--out /results/execution_benchmarks/xpblup/docker/xpblup
+
+
+Reading PLINK FAM file from [/data/trainN4k.fam].
+4000 individuals to be included from [/data/trainN4k.fam].
+BLUP solution to the total genetic effects for 4000 individuals have been read from [/results/execution_benchmarks/xpblup/docker/xpblup.indi.blp].
+Reading PLINK BIM file from [/data/trainN4k.bim].
+18000 SNPs to be included from [/data/trainN4k.bim].
+Reading PLINK BED file from [/data/trainN4k.bed] in SNP-major format ...
+Genotype data for 4000 individuals and 18000 SNPs to be included from [/data/trainN4k.bed].
+Calculating allele frequencies ...
+Calculating the BLUP solutions to SNP effects ...
+Writing BLUP solutions of SNP effects for 18000 SNPs to [/results/execution_benchmarks/xpblup/docker/xpblup.snp.blp].
+BLUP solutions of SNP effects for 18000 SNPs have been saved in the file [/results/execution_benchmarks/xpblup/docker/xpblup.snp.blp].
+
+Analysis finished at 04:29:12 UTC on Wed Nov 05 2025
+Overall computational time: 1.21 sec.
+Wed Nov  5 04:29:12 UTC 2025: REML successful! 
+
+Wed Nov  5 04:29:12 UTC 2025: Reformatting beta coefficients ...
+
+Wed Nov  5 04:29:12 UTC 2025: Reformatting beta coefficients successful! 
+
+Wed Nov  5 04:29:12 UTC 2025: Calculating final prediction ...
+
+Wed Nov  5 04:29:12 UTC 2025: Job Completed! 
+

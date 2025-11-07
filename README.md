@@ -92,7 +92,7 @@ Bench-PRS-Dock/
 ```
 
 **Description:**
-- **Core files:** `README.md`, `LICENSE`, `CITATION.cff`  
+- **Core files:** `README.md`, `LICENSE`
 - **Documentation:** `docs/` - Tool-specific pages and workflow notes  
 - **Metadata:** `manifest/` - Docker image inventory and verification logs  
 - **Benchmarking Scripts:** `benchmarking/scripts/` - All setup, execution and system-capture scripts used for reproducibility testing

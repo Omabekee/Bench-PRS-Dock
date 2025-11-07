@@ -1,0 +1,70 @@
+Docker setup benchmark for 'sdprx'
+Command: docker pull chiomab/sdprx:v1.0
+Detected image: chiomab/sdprx:v1.0
+Removing existing image: chiomab/sdprx:v1.0
+Untagged: chiomab/sdprx:v1.0
+Untagged: chiomab/sdprx@sha256:b298b24af6ad23b6a3c3631ad44be37b415ca0e13a91cd209a8898174dbfcb31
+Deleted: sha256:1c46ba61f9ce5728968beaa70581678d2536b6b5899fbbae8410b7eb06189156
+Deleted: sha256:982268f0f3379befe9380d6170bec42ed72d6f3b733ce2afd79d9b31dbe326ac
+Deleted: sha256:f433b564891db3e2896a07863d34d64dfb91c75bebb4df53cb4a8b9e23c20cd9
+Deleted: sha256:2dee6c69a6f6b16afee4989302f50412afe6699788e91582e28a0e7a1d8f3d4c
+Deleted: sha256:fc9866de2a29530d165fce937117d921512b988e8bc8fed2dcbce30dfa4fdec7
+Deleted: sha256:e45df502bb8314441eb191b568ca550a8b4ef6f19b3a423e29795a250cd45077
+Deleted: sha256:5b525da5baa53686ff607fe9667ed676adbd9a0fb3735a7109727760bdd8a7d2
+Deleted: sha256:cc36ccf8f67d94025cf6769d37ecff832703ee792a27cf67d1fb7ab9f172737d
+Deleted: sha256:ae7f339b33f2d7c1bf0df27464dcd4e678a53cba0d54c02d8035a95ca58be053
+Deleted: sha256:a752787694802dbb12a68c0472095dd6e750228f180479661327a7f419e0c85e
+Total reclaimed space: 0B
+Starting timed docker pull...
+Running setup in 'docker' mode...
+Command: docker pull chiomab/sdprx:v1.0
+v1.0: Pulling from chiomab/sdprx
+c29f5b76f736: Already exists
+c2ba682189ed: Already exists
+1fc11db7aa34: Already exists
+73e047586d18: Pulling fs layer
+21ba3e35276d: Pulling fs layer
+3d8beab94105: Pulling fs layer
+4156e309f4dd: Pulling fs layer
+fa2227c38386: Pulling fs layer
+5768d00fadd6: Pulling fs layer
+e089b9b3fa2f: Pulling fs layer
+55778d1a6712: Pulling fs layer
+679d7345f17c: Pulling fs layer
+4156e309f4dd: Waiting
+fa2227c38386: Waiting
+5768d00fadd6: Waiting
+e089b9b3fa2f: Waiting
+55778d1a6712: Waiting
+679d7345f17c: Waiting
+21ba3e35276d: Download complete
+4156e309f4dd: Verifying Checksum
+4156e309f4dd: Download complete
+fa2227c38386: Verifying Checksum
+fa2227c38386: Download complete
+5768d00fadd6: Download complete
+e089b9b3fa2f: Verifying Checksum
+e089b9b3fa2f: Download complete
+55778d1a6712: Verifying Checksum
+55778d1a6712: Download complete
+679d7345f17c: Verifying Checksum
+679d7345f17c: Download complete
+73e047586d18: Verifying Checksum
+73e047586d18: Download complete
+73e047586d18: Pull complete
+21ba3e35276d: Pull complete
+3d8beab94105: Verifying Checksum
+3d8beab94105: Download complete
+3d8beab94105: Pull complete
+4156e309f4dd: Pull complete
+fa2227c38386: Pull complete
+5768d00fadd6: Pull complete
+e089b9b3fa2f: Pull complete
+55778d1a6712: Pull complete
+679d7345f17c: Pull complete
+Digest: sha256:b298b24af6ad23b6a3c3631ad44be37b415ca0e13a91cd209a8898174dbfcb31
+Status: Downloaded newer image for chiomab/sdprx:v1.0
+docker.io/chiomab/sdprx:v1.0
+Setup completed successfully in 41 seconds.
+Logged to /home/bonyido/trances-prs-dock/results/setup_benchmarks/setup_log.csv
+Completed Docker run for sdprx.

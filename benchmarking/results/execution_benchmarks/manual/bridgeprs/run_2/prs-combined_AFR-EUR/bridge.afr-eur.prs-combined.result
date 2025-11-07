@@ -1,0 +1,7 @@
+WEIGHTED_COMBINED_PREDS=/home/bonyido/trances-prs-dock/results/execution_benchmarks/bridgeprs/manual/prs-combined_AFR-EUR/AFR_weighted_combined_preds.dat
+LAMBDA_WEIGHTS=/home/bonyido/trances-prs-dock/results/execution_benchmarks/bridgeprs/manual/prs-combined_AFR-EUR/AFR_lambda_weights.dat
+TAU_WEIGHTS=/home/bonyido/trances-prs-dock/results/execution_benchmarks/bridgeprs/manual/prs-combined_AFR-EUR/AFR_tau_weights.dat
+ALPHA_WEIGHTS=/home/bonyido/trances-prs-dock/results/execution_benchmarks/bridgeprs/manual/prs-combined_AFR-EUR/AFR_alpha_weights.dat
+WEIGHTED_COMBINED_VAR_EXPLAINED=/home/bonyido/trances-prs-dock/results/execution_benchmarks/bridgeprs/manual/prs-combined_AFR-EUR/AFR_weighted_combined_var_explained.txt
+WEIGHTED_COMBINED_SNP_WEIGHTS=/home/bonyido/trances-prs-dock/results/execution_benchmarks/bridgeprs/manual/prs-combined_AFR-EUR/AFR_weighted_combined_snp_weights.dat
+COMBINE_FIN=TRUE

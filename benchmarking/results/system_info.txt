@@ -1,0 +1,21 @@
+===== SYSTEM INFO =====
+Date: Wed Nov  5 04:42:23 WAT 2025
+OS: Linux HP 5.15.167.4-microsoft-standard-WSL2 #1 SMP Tue Nov 5 00:21:55 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+CPU Info: Model name:                           13th Gen Intel(R) Core(TM) i9-13950HX
+Cores: 32
+RAM: 15Gi
+Disk Type:
+  sda (HDD)
+  sdb (HDD)
+  sdc (HDD)
+Conda Version: conda 25.5.0
+Docker Version: 
+The command 'docker' could not be found in this WSL 2 distro.
+We recommend to activate the WSL integration in Docker Desktop settings.
+
+For details about using Docker Desktop with WSL 2, visit:
+
+https://docs.docker.com/go/wsl2/
+Python Version: Python 3.13.2
+Network Speed Test (approx):
+rtt min/avg/max/mdev = 99.319/104.290/113.994/6.862 ms

@@ -1,0 +1,112 @@
+MODE,COMMAND,EXIT_STATUS,SETUP_TIME(seconds),DATE,,,,,,,,,,,
+manual,"
+rm -rf SDPRX &&
+git clone https://github.com/eldronzhou/SDPRX.git &&
+cd SDPRX &&
+pip install --no-cache-dir joblib numpy scipy pandas",0,87,Tue Nov  4 09:41:47 WAT 2025,,,,,,,,,,,
+manual,"
+rm -rf SDPRX &&
+git clone https://github.com/eldronzhou/SDPRX.git &&
+cd SDPRX &&
+pip install --no-cache-dir joblib numpy scipy pandas",0,138,Tue Nov  4 09:45:22 WAT 2025,,,,,,,,,,,
+manual,"
+rm -rf SDPRX &&
+git clone https://github.com/eldronzhou/SDPRX.git &&
+cd SDPRX &&
+pip install --no-cache-dir joblib numpy scipy pandas",0,106,Tue Nov  4 09:48:21 WAT 2025,,,,,,,,,,,
+docker,docker pull chiomab/sdprx:v1.0,0,49,Tue Nov  4 09:50:31 WAT 2025,,,,,,,,,,,
+docker,docker pull chiomab/sdprx:v1.0,0,41,Tue Nov  4 09:54:54 WAT 2025,,,,,,,,,,,
+docker,docker pull chiomab/sdprx:v1.0,0,44,Tue Nov  4 09:57:01 WAT 2025,,,,,,,,,,,
+manual,"
+rm -rf BridgePRS &&
+sudo apt-get update &&
+sudo apt-get install -y   build-essential wget unzip git python3 python3-pip r-base   libcurl4-openssl-dev libssl-dev libxml2-dev libxt-dev && wget https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20241013.zip && unzip plink_linux_x86_64_20241013.zip && sudo mv plink /usr/local/bin/ && rm plink_linux_x86_64_20241013.zip && git clone https://github.com/clivehoggart/BridgePRS.git && cd BridgePRS && R_LIB_USER=~/R/x86_64-pc-linux-gnu-library/$(R --version | head -n 1 | awk '{print $3}' | cut -d. -f1,2) && mkdir -p $R_LIB_USER && /usr/bin/Rscript -e install.packages(c('parallel'",'glmnet','boot','data.table','doMC','BEDMatrix','optparse','MASS','R.utils'), repos='https://cloud.r-project.org', dependencies=TRUE," lib='$R_LIB_USER')"" && /usr/bin/Rscript -e 'sessionInfo()' > /home/bonyido/trances-prs-dock/results/setup_benchmarks/bridgeprs/session_info.txt""",0,395,Wed Nov  5 04:50:24 WAT 2025
+manual,"
+rm -rf BridgePRS &&
+sudo apt-get update &&
+sudo apt-get install -y   build-essential wget unzip git python3 python3-pip r-base   libcurl4-openssl-dev libssl-dev libxml2-dev libxt-dev && wget https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20241013.zip && unzip plink_linux_x86_64_20241013.zip && sudo mv plink /usr/local/bin/ && rm plink_linux_x86_64_20241013.zip && git clone https://github.com/clivehoggart/BridgePRS.git && cd BridgePRS && R_LIB_USER=~/R/x86_64-pc-linux-gnu-library/$(R --version | head -n 1 | awk '{print $3}' | cut -d. -f1,2) && mkdir -p $R_LIB_USER && /usr/bin/Rscript -e install.packages(c('parallel'",'glmnet','boot','data.table','doMC','BEDMatrix','optparse','MASS','R.utils'), repos='https://cloud.r-project.org', dependencies=TRUE," lib='$R_LIB_USER')"" && /usr/bin/Rscript -e 'sessionInfo()' > /home/bonyido/trances-prs-dock/results/setup_benchmarks/bridgeprs/session_info.txt""",0,345,Wed Nov  5 04:57:14 WAT 2025
+manual,"
+rm -rf BridgePRS &&
+sudo apt-get update &&
+sudo apt-get install -y   build-essential wget unzip git python3 python3-pip r-base   libcurl4-openssl-dev libssl-dev libxml2-dev libxt-dev && wget https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20241013.zip && unzip plink_linux_x86_64_20241013.zip && sudo mv plink /usr/local/bin/ && rm plink_linux_x86_64_20241013.zip && git clone https://github.com/clivehoggart/BridgePRS.git && cd BridgePRS && R_LIB_USER=~/R/x86_64-pc-linux-gnu-library/$(R --version | head -n 1 | awk '{print $3}' | cut -d. -f1,2) && mkdir -p $R_LIB_USER && /usr/bin/Rscript -e install.packages(c('parallel'",'glmnet','boot','data.table','doMC','BEDMatrix','optparse','MASS','R.utils'), repos='https://cloud.r-project.org', dependencies=TRUE," lib='$R_LIB_USER')"" && /usr/bin/Rscript -e 'sessionInfo()' > /home/bonyido/trances-prs-dock/results/setup_benchmarks/bridgeprs/session_info.txt""",0,361,Wed Nov  5 05:03:58 WAT 2025
+manual,"
+rm -rf XP-BLUP &&
+git clone https://github.com/tanglab/XP-BLUP.git &&
+cd XP-BLUP &&
+chmod +x *.sh &&
+wget -qO- https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20241013.zip > plink.zip &&
+unzip -o plink.zip &&
+mkdir -p bin &&
+mv plink bin/ &&
+rm plink.zip &&
+wget -O gcta64.zip https://yanglab.westlake.edu.cn/software/gcta/bin/gcta-1.94.4-linux-kernel-3-x86_64.zip &&
+unzip -o gcta64.zip &&
+mv gcta-1.94.4-linux-kernel-3-x86_64/gcta64 bin/ &&
+rm -rf gcta64.zip gcta-1.94.4-linux-kernel-3-x86_64 &&
+export PATH=$PATH:$PWD/bin",0,37,Wed Nov  5 05:18:07 WAT 2025,,,,,,,,,,,
+manual,"
+rm -rf XP-BLUP &&
+git clone https://github.com/tanglab/XP-BLUP.git &&
+cd XP-BLUP &&
+chmod +x *.sh &&
+wget -qO- https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20241013.zip > plink.zip &&
+unzip -o plink.zip &&
+mkdir -p bin &&
+mv plink bin/ &&
+rm plink.zip &&
+wget -O gcta64.zip https://yanglab.westlake.edu.cn/software/gcta/bin/gcta-1.94.4-linux-kernel-3-x86_64.zip &&
+unzip -o gcta64.zip &&
+mv gcta-1.94.4-linux-kernel-3-x86_64/gcta64 bin/ &&
+rm -rf gcta64.zip gcta-1.94.4-linux-kernel-3-x86_64 &&
+export PATH=$PATH:$PWD/bin",0,35,Wed Nov  5 05:19:21 WAT 2025,,,,,,,,,,,
+manual,"
+rm -rf XP-BLUP &&
+git clone https://github.com/tanglab/XP-BLUP.git &&
+cd XP-BLUP &&
+chmod +x *.sh &&
+wget -qO- https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20241013.zip > plink.zip &&
+unzip -o plink.zip &&
+mkdir -p bin &&
+mv plink bin/ &&
+rm plink.zip &&
+wget -O gcta64.zip https://yanglab.westlake.edu.cn/software/gcta/bin/gcta-1.94.4-linux-kernel-3-x86_64.zip &&
+unzip -o gcta64.zip &&
+mv gcta-1.94.4-linux-kernel-3-x86_64/gcta64 bin/ &&
+rm -rf gcta64.zip gcta-1.94.4-linux-kernel-3-x86_64 &&
+export PATH=$PATH:$PWD/bin",0,38,Wed Nov  5 05:21:01 WAT 2025,,,,,,,,,,,
+docker,docker pull chiomab/xpblup:v1.0,0,11,Wed Nov  5 05:32:40 WAT 2025,,,,,,,,,,,
+docker,docker pull chiomab/xpblup:v1.0,0,9,Wed Nov  5 05:34:36 WAT 2025,,,,,,,,,,,
+docker,docker pull chiomab/xpblup:v1.0,0,10,Wed Nov  5 05:34:57 WAT 2025,,,,,,,,,,,
+manual,"
+sudo apt-get update &&
+sudo apt-get install -y   build-essential cmake wget unzip git gcc   libcurl4-openssl-dev libxml2-dev libfontconfig1-dev libfreetype6-dev   libharfbuzz-dev libfribidi-dev libssl-dev libudunits2-dev libgdal-dev   libproj-dev libxt-dev libv8-dev libpng-dev libjpeg-dev libtiff-dev libgfortran5   r-base sudo curl && R_LIB_USER=~/R/x86_64-pc-linux-gnu-library/$(R --version | head -n 1 | awk '{print $3}' | cut -d. -f1,2) && mkdir -p $R_LIB_USER && /usr/bin/Rscript -e install.packages(c('systemfonts'",'textshaping','ragg','pkgdown','data.table','RhpcBLASctl'), repos='https://cloud.r-project.org'," lib='$R_LIB_USER')"" && /usr/bin/Rscript -e ""install.packages('devtools'", repos='https://cloud.r-project.org', dependencies=TRUE," lib='$R_LIB_USER')"" && /usr/bin/Rscript -e ""devtools::install_github('YangLabHKUST/XPASS'"," lib='$R_LIB_USER')"" && /usr/bin/Rscript -e 'sessionInfo()' > /home/bonyido/trances-prs-dock/results/setup_benchmarks/xpass/session_info.txt""",0,608,Wed Nov  5 05:46:28 WAT 2025
+manual,"
+sudo apt-get update &&
+sudo apt-get install -y   build-essential cmake wget unzip git gcc   libcurl4-openssl-dev libxml2-dev libfontconfig1-dev libfreetype6-dev   libharfbuzz-dev libfribidi-dev libssl-dev libudunits2-dev libgdal-dev   libproj-dev libxt-dev libv8-dev libpng-dev libjpeg-dev libtiff-dev libgfortran5   r-base sudo curl && R_LIB_USER=~/R/x86_64-pc-linux-gnu-library/$(R --version | head -n 1 | awk '{print $3}' | cut -d. -f1,2) && mkdir -p $R_LIB_USER && /usr/bin/Rscript -e install.packages(c('systemfonts'",'textshaping','ragg','pkgdown','data.table','RhpcBLASctl'), repos='https://cloud.r-project.org'," lib='$R_LIB_USER')"" && /usr/bin/Rscript -e ""install.packages('devtools'", repos='https://cloud.r-project.org', dependencies=TRUE," lib='$R_LIB_USER')"" && /usr/bin/Rscript -e ""devtools::install_github('YangLabHKUST/XPASS'"," lib='$R_LIB_USER')"" && /usr/bin/Rscript -e 'sessionInfo()' > /home/bonyido/trances-prs-dock/results/setup_benchmarks/xpass/session_info.txt""",0,572,Wed Nov  5 05:56:20 WAT 2025
+manual,"
+sudo apt-get update &&
+sudo apt-get install -y   build-essential cmake wget unzip git gcc   libcurl4-openssl-dev libxml2-dev libfontconfig1-dev libfreetype6-dev   libharfbuzz-dev libfribidi-dev libssl-dev libudunits2-dev libgdal-dev   libproj-dev libxt-dev libv8-dev libpng-dev libjpeg-dev libtiff-dev libgfortran5   r-base sudo curl && R_LIB_USER=~/R/x86_64-pc-linux-gnu-library/$(R --version | head -n 1 | awk '{print $3}' | cut -d. -f1,2) && mkdir -p $R_LIB_USER && /usr/bin/Rscript -e install.packages(c('systemfonts'",'textshaping','ragg','pkgdown','data.table','RhpcBLASctl'), repos='https://cloud.r-project.org'," lib='$R_LIB_USER')"" && /usr/bin/Rscript -e ""install.packages('devtools'", repos='https://cloud.r-project.org', dependencies=TRUE," lib='$R_LIB_USER')"" && /usr/bin/Rscript -e ""devtools::install_github('YangLabHKUST/XPASS'"," lib='$R_LIB_USER')"" && /usr/bin/Rscript -e 'sessionInfo()' > /home/bonyido/trances-prs-dock/results/setup_benchmarks/xpass/session_info.txt""",0,586,Wed Nov  5 06:06:33 WAT 2025
+docker,docker pull chiomab/xpass:v1.2,0,85,Wed Nov  5 06:09:53 WAT 2025,,,,,,,,,,,
+docker,docker pull chiomab/xpass:v1.2,0,86,Wed Nov  5 06:11:37 WAT 2025,,,,,,,,,,,
+docker,docker pull chiomab/xpass:v1.2,0,93,Wed Nov  5 06:13:21 WAT 2025,,,,,,,,,,,
+docker,docker pull chiomab/bridgeprs:v1.5,0,72,Wed Nov  5 06:42:10 WAT 2025,,,,,,,,,,,
+docker,docker pull chiomab/bridgeprs:v1.5,0,67,Wed Nov  5 06:43:45 WAT 2025,,,,,,,,,,,
+docker,docker pull chiomab/bridgeprs:v1.5,0,68,Wed Nov  5 06:46:03 WAT 2025,,,,,,,,,,,
+manual,"
+rm -rf PRScsx &&
+git clone https://github.com/getian107/PRScsx.git &&
+cd PRScsx &&
+pip install --no-cache-dir scipy h5py",0,12,Wed Nov  5 22:40:16 WAT 2025,,,,,,,,,,,
+manual,"
+rm -rf PRScsx &&
+git clone https://github.com/getian107/PRScsx.git &&
+cd PRScsx &&
+pip install --no-cache-dir scipy h5py",0,12,Wed Nov  5 22:41:00 WAT 2025,,,,,,,,,,,
+manual,"
+rm -rf PRScsx &&
+git clone https://github.com/getian107/PRScsx.git &&
+cd PRScsx &&
+pip install --no-cache-dir scipy h5py",0,13,Wed Nov  5 22:41:28 WAT 2025,,,,,,,,,,,
+docker,docker pull chiomab/prscsx:v1.2,0,15,Wed Nov  5 22:45:23 WAT 2025,,,,,,,,,,,
+docker,docker pull chiomab/prscsx:v1.2,0,16,Wed Nov  5 22:48:34 WAT 2025,,,,,,,,,,,
+docker,docker pull chiomab/prscsx:v1.2,0,16,Wed Nov  5 22:49:00 WAT 2025,,,,,,,,,,,

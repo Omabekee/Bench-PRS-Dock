@@ -1,0 +1,42 @@
+*******************************************************************
+* Genome-wide Complex Trait Analysis (GCTA)
+* version v1.94.4 Linux
+* Built at Apr  7 2025 11:00:19, by GCC 8.3
+* (C) 2010-present, Yang Lab, Westlake University
+* Please report bugs to Jian Yang <jian.yang@westlake.edu.cn>
+*******************************************************************
+Analysis started at 04:28:32 UTC on Wed Nov 05 2025.
+Hostname: cafee7289846
+
+Accepted options:
+--bfile /data/trainN4k
+--extract /data/metaExtract.txt
+--make-grm-bin
+--out /results/execution_benchmarks/xpblup/docker/xpblup_small
+
+Note: This is a multi-thread program. You could specify the number of threads by the --thread-num option to speed up the computation if there are multiple processors in your machine.
+
+Reading PLINK FAM file from [/data/trainN4k.fam].
+4000 individuals to be included from [/data/trainN4k.fam].
+Reading PLINK BIM file from [/data/trainN4k.bim].
+18000 SNPs to be included from [/data/trainN4k.bim].
+Reading a list of SNPs from [/data/metaExtract.txt].
+3583 SNPs are extracted from [/data/metaExtract.txt].
+Reading PLINK BED file from [/data/trainN4k.bed] in SNP-major format ...
+Genotype data for 4000 individuals and 3583 SNPs to be included from [/data/trainN4k.bed].
+Calculating allele frequencies ...
+Recoding genotypes (individual major mode) ...
+
+Calculating the genetic relationship matrix (GRM) ... (Note: default speed-optimized mode, may use huge RAM)
+
+Summary of the GRM:
+Mean of diagonals = 1.00045
+Variance of diagonals = 0.0030353
+Mean of off-diagonals = -0.000250172
+Variance of off-diagonals = 0.000982539
+GRM of 4000 individuals has been saved in the file [/results/execution_benchmarks/xpblup/docker/xpblup_small.grm.bin] (in binary format).
+Number of SNPs to calculate the genetic relationship between each pair of individuals has been saved in the file [/results/execution_benchmarks/xpblup/docker/xpblup_small.grm.N.bin] (in binary format).
+IDs for the GRM file [/results/execution_benchmarks/xpblup/docker/xpblup_small.grm.bin] have been saved in the file [/results/execution_benchmarks/xpblup/docker/xpblup_small.grm.id].
+
+Analysis finished at 04:28:34 UTC on Wed Nov 05 2025
+Overall computational time: 1.63 sec.

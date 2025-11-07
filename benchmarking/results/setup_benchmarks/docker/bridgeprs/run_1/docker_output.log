@@ -1,0 +1,74 @@
+Docker setup benchmark for 'bridgeprs'
+Command: docker pull chiomab/bridgeprs:v1.5
+Detected image: chiomab/bridgeprs:v1.5
+Cold mode enabled: pruning all images and caches.
+Deleted Images:
+untagged: chiomab/prscsx:v1.2
+untagged: chiomab/prscsx@sha256:dc1be542e5d33a06d680d4f0ff78f5f0cfdb43f7cf258463041ba91c14984a34
+deleted: sha256:db10210798df0ae4bf55dda8b64a667de4103ee2d863f8f01a37579e006de70d
+deleted: sha256:779609dc24acf2417027ba42b9c96db27ea236a4c80fa7cbf5df7f0f8e40dc4d
+deleted: sha256:9cdf770ed76a11405c381a1a717038eeff192744fcc989e4d3708d3e0cdebfb9
+deleted: sha256:23926fd2a5cd2b55a2164fedb7c505b6104653dc5bba0a15984148bf973e1c0c
+deleted: sha256:2ceecb6416ec24d5a32e389e5fd6a1ad6489e40599a47fc8e309abce2810b90e
+deleted: sha256:c61ea1ae44cf80c18869f8646760cd7074acca0a78e4dbde810392cdc76e4aff
+deleted: sha256:455b3b8dc5d8dd89d2317d758269e43d8624805dfdf812bc1d79535cbe966478
+deleted: sha256:50f0966dd8b36ed309dea25e067120b4bbad57a703b348c5e44f7b0788a4fb67
+deleted: sha256:f9e10a090842921f8e8ec9e6605603adbb763f1f022941224c100657ac4354ea
+deleted: sha256:a8569f9f0fac613f75ee2e86c2b36e253b5d04d508fdbd9908049dd0bd1bb4e2
+deleted: sha256:8d853c8add5d1e7b0aafc4b68a3d9fb8e7a0da27970c2acf831fe63be4a0cd2c
+
+Total reclaimed space: 379.7MB
+Total:	0B
+Total reclaimed space: 0B
+Starting timed docker pull...
+Running setup in 'docker' mode...
+Command: docker pull chiomab/bridgeprs:v1.5
+v1.5: Pulling from chiomab/bridgeprs
+89dc6ea4eae2: Pulling fs layer
+cb37f27f1cda: Pulling fs layer
+471cdda18a91: Pulling fs layer
+7041e2f6687a: Pulling fs layer
+bb3f6177bea9: Pulling fs layer
+ce49e7170f2a: Pulling fs layer
+4f4fb700ef54: Pulling fs layer
+26178c83fdc9: Pulling fs layer
+67fedea6ed7e: Pulling fs layer
+ce49e7170f2a: Waiting
+4f4fb700ef54: Waiting
+67fedea6ed7e: Waiting
+26178c83fdc9: Waiting
+7041e2f6687a: Waiting
+bb3f6177bea9: Waiting
+471cdda18a91: Verifying Checksum
+471cdda18a91: Download complete
+7041e2f6687a: Verifying Checksum
+7041e2f6687a: Download complete
+89dc6ea4eae2: Verifying Checksum
+89dc6ea4eae2: Download complete
+89dc6ea4eae2: Pull complete
+ce49e7170f2a: Verifying Checksum
+ce49e7170f2a: Download complete
+bb3f6177bea9: Verifying Checksum
+bb3f6177bea9: Download complete
+4f4fb700ef54: Verifying Checksum
+4f4fb700ef54: Download complete
+67fedea6ed7e: Verifying Checksum
+67fedea6ed7e: Download complete
+26178c83fdc9: Verifying Checksum
+26178c83fdc9: Download complete
+cb37f27f1cda: Verifying Checksum
+cb37f27f1cda: Download complete
+cb37f27f1cda: Pull complete
+471cdda18a91: Pull complete
+7041e2f6687a: Pull complete
+bb3f6177bea9: Pull complete
+ce49e7170f2a: Pull complete
+4f4fb700ef54: Pull complete
+26178c83fdc9: Pull complete
+67fedea6ed7e: Pull complete
+Digest: sha256:60fcf6972ce58b97870962ab323941db32cb7f55134b4d1237e622da2a88e4b6
+Status: Downloaded newer image for chiomab/bridgeprs:v1.5
+docker.io/chiomab/bridgeprs:v1.5
+Setup completed successfully in 72 seconds.
+Logged to /home/bonyido/trances-prs-dock/results/setup_benchmarks/setup_log.csv
+Completed Docker run for bridgeprs.

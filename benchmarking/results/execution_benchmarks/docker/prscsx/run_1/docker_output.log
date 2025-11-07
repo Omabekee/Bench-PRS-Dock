@@ -1,0 +1,72 @@
+Docker execution benchmark for 'prscsx'
+Command: 
+docker run --rm -v /mnt/d/ld_ref:/ld_ref -v /home/bonyido/trances-prs-dock/test_data:/test_data -v /home/bonyido/trances-prs-dock/results:/results chiomab/prscsx:v1.2 python PRScsx.py --ref_dir=/ld_ref --bim_prefix=test_data/test --sst_file=test_data/EUR_sumstats.txt,test_data/EAS_sumstats.txt  --n_gwas=200000,100000 --pop=EUR,EAS --chrom=22 --phi=1e-2 --out_dir=/results/execution_benchmarks/prscsx/docker/ --out_name=test --seed=1234
+Starting timed Docker run...
+Running execution in 'docker' mode...
+Command: 
+docker run --rm -v /mnt/d/ld_ref:/ld_ref -v /home/bonyido/trances-prs-dock/test_data:/test_data -v /home/bonyido/trances-prs-dock/results:/results chiomab/prscsx:v1.2 python PRScsx.py --ref_dir=/ld_ref --bim_prefix=test_data/test --sst_file=test_data/EUR_sumstats.txt,test_data/EAS_sumstats.txt  --n_gwas=200000,100000 --pop=EUR,EAS --chrom=22 --phi=1e-2 --out_dir=/results/execution_benchmarks/prscsx/docker/ --out_name=test --seed=1234
+
+
+--ref_dir=/ld_ref
+--bim_prefix=test_data/test
+--sst_file=['test_data/EUR_sumstats.txt', 'test_data/EAS_sumstats.txt']
+--a=1
+--b=0.5
+--phi=0.01
+--n_gwas=[200000, 100000]
+--pop=['EUR', 'EAS']
+--n_iter=2000
+--n_burnin=1000
+--thin=5
+--out_dir=/results/execution_benchmarks/prscsx/docker/
+--out_name=test
+--chrom=['22']
+--meta=FALSE
+--write_pst=FALSE
+--seed=1234
+
+
+*** 2 discovery populations detected ***
+
+##### process chromosome 22 #####
+... parse reference file: /ld_ref/snpinfo_mult_1kg_hm3 ...
+... 18944 SNPs on chromosome 22 read from /ld_ref/snpinfo_mult_1kg_hm3 ...
+... parse bim file: test_data/test.bim ...
+... 1000 SNPs on chromosome 22 read from test_data/test.bim ...
+... parse EUR sumstats file: test_data/EUR_sumstats.txt ...
+... 1000 SNPs read from test_data/EUR_sumstats.txt ...
+... 1000 common SNPs in the EUR reference, EUR sumstats, and validation set ...
+... parse EAS sumstats file: test_data/EAS_sumstats.txt ...
+... 1000 SNPs read from test_data/EAS_sumstats.txt ...
+... 901 common SNPs in the EAS reference, EAS sumstats, and validation set ...
+... parse EUR reference LD on chromosome 22 ...
+... parse EAS reference LD on chromosome 22 ...
+... align reference LD on chromosome 22 across populations ...
+... 1000 valid SNPs across populations ...
+... MCMC ...
+--- iter-100 ---
+--- iter-200 ---
+--- iter-300 ---
+--- iter-400 ---
+--- iter-500 ---
+--- iter-600 ---
+--- iter-700 ---
+--- iter-800 ---
+--- iter-900 ---
+--- iter-1000 ---
+--- iter-1100 ---
+--- iter-1200 ---
+--- iter-1300 ---
+--- iter-1400 ---
+--- iter-1500 ---
+--- iter-1600 ---
+--- iter-1700 ---
+--- iter-1800 ---
+--- iter-1900 ---
+--- iter-2000 ---
+... Done ...
+
+
+Execution completed successfully in 149 seconds.
+Logged to /home/bonyido/trances-prs-dock/results/execution_benchmarks/runtime_log.csv
+Completed Docker execution benchmark for prscsx.

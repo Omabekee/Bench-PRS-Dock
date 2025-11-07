@@ -1,0 +1,45 @@
+Summary statistics file 1: /data/BMI_bbj_small.txt
+Summary statistics file 2: /data/BMI_ukb_small.txt
+Reference file 1: /data/1000G.EAS.QC.hm3.ind
+Reference file 2: /data/1000G.EUR.QC.hm3.ind
+Covariates file 1: /data/1000G.EAS.QC.hm3.ind.pc5.txt
+Covariates file 2: /data/1000G.EUR.QC.hm3.ind.pc20.txt
+Test genotype file : /data/1000G.EAS.QC.hm3.ind
+Reading data from summary statisitcs...
+9999 and 9999 SNPs found in summary statistics files 1 and 2.
+Reading SNP info from reference panels...
+1209411 and 1313833 SNPs found in reference panel 1 and 2.
+Reading SNP info from test genotype file...
+1209411 SNPs found in test file.
+2079 SNPs are matched in all files.
+0 SNPs are removed because of ambiguity; 2079 SNPs remained.
+Calculating kinship matrix from the both reference panels...
+0 SNPs are removed because of no variation; 2079 SNPs remained.
+370 SNPs in the second reference panel are alligned for alleles according to the first.
+42 SNPs have different minor alleles in population 1, z-scores are corrected according to reference panel.
+42 SNPs have different minor alleles in population 2, z-scores are corrected according to reference panel.
+Assigning SNPs to LD Blocks...
+Calculate PVE...
+               h1           h2          h12       rho
+[1,] 0.0004011115 0.0009534036 0.0004334987 0.7009982
+[2,] 0.0003300794 0.0002782913 0.0002434645 0.2950471
+Compute posterior mean from  7  blocks ...
+Compute posterior mean from two datasets.
+Block 1 / 7  finished. 
+Compute posterior mean from two datasets.
+Block 2 / 7  finished. 
+Compute posterior mean from two datasets.
+Block 3 / 7  finished. 
+Compute posterior mean from two datasets.
+Block 4 / 7  finished. 
+Compute posterior mean from two datasets.
+Block 5 / 7  finished. 
+Compute posterior mean from two datasets.
+Block 6 / 7  finished. 
+Compute posterior mean from two datasets.
+Block 7 / 7  finished. 
+Predicting PRS from test genotypes...
+Done.
+               h1           h2          h12       rho
+[1,] 0.0004011115 0.0009534036 0.0004334987 0.7009982
+[2,] 0.0003300794 0.0002782913 0.0002434645 0.2950471

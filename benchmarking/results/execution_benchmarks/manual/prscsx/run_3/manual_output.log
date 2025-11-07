@@ -1,0 +1,71 @@
+Active Python: /home/bonyido/trances_prs_env/bin/python
+Python 3.12.3
+Running execution benchmark for 'prscsx'...
+Running execution in 'manual' mode...
+Command: 
+python PRScsx/PRScsx.py --ref_dir=/mnt/d/ld_ref --bim_prefix=PRScsx/test_data/test --sst_file=PRScsx/test_data/EUR_sumstats.txt,PRScsx/test_data/EAS_sumstats.txt  --n_gwas=200000,100000 --pop=EUR,EAS --chrom=22 --phi=1e-2 --out_dir=results/execution_benchmarks/prscsx/manual --out_name=test --seed=1234
+
+
+--ref_dir=/mnt/d/ld_ref
+--bim_prefix=PRScsx/test_data/test
+--sst_file=['PRScsx/test_data/EUR_sumstats.txt', 'PRScsx/test_data/EAS_sumstats.txt']
+--a=1
+--b=0.5
+--phi=0.01
+--n_gwas=[200000, 100000]
+--pop=['EUR', 'EAS']
+--n_iter=2000
+--n_burnin=1000
+--thin=5
+--out_dir=results/execution_benchmarks/prscsx/manual
+--out_name=test
+--chrom=['22']
+--meta=FALSE
+--write_pst=FALSE
+--seed=1234
+
+
+*** 2 discovery populations detected ***
+
+##### process chromosome 22 #####
+... parse reference file: /mnt/d/ld_ref/snpinfo_mult_1kg_hm3 ...
+... 18944 SNPs on chromosome 22 read from /mnt/d/ld_ref/snpinfo_mult_1kg_hm3 ...
+... parse bim file: PRScsx/test_data/test.bim ...
+... 1000 SNPs on chromosome 22 read from PRScsx/test_data/test.bim ...
+... parse EUR sumstats file: PRScsx/test_data/EUR_sumstats.txt ...
+... 1000 SNPs read from PRScsx/test_data/EUR_sumstats.txt ...
+... 1000 common SNPs in the EUR reference, EUR sumstats, and validation set ...
+... parse EAS sumstats file: PRScsx/test_data/EAS_sumstats.txt ...
+... 1000 SNPs read from PRScsx/test_data/EAS_sumstats.txt ...
+... 901 common SNPs in the EAS reference, EAS sumstats, and validation set ...
+... parse EUR reference LD on chromosome 22 ...
+... parse EAS reference LD on chromosome 22 ...
+... align reference LD on chromosome 22 across populations ...
+... 1000 valid SNPs across populations ...
+... MCMC ...
+--- iter-100 ---
+--- iter-200 ---
+--- iter-300 ---
+--- iter-400 ---
+--- iter-500 ---
+--- iter-600 ---
+--- iter-700 ---
+--- iter-800 ---
+--- iter-900 ---
+--- iter-1000 ---
+--- iter-1100 ---
+--- iter-1200 ---
+--- iter-1300 ---
+--- iter-1400 ---
+--- iter-1500 ---
+--- iter-1600 ---
+--- iter-1700 ---
+--- iter-1800 ---
+--- iter-1900 ---
+--- iter-2000 ---
+... Done ...
+
+
+Execution completed successfully in 32 seconds.
+Logged to /home/bonyido/trances-prs-dock/results/execution_benchmarks/runtime_log.csv
+Completed manual execution benchmark for prscsx.

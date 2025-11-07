@@ -1,0 +1,138 @@
+Docker setup benchmark for 'xpass'
+Command: docker pull chiomab/xpass:v1.2
+Detected image: chiomab/xpass:v1.2
+Cold mode enabled: pruning all images and caches.
+Deleted Images:
+untagged: chiomab/xpass:v1.2
+untagged: chiomab/xpass@sha256:e4f3ce2270b6a867f22134f33c01609d686fa556712cc6e742bd1b762530da95
+deleted: sha256:96c0eba8b055fe559b23e7baa8fd8617d1d952dadea21287c97ea0f403d273f3
+deleted: sha256:c63071e46d5e32db1bff0ea734719fa5b8ce2a361d6eaeabc1ca3e4336099184
+deleted: sha256:f0d8afcd05bbe820f695df0f813a4879b0723442817d36e49b91f6481cc38617
+deleted: sha256:2902229b9c4e34ab1d09138d2b3196d1a244a0c5f16ed76980c9a64d4a2353bb
+deleted: sha256:5076680863b5649a937cf28f48767441684da9c15b4ff8c6da827862ddd07b22
+deleted: sha256:78b42140bca671d760acb3e420fdeb7d430d71c2a8a82de1b844c4d25c824cf9
+deleted: sha256:817dc91d2c9a05bb59fa2cd94c22b9935ff6805e85415b4d0cf4794f64557ce7
+deleted: sha256:da1114621468f06b5e5cca1d9b9d982fa3f6978d46bdd27cbefbeffd1bf72724
+deleted: sha256:055a4ff3fbc679e39e40304c1910d7486d9d0719f7b94a5efc3c3987e1144eb1
+deleted: sha256:90dfba931d377a60d9bc67258476f85c559fee50f3aa32a6456b6025c8928e02
+deleted: sha256:6cd5afc102d18e60f58838560fd224b9905925b9b419f025ede6c3f6815c0935
+deleted: sha256:5d4dfb6c9a8f9338a01f9d1dbf5448a7cd130084514fe3f129c4ff0255c733f0
+deleted: sha256:69ef43dcf28132967b0f1ef01d4a3f7bd1d418004bd0554d4661085c271832ea
+deleted: sha256:e043bc1d3faea96c50d53d1eb406cd88150b880da50c7d4d6ffae1d50abb6b68
+deleted: sha256:eaf954f602e76a8c8ecbd5a186dd39f72623083f66dc86164dfae7cbfcd4a5ac
+deleted: sha256:81d9c132379ea6a756a425e73abaac5734eb4debd7a995f0b6afb17dcacf8d86
+deleted: sha256:2539a0ff3361f89d47b7ac14c6f733d8d0175766b45c03a80c042ae0a8bf89ea
+deleted: sha256:689bd3874ec26a07036c4c7f7fe17d1a1a0565e5bf27ece9c8c1fd6df5b72b4a
+deleted: sha256:e4029f8b54716f9f7ab587c6104b9b30cbf7485a4870e766daf2682135978580
+deleted: sha256:dab9630843bc382c99505a2b84839405ced419fe09771d42651475249205e81a
+deleted: sha256:3cc982388b71ef357e0157e0b7d3059dcefa4dc9fd2e3815bde6c6ce040302f3
+
+Total reclaimed space: 2.107GB
+Total:	0B
+Total reclaimed space: 0B
+Starting timed docker pull...
+Running setup in 'docker' mode...
+Command: docker pull chiomab/xpass:v1.2
+v1.2: Pulling from chiomab/xpass
+1d387567261e: Pulling fs layer
+a185624c2452: Pulling fs layer
+f24d805e7267: Pulling fs layer
+4f4fb700ef54: Pulling fs layer
+4a7ee62e69ca: Pulling fs layer
+1b6a24d2ff57: Pulling fs layer
+b0480b1dac22: Pulling fs layer
+eb58596d2594: Pulling fs layer
+f5f74f521534: Pulling fs layer
+3e86b9578c13: Pulling fs layer
+8ff40a50668c: Pulling fs layer
+8908c5954261: Pulling fs layer
+366bb8a0f703: Pulling fs layer
+3061daf3c800: Pulling fs layer
+f9ddd137960b: Pulling fs layer
+e3fee7b9b27b: Pulling fs layer
+95ea38f82d8e: Pulling fs layer
+0bd11c887192: Pulling fs layer
+46d0a61f0b93: Pulling fs layer
+8ff40a50668c: Waiting
+8908c5954261: Waiting
+366bb8a0f703: Waiting
+3061daf3c800: Waiting
+f9ddd137960b: Waiting
+e3fee7b9b27b: Waiting
+95ea38f82d8e: Waiting
+3e86b9578c13: Waiting
+0bd11c887192: Waiting
+46d0a61f0b93: Waiting
+b0480b1dac22: Waiting
+eb58596d2594: Waiting
+f5f74f521534: Waiting
+4f4fb700ef54: Waiting
+4a7ee62e69ca: Waiting
+1b6a24d2ff57: Waiting
+f24d805e7267: Verifying Checksum
+f24d805e7267: Download complete
+4f4fb700ef54: Verifying Checksum
+4f4fb700ef54: Download complete
+4a7ee62e69ca: Verifying Checksum
+4a7ee62e69ca: Download complete
+1b6a24d2ff57: Verifying Checksum
+1b6a24d2ff57: Download complete
+b0480b1dac22: Verifying Checksum
+b0480b1dac22: Download complete
+1d387567261e: Verifying Checksum
+1d387567261e: Download complete
+1d387567261e: Pull complete
+f5f74f521534: Verifying Checksum
+f5f74f521534: Download complete
+3e86b9578c13: Verifying Checksum
+3e86b9578c13: Download complete
+8ff40a50668c: Verifying Checksum
+8ff40a50668c: Download complete
+eb58596d2594: Verifying Checksum
+eb58596d2594: Download complete
+366bb8a0f703: Verifying Checksum
+366bb8a0f703: Download complete
+8908c5954261: Verifying Checksum
+8908c5954261: Download complete
+3061daf3c800: Download complete
+e3fee7b9b27b: Verifying Checksum
+e3fee7b9b27b: Download complete
+f9ddd137960b: Verifying Checksum
+f9ddd137960b: Download complete
+0bd11c887192: Verifying Checksum
+0bd11c887192: Download complete
+46d0a61f0b93: Verifying Checksum
+46d0a61f0b93: Download complete
+a185624c2452: Retrying in 5 seconds
+a185624c2452: Retrying in 4 seconds
+a185624c2452: Retrying in 3 seconds
+a185624c2452: Retrying in 2 seconds
+a185624c2452: Retrying in 1 second
+95ea38f82d8e: Verifying Checksum
+95ea38f82d8e: Download complete
+a185624c2452: Verifying Checksum
+a185624c2452: Download complete
+a185624c2452: Pull complete
+f24d805e7267: Pull complete
+4f4fb700ef54: Pull complete
+4a7ee62e69ca: Pull complete
+1b6a24d2ff57: Pull complete
+b0480b1dac22: Pull complete
+eb58596d2594: Pull complete
+f5f74f521534: Pull complete
+3e86b9578c13: Pull complete
+8ff40a50668c: Pull complete
+8908c5954261: Pull complete
+366bb8a0f703: Pull complete
+3061daf3c800: Pull complete
+f9ddd137960b: Pull complete
+e3fee7b9b27b: Pull complete
+95ea38f82d8e: Pull complete
+0bd11c887192: Pull complete
+46d0a61f0b93: Pull complete
+Digest: sha256:e4f3ce2270b6a867f22134f33c01609d686fa556712cc6e742bd1b762530da95
+Status: Downloaded newer image for chiomab/xpass:v1.2
+docker.io/chiomab/xpass:v1.2
+Setup completed successfully in 93 seconds.
+Logged to /home/bonyido/trances-prs-dock/results/setup_benchmarks/setup_log.csv
+Completed Docker run for xpass.

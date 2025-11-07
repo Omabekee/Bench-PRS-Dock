@@ -1,0 +1,29 @@
+PLINK v1.9.0-b.7.6 64-bit (13 Oct 2024)
+Options in effect:
+  --allow-no-sex
+  --bfile /data/testN2k
+  --out /results/execution_benchmarks/xpblup/docker/xpblup.predict
+  --score /results/execution_benchmarks/xpblup/docker/xpblup.betaRecal
+
+Hostname: bfacb44169e6
+Working directory: /xpblup
+Start time: Wed Nov  5 04:31:02 2025
+
+Random number seed: 1762317062
+15793 MB RAM detected; reserving 7896 MB for main workspace.
+18000 variants loaded from .bim file.
+2000 people (0 males, 0 females, 2000 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+/results/execution_benchmarks/xpblup/docker/xpblup.predict.nosex .
+2000 phenotype values loaded from .fam.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 2000 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is exactly 1.
+18000 variants and 2000 people pass filters and QC.
+Phenotype data is quantitative.
+--score: 18000 valid predictors loaded.
+--score: Results written to
+/results/execution_benchmarks/xpblup/docker/xpblup.predict.profile .
+
+End time: Wed Nov  5 04:31:02 2025

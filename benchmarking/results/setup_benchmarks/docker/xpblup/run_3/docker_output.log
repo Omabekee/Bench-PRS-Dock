@@ -1,0 +1,73 @@
+Docker setup benchmark for 'xpblup'
+Command: docker pull chiomab/xpblup:v1.0
+Detected image: chiomab/xpblup:v1.0
+Cold mode enabled: pruning all images and caches.
+Deleted Images:
+untagged: chiomab/xpblup:v1.0
+untagged: chiomab/xpblup@sha256:62d8252f75cc653405c444282ffb225393239a365a1a0ef923ea8b9937022441
+deleted: sha256:45441208f13349fd7c6e4a6341150c65b16726226f0f638a335dc2930d3a367a
+deleted: sha256:d2093d2736833463e4780dfaa26402934515e217517195ea94abc44ee834a807
+deleted: sha256:7131aabe8713ee4e0fa8e6e6a97ccdf6227abebc8aeb8d97442ba39c6b6df743
+deleted: sha256:32f31c0c48acf13ae3164bb9d90c3b4acdbe63ca1868f184bee3d9b591b55bd3
+deleted: sha256:d89682945672edb0205a7fa3683e5d730397ecfd7b7997b9c501f3803551e3da
+deleted: sha256:ffc02a6486b43624d8bf75acad9454a3cec9c7f0fd662e3ff7a3b0e4e337002c
+deleted: sha256:9f88e6fe7fd2108d00e17b6d1a4f182dbdea8fcd05643a91bd972ac19df6710f
+deleted: sha256:59a265daf6657259541e9d29c14a9b00cc42d77ec0b225efcf9e6ac74f6f7b89
+deleted: sha256:748f56f99ffe6b9769666b1afa57a1e43cfe8f12ce38d09166ff45ad79c7ca23
+deleted: sha256:65c636ce09f299ba8ea7157c8d126dfd5b115fa7bbc5d634a91b34786958546e
+
+Total reclaimed space: 167MB
+Total:	0B
+Total reclaimed space: 0B
+Starting timed docker pull...
+Running setup in 'docker' mode...
+Command: docker pull chiomab/xpblup:v1.0
+v1.0: Pulling from chiomab/xpblup
+30a9c22ae099: Pulling fs layer
+39ba83b59198: Pulling fs layer
+52fe94982161: Pulling fs layer
+4f4fb700ef54: Pulling fs layer
+3043ebc061ed: Pulling fs layer
+bc91395c8904: Pulling fs layer
+71c898a238d9: Pulling fs layer
+328ffe0ae311: Pulling fs layer
+58dd1995bdaa: Pulling fs layer
+4f4fb700ef54: Waiting
+3043ebc061ed: Waiting
+bc91395c8904: Waiting
+71c898a238d9: Waiting
+328ffe0ae311: Waiting
+58dd1995bdaa: Waiting
+52fe94982161: Verifying Checksum
+52fe94982161: Download complete
+39ba83b59198: Verifying Checksum
+39ba83b59198: Download complete
+4f4fb700ef54: Verifying Checksum
+4f4fb700ef54: Download complete
+bc91395c8904: Verifying Checksum
+bc91395c8904: Download complete
+3043ebc061ed: Verifying Checksum
+3043ebc061ed: Download complete
+71c898a238d9: Verifying Checksum
+71c898a238d9: Download complete
+328ffe0ae311: Verifying Checksum
+328ffe0ae311: Download complete
+58dd1995bdaa: Verifying Checksum
+58dd1995bdaa: Download complete
+30a9c22ae099: Verifying Checksum
+30a9c22ae099: Download complete
+30a9c22ae099: Pull complete
+39ba83b59198: Pull complete
+52fe94982161: Pull complete
+4f4fb700ef54: Pull complete
+3043ebc061ed: Pull complete
+bc91395c8904: Pull complete
+71c898a238d9: Pull complete
+328ffe0ae311: Pull complete
+58dd1995bdaa: Pull complete
+Digest: sha256:62d8252f75cc653405c444282ffb225393239a365a1a0ef923ea8b9937022441
+Status: Downloaded newer image for chiomab/xpblup:v1.0
+docker.io/chiomab/xpblup:v1.0
+Setup completed successfully in 10 seconds.
+Logged to /home/bonyido/trances-prs-dock/results/setup_benchmarks/setup_log.csv
+Completed Docker run for xpblup.

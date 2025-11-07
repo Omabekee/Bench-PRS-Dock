@@ -1,0 +1,29 @@
+Active Python: /home/bonyido/trances_prs_env/bin/python
+Python 3.12.3
+Clearing pip cache...
+Running setup benchmark for 'prscsx'...
+Running setup in 'manual' mode...
+Command: 
+rm -rf PRScsx &&
+git clone https://github.com/getian107/PRScsx.git &&
+cd PRScsx &&
+pip install --no-cache-dir scipy h5py
+Cloning into 'PRScsx'...
+Collecting scipy
+  Downloading scipy-1.16.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (62 kB)
+Collecting h5py
+  Downloading h5py-3.15.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.0 kB)
+Collecting numpy<2.6,>=1.25.2 (from scipy)
+  Downloading numpy-2.3.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+Downloading scipy-1.16.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (35.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.7/35.7 MB 7.9 MB/s  0:00:04
+Downloading numpy-2.3.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 12.6 MB/s  0:00:01
+Downloading h5py-3.15.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (5.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.1/5.1 MB 12.7 MB/s  0:00:00
+Installing collected packages: numpy, scipy, h5py
+
+Successfully installed h5py-3.15.1 numpy-2.3.4 scipy-1.16.3
+Setup completed successfully in 13 seconds.
+Logged to /home/bonyido/trances-prs-dock/results/setup_benchmarks/setup_log.csv
+Completed run for prscsx (fresh environment created, dependencies fully reinstalled).
