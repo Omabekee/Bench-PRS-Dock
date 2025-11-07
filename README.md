@@ -110,9 +110,6 @@ To reproduce the benchmarking results reported in this repository, run the scrip
 
 See [CITATION.cff](https://www.notion.so/CITATION.cff) for formal citation metadata
 
-## License
-
-...
-
 
 ---
+
