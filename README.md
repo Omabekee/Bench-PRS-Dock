@@ -108,8 +108,9 @@ To reproduce the benchmarking results reported in this repository, run the scrip
 
 ## Cite Us
 
-See [CITATION.cff](https://www.notion.so/CITATION.cff) for formal citation metadata
+For citation and attribution information, please refer to [CITATION.cff](./citation.cff).
 
 
 ---
+
 
