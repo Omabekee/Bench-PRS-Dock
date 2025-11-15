@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use Bench-PRS-Dock, please cite this repository."
-title: "Bench-PRS-Dock: A Containerized Suite for Reproducible Polygenic Risk Score Analysis and Benchmarking"
+title: "Bench-PRS-Dock: A Containerized Suite for Reproducible PRS Analysis"
 version: 0.1.0
 authors:
   - family-names: Onyido (Oselu)
@@ -12,3 +12,4 @@ authors:
   - family-names: Oyelade
     given-names: Jelili
 date-released: 2025-11-06
+
