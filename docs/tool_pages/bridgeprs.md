@@ -56,4 +56,4 @@ If you use this container, please cite both the original method and the Bench-PR
 
 ## Related Resources
 
-Docker Hub page: https://hub.docker.com/u/chiomab
+Docker Hub page: https://hub.docker.com/r/chiomab/bridgeprs
