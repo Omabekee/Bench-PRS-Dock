@@ -17,7 +17,7 @@
 - Email: chiomabonyido@gmail.com
 - LinkedIn: [Chioma Onyido](https://www.linkedin.com/in/chioma-onyido/)
 
-**Docker Hub page:** https://hub.docker.com/repository/docker/chiomab/bridgeprs/general
+**Docker Hub page:** https://hub.docker.com/r/chiomab/bridgeprs
 
 Last updated: 2025-07-12
 
