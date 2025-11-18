@@ -1,11 +1,23 @@
 # BridgePRS - Detailed Documentation (Bench-PRS Dock)
 **Image**: chiomab/bridgeprs:v1.5
 
-**Version:** 1.5
+**Version:** 0.1.7
 
 **Purpose:** Bayesian ridge regression–based PRS method for multi-ancestry prediction
 
-**Maintainer**: Chioma Onyido
+**Authors:** Clive J. Hoggart, Shing Wan Choi,  Judit García-González, Tade Souaiaia, Michael Preuss & Paul F. O’Reilly
+
+**Website:** https://www.bridgeprs.net/
+
+**GitHub Documentation:** https://github.com/clivehoggart/BridgePRS
+
+**Published Paper:** [BridgePRS leverages shared genetic effects across ancestries to increase polygenic risk score portability](https://www.nature.com/articles/s41588-023-01583-9)
+
+**Docker Image Maintainer**: Chioma Onyido (Oselu)
+- Email: chiomabonyido@gmail.com
+- LinkedIn: [Chioma Onyido](https://www.linkedin.com/in/chioma-onyido/)
+
+**Docker Hub page:** https://hub.docker.com/repository/docker/chiomab/bridgeprs/general
 
 Last updated: 2025-07-12
 
@@ -44,16 +56,12 @@ bash -c './bridgePRS pipeline go \
   --phenotype y
 ```
 
-**More details in BridgePRS official documentation - GitHub Link: [Hoggart et al. (2024)](https://github.com/clivehoggart/BridgePRS)**
-
 
 ## Citation
 
-BridgePRS paper: Hoggart et al., 2024.
-
-Container maintained by Chioma Onyido (2025).
+Container maintained by Chioma Onyido (Oselu).
 If you use this container, please cite both the original method and the Bench-PRS Dock resource.
 
 ## Related Resources
 
-Docker Hub page: https://hub.docker.com/repository/docker/chiomab/bridgeprs/general
+**Docker Hub page:** https://hub.docker.com/repository/docker/chiomab/bridgeprs/general
