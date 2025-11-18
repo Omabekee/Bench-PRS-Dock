@@ -1,50 +1,55 @@
-# BridgePRS - Detailed Documentation (Bench-PRS Dock)
-**Image**: chiomab/bridgeprs:v1.5
-
-**Version:** 0.1.7
-
-**Purpose:** Bayesian ridge regression–based PRS method for multi-ancestry prediction
+# BridgePRS - Bench-PRS Dock Documentation
+**Image:** `chiomab/bridgeprs:v1.5`  
+**Tool Version:** 0.1.7  
+**Method Type:** Bayesian ridge regression–based PRS for multi-ancestry prediction
 
 **Authors:** Clive J. Hoggart, Shing Wan Choi,  Judit García-González, Tade Souaiaia, Michael Preuss & Paul F. O’Reilly
 
-**Website:** https://www.bridgeprs.net/
+**Website:** https://www.bridgeprs.net/  
+**GitHub:** https://github.com/clivehoggart/BridgePRS  
+**Published Paper:**  
+[BridgePRS leverages shared genetic effects across ancestries to increase polygenic risk score portability](https://www.nature.com/articles/s41588-023-01583-9)  
 
-**GitHub Documentation:** https://github.com/clivehoggart/BridgePRS
+---
 
-**Published Paper:** [BridgePRS leverages shared genetic effects across ancestries to increase polygenic risk score portability](https://www.nature.com/articles/s41588-023-01583-9)
-
-**Docker Image Maintainer**: Chioma Onyido (Oselu)
+## Maintainer (Bench-PRS Dock)
+**Chioma Blessing Onyido (Oselu)**
 - Email: chiomabonyido@gmail.com
 - LinkedIn: [Chioma Onyido](https://www.linkedin.com/in/chioma-onyido/)
-
-**Docker Hub page:** https://hub.docker.com/r/chiomab/bridgeprs
+- Docker Hub: https://hub.docker.com/r/chiomab/bridgeprs
 
 Last updated: 2025-07-12
 
 ---
-## Overview
-BridgePRS implements Bayesian ridge regression within a three-stage framework to construct ancestry-aware PRS using summary and individual-level data.
+## 1. Overview
+BridgePRS implements a three-stage Bayesian ridge regression framework to generate ancestry-aware polygenic scores using both GWAS summary statistics and individual-level data.
 
-In **Bench-PRS Dock**, this container provides a fully reproducible environment with all dependencies preinstalled.
+Within **Bench-PRS Dock**, the container provides:
+- Fully reproducible environment  
+- Preinstalled dependencies  
+- Stable versioning 
 
 ---
-## Included Software & Versions
+
+## 2. Included Software & Versions
 
 | Component | Version | 
 |-------|-------------|
-| **Main tool** | BridgePRS 0.1.7
-| **R / Python** | Python v3+, R v3.6.3
-| **Key dependencies** | parallel, glmnet, boot, data.table, doMC, BEDMatrix v2.0.3, optparse and MASS
-| **Additional utilities**| plink 1.9
+| **BridgePRS** | 0.1.7 |
+| **R** | 3.6.3 |
+| **Python** | 3+ |
+| **Key dependencies** | parallel, glmnet, boot, data.table, doMC, BEDMatrix v2.0.3, optparse and MASS |
+| **Utilities**| PLINK 1.9 |
 
 ---
-## Pull the Image
+## 3. Pull the Image
 ``` bash
 docker pull chiomab/bridgeprs:v1.5
 ```
 
 ---
-## Run Example
+
+## 4. Example Run
 ```bash
 docker run --rm \
   -v ~/BridgePRS/data:/data \
@@ -55,12 +60,12 @@ bash -c './bridgePRS pipeline go \
   --config_files /data/afr.config /data/eur.config \
   --phenotype y
 ```
+---
 
-
-## Citation
-
-Container maintained by Chioma Onyido (Oselu).
+## 5. Citation
 If you use this container, please cite both the original method and the Bench-PRS Dock resource.
 
-## Related Resources
+---
+
+## 6. Related Resources
 Docker Hub page: https://hub.docker.com/r/chiomab/bridgeprs
