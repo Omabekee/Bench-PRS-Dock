@@ -1,7 +1,7 @@
-# SDPRX - Bench-PRS Dock Documentation
+# XPASS/ XPASS+ - Bench-PRS Dock Documentation
 **Image:** `chiomab/xpass:v1.2`  
 **Tool Version:** Latest  
-**Method Type:** Bayesian hierarchical model for multi-ancestry polygenic scoring
+**Method Type:** Bayesian hierarchical model for multi-ancestry polygenic scoring using GWAS summary statistics
 
 **Authors:** Cai, M., Xiao, J., Zhang, S., Wan, X., Zhao, H., Chen, G., & Yang, C.
  
@@ -21,24 +21,34 @@ Last updated: 2025-07-12
 
 ---
 ## 1. Overview
-XPASS and XPASS+ apply a Bayesian hierarchical framework to combine ancestry-specific and shared genetic effects to improve polygenic scoring in diverse populations. They leverage large European GWAS datasets to boost prediction accuracy in under-represented target
+XPASS is a Bayesian hierarchical model that combines ancestry-specific and shared genetic effects using summary statistics to improve polygenic scoring in under-represented populations.
+
+XPASS+ extends XPASS by incorporating population-specific SNP effects into PRS construction. It requires a pre-selected set of population-specific variants, obtained using a P+T procedure (e.g. via the ieugwasr R package).
+
+They both leverage large European GWAS datasets to boost prediction accuracy in under-represented populations.
 
 
 Within **Bench-PRS Dock**, the container provides:
 - Fully reproducible environment  
 - Preinstalled dependencies  
-- Stable versioning 
+- Stable versioning
+- Support for running both **XPASS** and **XPASS+** 
 
 ---
 
 ## 2. Included Software & Versions
 
-
+| Component | Version | 
+|-------|-------------|
+| **R** | | r-base/ System R (installed via apt) |
+| **R packages** | systemfonts, textshaping, ragg, pkgdown, data.table, RhpcBLASctl, ieugwasr, devtools |
+| **Fourier LD files** | AFR, EUR, EAS panels |
+| **Utilities**| PLINK 1.9 |
 
 ---
 ## 3. Pull the Image
 ``` bash
-docker pull chiomab/xpblup:v1.0
+docker pull chiomab/xpass:v1.2
 ```
 
 ---
@@ -46,10 +56,10 @@ docker pull chiomab/xpblup:v1.0
 ## 4. Example Run
 ```bash
 docker run --rm \
-  -v ~/XPASS/XPASS_demo:/data \
+  -v ~/XPASS_demo:/data \
   -v ~/results:/results \
   chiomab/xpass:v1.2 \
-  Rscript /data/run_xpass_bmi_test.R
+  Rscript /data/run_xpass.R
 ```
 ---
 
