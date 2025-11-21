@@ -61,7 +61,6 @@ See the full technical inventory in [`Bench-PRS Dock Inventory`](docs/benchprsdo
 Bench-PRS-Dock/
 ├─ README.md
 ├─ CITATION.cff
-├─ LICENSE
 
 ├─ docs/
 │  └─ tool_pages/
