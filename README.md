@@ -31,7 +31,7 @@ See all tool pages in [`docs/tool_pages/`](docs/tool_pages/)
 ---
 
 ## Suite Contents
-See the full technical inventory → [`Bench-PRS Dock Inventory`](docs/benchprsdock_inventory.md)
+See the full technical inventory in [`Bench-PRS Dock Inventory`](docs/benchprsdock_inventory.md)
 
 ### Bench-PRS Tool Suite
 ---
