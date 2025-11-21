@@ -95,7 +95,7 @@ Bench-PRS-Dock/
 ```
 
 **Description:**
-- **Essential** `README.md`
+- **Essential:** `README.md`
 - **Documentation:** `docs/` - Docker image inventory and Tool-specific pages  
 - **Benchmarking Scripts:** `benchmarking/scripts/` - To reproduce the benchmarking results reported in this repository, run the scripts located in:
    - `setup/` - Setup-time benchmarking scripts
