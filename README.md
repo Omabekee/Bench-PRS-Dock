@@ -31,21 +31,21 @@ See all tool pages in [`docs/tool_pages/`](docs/tool_pages/)
 ---
 
 ## Suite Contents
-Full inventory: [`manifest/prsdock_inventory.csv`](https://www.notion.so/docs/reproducibility_manifest.md)
+See the full technical inventory → [`Bench-PRS Dock Inventory`](docs/benchprsdock_inventory.md)
 
 ### Bench-PRS Tool Suite
 ---
-| Tools | Docker Tags | Image Size | Citation
+| Tools | Docker Image/ Tags | Image Size | Citation
 |-------|-------------|------------|---------|
-| **BridgePRS** | chiomab/bridgeprs:v1.5 | 588.9 MB | [Hoggart et al. (2024)](https://www.nature.com/articles/s41588-023-01583-9) |
-| **PRSCSx** | chiomab/prscsx:v1.2 | 118.3 MB | [Ruan et al. (2022)](https://www.nature.com/articles/s41588-022-01054-7) |
-| **SDPRX** | chiomab/sdprx:v1.0 | 555.8 MB | [Zhou et al. (2023)](https://doi.org/10.1016/j.ajhg.2022.11.007) |
-| **XPASS/ XPASS+** | chiomab/xpass:v1.2 | 689.1 | [Cai et al. (2021)](10.1016/j.ajhg.2021.03.002) |
-| **XP-BLUP** | chiomab/xpblup:v1.0 | 51.4 MB| [Coram et al. (2017)](https://doi.org/10.1016/j.ajhg.2017.06.015) |
-| **GAUDI** | chiomab/gaudi:v1.1 | 577.3 MB| [Sun et al. (2024)](https://www.nature.com/articles/s41467-024-45135-z) |
-| **PolyFun** | chiomab/polyfun:v1.1 | 2.6 GB| [Weissbrod et al. (2022)](https://www.nature.com/articles/s41588-022-01036-9) |
-| **SNPNET** | chiomab/snpnet:v1.1 | 811.3 MB | [Qian et al. (2020)](https://doi.org/10.1371/journal.pgen.1009141) |
-| **TL-PRS** | chiomab/tl-prs:v1.2 | 635.2 MB | [Zhao et al. (2022)](10.1016/j.ajhg.2022.09.010) |
+| **BridgePRS** | [chiomab/bridgeprs:v1.5](https://hub.docker.com/r/chiomab/bridgeprs) | 588.9 MB | [Hoggart et al. (2024)](https://www.nature.com/articles/s41588-023-01583-9) |
+| **PRSCSx** | [chiomab/prscsx:v1.2](https://hub.docker.com/r/chiomab/prscsx) | 118.3 MB | [Ruan et al. (2022)](https://www.nature.com/articles/s41588-022-01054-7) |
+| **SDPRX** | [chiomab/sdprx:v1.0](https://hub.docker.com/r/chiomab/sdprx) | 555.8 MB | [Zhou et al. (2023)](https://doi.org/10.1016/j.ajhg.2022.11.007) |
+| **XPASS/ XPASS+** | [chiomab/xpass:v1.2](https://hub.docker.com/r/chiomab/xpass) | 689.1 | [Cai et al. (2021)](10.1016/j.ajhg.2021.03.002) |
+| **XP-BLUP** | [chiomab/xpblup:v1.0](https://hub.docker.com/r/chiomab/xpblup) | 51.4 MB| [Coram et al. (2017)](https://doi.org/10.1016/j.ajhg.2017.06.015) |
+| **GAUDI** | [chiomab/gaudi-prs:v1.1](https://hub.docker.com/r/chiomab/gaudi-prs) | 577.3 MB| [Sun et al. (2024)](https://www.nature.com/articles/s41467-024-45135-z) |
+| **PolyFun** | [chiomab/polyfun:v1.3](https://hub.docker.com/r/chiomab/polyfun) | 2.6 GB| [Weissbrod et al. (2022)](https://www.nature.com/articles/s41588-022-01036-9) |
+| **SNPNET** | [chiomab/snpnet:v1.1](https://hub.docker.com/r/chiomab/snpnet) | 811.3 MB | [Qian et al. (2020)](https://doi.org/10.1371/journal.pgen.1009141) |
+| **TL-PRS** | [chiomab/tl-prs:v1.2](https://hub.docker.com/r/chiomab/tl-prs) | 635.2 MB | [Zhao et al. (2022)](10.1016/j.ajhg.2022.09.010) |
 
 
 ## Repository Structure
@@ -70,11 +70,14 @@ Bench-PRS-Dock/
 │  │  │  ├─ measure_time_setup.sh
 │  │  │  ├─ run_manual_setup.sh
 │  │  │  └─ run_setup_docker.sh
-│  │  └─ execution/
-│  │     ├─ measure_time_execution.sh
-│  │     ├─ run_manual_execution.sh
-│  │     └─ run_docker_execution.sh
-│  │
+│  │  ├─ execution/
+│  │  │  ├─ measure_time_execution.sh
+│  │  │  ├─ run_manual_execution.sh
+│  │  │  └─ run_docker_execution.sh
+│  │  └─ visualization/
+│  │  │  ├─ plot_eff_ratio.R
+│  │  │  └─ plot_error_barchart.R
+│  │      
 │  ├─ results/
 │  │  ├─ setup_benchmarks/
 │  │  │  ├─ docker/
