@@ -40,7 +40,7 @@ Within **Bench-PRS Dock**, the container provides:
 
 | Component | Version | 
 |-------|-------------|
-| **R** | | r-base/ System R (installed via apt) |
+| **R** | | 4.0+ |
 | **R packages** | systemfonts, textshaping, ragg, pkgdown, data.table, RhpcBLASctl, ieugwasr, devtools |
 | **Fourier LD files** | AFR, EUR, EAS panels |
 | **Utilities**| PLINK 1.9 |
