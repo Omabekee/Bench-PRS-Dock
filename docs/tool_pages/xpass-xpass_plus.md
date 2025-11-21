@@ -40,7 +40,7 @@ Within **Bench-PRS Dock**, the container provides:
 
 | Component | Version | 
 |-------|-------------|
-| **R** | | 4.0+ |
+| **R** | 4.0+ |
 | **R packages** | systemfonts, textshaping, ragg, pkgdown, data.table, RhpcBLASctl, ieugwasr, devtools |
 | **Fourier LD files** | AFR, EUR, EAS panels |
 | **Utilities**| PLINK 1.9 |
@@ -69,4 +69,5 @@ If you use this container, please cite both the original method and the Bench-PR
 ---
 
 ## 6. Related Resources
+
 Docker Hub page: https://hub.docker.com/r/chiomab/xpass
