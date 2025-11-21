@@ -4,7 +4,7 @@ Bench-PRS Dock is a curated collection of ten Dockerized Polygenic Risk Score (P
 
 
 <p align="center">
-  <img src="figures/benchprs_architecture.png" alt="Bench-PRS Dock Architecture" width="800">
+  <img src="benchmarking/figures/benchprsdock_architecture.png" alt="Bench-PRS Dock Architecture" width="800">
   <br>
   <em>Figure 1. Bench-PRS Dock Architecture.</em>
 </p>
