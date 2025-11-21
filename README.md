@@ -95,19 +95,15 @@ Bench-PRS-Dock/
 ```
 
 **Description:**
-- **Core files:** `README.md`, `LICENSE`
-- **Documentation:** `docs/` - Tool-specific pages and workflow notes  
-- **Metadata:** `manifest/` - Docker image inventory and verification logs  
-- **Benchmarking Scripts:** `benchmarking/scripts/` - All setup, execution and system-capture scripts used for reproducibility testing
+- **Core files:** `README.md`
+- **Documentation:** `docs/` - Docker image inventory and Tool-specific pages  
+- **Benchmarking Scripts:** `benchmarking/scripts/` - To reproduce the benchmarking results reported in this repository, run the scripts located in:
    - `setup/` - Setup-time benchmarking scripts
    - `execution/` - Execution-time benchmarking scripts
+   - `visualization/` - R scripts for plotting figures in manuscript
    - `capture_system_info.sh` - Environment metadata capture
 - **Benchmark Results:** `benchmarking/results/` - Organized setup and execution benchmarks for all tools (Docker vs manual)
-- **Figures**: `figures/` - Visuals used in README and publications
-
-## Verification
-To reproduce the benchmarking results reported in this repository, run the scripts located in `benchmarking/scripts/`
-
+- **Figures**: `figures/` - Visuals used in README and manuscript
 
 ## Cite Us
 
