@@ -2,6 +2,14 @@
 
 Bench-PRS Dock is a curated collection of ten Dockerized Polygenic Risk Score (PRS) tools built to make genetic risk prediction analyses reproducible, portable, and easy to benchmark across populations. Each container is versioned, metadata-tracked, and verified for runtime consistency.
 
+
+<p align="center">
+  <img src="figures/benchprs_architecture.png" alt="Bench-PRS Dock Architecture" width="800">
+  <br>
+  <em>Figure 1. Bench-PRS Dock Architecture.</em>
+</p>
+
+
 ---
 
 ## Quick Start
