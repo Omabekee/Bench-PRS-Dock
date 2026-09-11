@@ -18,6 +18,8 @@ internal dependencies. The `RepoDigest` is the immutable content reference - `do
 | XP-BLUP | `chiomab/xpblup:v1.1` | ubuntu:22.04 | Shell / GCTA | Two-component linear mixed model (BLUP) | GCTA, PLINK 1.9 |
 
 ## RepoDigests (pull-by-digest)
+Pulling by digest guarantees the exact image used in the benchmark, independent of any later change to the tag. For example:
+`docker pull chiomab/prsice@sha256:39ddea2e57d254fb50cc8edf749899c0b07d1dc50f8a2b152e55bbe5d9aa0fd7`
 
 | Image | RepoDigest |
 |-------|------------|
