@@ -8,6 +8,8 @@ Every image is **self-documenting** - a bare `docker run <image>` prints the too
 **self-verifying** - `docker run <image> goss -g /goss.yaml validate` checks its internal dependencies.
 All images are on Docker Hub under [`chiomab`](https://hub.docker.com/u/chiomab).
 
+![Bench-PRS Dock images](docs/bench_prs_dock_overview.png)
+
 ## Tools
 
 | Tool | Image | Method | Page |
