@@ -5,5 +5,15 @@ authors:
   - family-names: Oselu
     given-names: Chioma
     email: chiomabonyido@gmail.com
+    affiliation: "Covenant University, Ota, Ogun State, Nigeria"
+  - family-names: Emmanuel
+    given-names: Jerry
+    affiliation: "Covenant University, Ota, Ogun State, Nigeria"
+  - family-names: Iyegbe
+    given-names: Conrad
+    affiliation: "Icahn School of Medicine at Mount Sinai, New York, USA"
+  - family-names: Oyelade
+    given-names: Jelili
+    affiliation: "Covenant University, Ota, Ogun State, Nigeria"
 year: 2026
 license: MIT
