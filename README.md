@@ -1,4 +1,4 @@
-# Bench-PRS Dock: Containerised Multi-Ancestry Polygenic Risk Score Tools
+# Bench-PRS Dock: A Containerised Collection of Multi-Ancestry Polygenic Risk Score Tools for Reproducible Deployment and Benchmarking
 
 Reproducible Docker images for ten multi-ancestry polygenic risk score (PRS) tools, and a benchmark
 comparing each tool run across native, Docker and Apptainer execution (setup time, execution time,
