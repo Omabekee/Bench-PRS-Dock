@@ -1,11 +1,11 @@
-# PRS tool containers & Docker-vs-native benchmark
+# Bench-PRS Dock: Containerised Multi-Ancestry Polygenic Risk Score Tools
 
 Reproducible Docker images for ten multi-ancestry polygenic risk score (PRS) tools, and a benchmark
-comparing each tool run **natively** versus from its **Docker image** (setup time, execution time,
+comparing each tool run across native, Docker and Apptainer execution (setup time, execution time,
 peak memory and output consistency).
 
-Every image is **self-documenting** - a bare `docker run <image>` prints the tool's usage - and
-**self-verifying** - `docker run <image> goss -g /goss.yaml validate` checks its internal dependencies.
+Every image is **self-documenting**: a bare `docker run <image>` prints the tool's usage - and
+**self-verifying**: `docker run <image> goss -g /goss.yaml validate` checks its internal dependencies.
 All images are on Docker Hub under [`chiomab`](https://hub.docker.com/u/chiomab).
 
 ![Bench-PRS Dock images](docs/bench_prs_dock_overview.png)
