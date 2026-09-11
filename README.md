@@ -1,8 +1,8 @@
 # PRS tool containers & Docker-vs-native benchmark
 
-Reproducible Docker images for ten cross-population polygenic risk score (PRS) tools, and a benchmark
+Reproducible Docker images for ten multi-ancestry polygenic risk score (PRS) tools, and a benchmark
 comparing each tool run **natively** versus from its **Docker image** (setup time, execution time,
-peak memory, and output consistency).
+peak memory and output consistency).
 
 Every image is **self-documenting** - a bare `docker run <image>` prints the tool's usage - and
 **self-verifying** - `docker run <image> goss -g /goss.yaml validate` checks its internal dependencies.
