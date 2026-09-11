@@ -1,0 +1,38 @@
+# goss spec - chiomab/bridgeprs:v1.6 internal dependency validation
+file:
+  /usr/local/bin/bridgeprs-help:
+    exists: true
+    mode: "0755"
+    filetype: file
+  /BridgePRS/bridgePRS:
+    exists: true
+    filetype: file
+  /usr/local/bin/plink:
+    exists: true
+    filetype: file
+  /usr/local/bin/goss:
+    exists: true
+    mode: "0755"
+    filetype: file
+
+command:
+  # R runtime present (matches native install: R 4.1.2)
+  "R --version":
+    exit-status: 0
+    stdout:
+      - "4.1.2"
+  # BridgePRS R dependencies load cleanly
+  "R -q -e 'suppressMessages({library(BEDMatrix); library(data.table); library(optparse); library(glmnet); library(MASS)})'":
+    exit-status: 0
+  # bundled launcher responds (subcommand help)
+  "/BridgePRS/bridgePRS --help":
+    exit-status: 0
+    stdout:
+      - "bridgePRS"
+      - "pipeline"
+  # bundled usage helper runs and prints the tool banner
+  "/usr/local/bin/bridgeprs-help":
+    exit-status: 0
+    stdout:
+      - "BridgePRS"
+      - "clivehoggart/BridgePRS"

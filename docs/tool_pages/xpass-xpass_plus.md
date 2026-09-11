@@ -1,73 +1,49 @@
-# XPASS/ XPASS+ - Bench-PRS Dock Documentation
-**Image:** `chiomab/xpass:v1.2`  
-**Tool Version:** Latest  
-**Method Type:** Bayesian hierarchical model for multi-ancestry polygenic scoring using GWAS summary statistics
+# XPASS / XPASS+
 
-**Authors:** Cai, M., Xiao, J., Zhang, S., Wan, X., Zhao, H., Chen, G., & Yang, C.
- 
+**Image:** `chiomab/xpass:v1.4`  
+**Method:** Bayesian hierarchical (shared and population-specific effects)  
+**Authors:** Mingxuan Cai, Jiashun Xiao, Shunkang Zhang, Xiang Wan, Hongyu Zhao, Gang Chen, Can Yang  
 **GitHub:** https://github.com/YangLabHKUST/XPASS  
-**Published Paper:**  
-[A unified framework for cross-population trait prediction by leveraging the genetic correlation of polygenic traits](10.1016/j.ajhg.2021.03.002)  
+**Paper:** [A unified framework for cross-population trait prediction by leveraging the genetic correlation of polygenic traits](https://doi.org/10.1016/j.ajhg.2021.03.002)
 
----
+## Overview
+XPASS constructs polygenic scores for an under-represented target population by leveraging large European GWAS data. XPASS+ additionally incorporates population-specific SNP effects. This single image serves both variants.
 
-## Maintainer (Bench-PRS Dock)
-**Chioma Blessing Onyido (Oselu)**
-- Email: chiomabonyido@gmail.com
-- LinkedIn: [Chioma Onyido](https://www.linkedin.com/in/chioma-onyido/)
-- Docker Hub: https://hub.docker.com/r/chiomab/xpass
+## Included software
 
-Last updated: 2025-07-12
+| Component | Version |
+|-----------|---------|
+| R | 4.1.2 |
+| R packages | XPASS, data.table, RhpcBLASctl, ieugwasr |
+| Utilities | PLINK 1.9 |
 
----
-## 1. Overview
-XPASS is a Bayesian hierarchical model that combines ancestry-specific and shared genetic effects using summary statistics to improve polygenic scoring in under-represented populations.
-
-XPASS+ extends XPASS by incorporating population-specific SNP effects into PRS construction. It requires a pre-selected set of population-specific variants, obtained using a P+T procedure (e.g. via the ieugwasr R package).
-
-They both leverage large European GWAS datasets to boost prediction accuracy in under-represented populations.
-
-
-Within **Bench-PRS Dock**, the container provides:
-- Fully reproducible environment  
-- Preinstalled dependencies  
-- Stable versioning
-- Support for running both **XPASS** and **XPASS+** 
-
----
-
-## 2. Included Software & Versions
-
-| Component | Version | 
-|-------|-------------|
-| **R** | 4.0+ |
-| **R packages** | systemfonts, textshaping, ragg, pkgdown, data.table, RhpcBLASctl, ieugwasr, devtools |
-| **Fourier LD files** | AFR, EUR, EAS panels |
-| **Utilities**| PLINK 1.9 |
-
----
-## 3. Pull the Image
-``` bash
-docker pull chiomab/xpass:v1.2
+## Pull the image
+```bash
+docker pull chiomab/xpass:v1.4
 ```
 
----
-
-## 4. Example Run
+## Usage
+The image bundles an executable usage helper, `xpass-help.sh` - a usage guide adapted from the tool's original GitHub repository - set as the default command, so it prints when you run the image with no arguments:
+```bash
+docker run --rm chiomab/xpass:v1.4
+```
+To run XPASS / XPASS+ on your own data, mount your input and output directories and call the tool:
 ```bash
 docker run --rm \
-  -v ~/XPASS_demo:/data \
-  -v ~/results:/results \
-  chiomab/xpass:v1.2 \
-  Rscript /data/run_xpass.R
+  -v /path/sumstats:/in -v /path/ldref:/ref -v "$PWD/out":/out \
+  chiomab/xpass:v1.4 \
+  Rscript /usr/local/bin/run_xpass.R xpass \
+    /in/AFR_sumstats.txt /in/EUR_sumstats.txt \
+    /ref/AFR_ref /ref/EUR_ref /ref/AFR_ref AFR LD_block NA /out/xpass
 ```
----
 
-## 5. Citation
-If you use this container, please cite both the original method and the Bench-PRS Dock resource.
+## Self-check
+```bash
+docker run --rm chiomab/xpass:v1.4 goss -g /goss.yaml validate
+```
 
----
+## Citation
+If you use this image, please cite the original method: [A unified framework for cross-population trait prediction by leveraging the genetic correlation of polygenic traits](https://doi.org/10.1016/j.ajhg.2021.03.002).
 
-## 6. Related Resources
-
-Docker Hub page: https://hub.docker.com/r/chiomab/xpass
+## Maintainer
+Chioma Oselu - chiomabonyido@gmail.com  ·  Docker Hub: https://hub.docker.com/r/chiomab/xpass

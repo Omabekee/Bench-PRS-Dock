@@ -1,0 +1,37 @@
+# goss spec - chiomab/jointprs:v1.1 internal dependency validation
+file:
+  /usr/local/bin/jointprs-help:
+    exists: true
+    mode: "0755"
+    filetype: file
+  /jointprs/JointPRS.py:
+    exists: true
+    filetype: file
+  /usr/local/bin/plink2:
+    exists: true
+    filetype: file
+  /usr/local/bin/goss:
+    exists: true
+    mode: "0755"
+    filetype: file
+
+command:
+  # Python runtime present (matches native install: Python 3.8)
+  "python3 --version":
+    exit-status: 0
+    stdout:
+      - "3.8"
+  # JointPRS Python deps load cleanly (numpy 1.24.4 / scipy 1.10.1 / h5py) + compiled ext
+  "python3 -c 'import numpy, scipy, h5py; print(numpy.__version__)'":
+    exit-status: 0
+    stdout:
+      - "1.24.4"
+  # plink2 present
+  "/usr/local/bin/plink2 --version":
+    exit-status: 0
+  # bundled usage helper runs and prints the tool banner
+  "/usr/local/bin/jointprs-help":
+    exit-status: 0
+    stdout:
+      - "JointPRS"
+      - "LeqiXu/JointPRS"

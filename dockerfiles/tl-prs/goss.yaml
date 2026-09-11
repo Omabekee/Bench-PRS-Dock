@@ -1,0 +1,40 @@
+# goss spec - chiomab/tl-prs:v1.3 internal dependency validation
+file:
+  /usr/local/bin/tl-prs-help:
+    exists: true
+    mode: "0755"
+    filetype: file
+  /usr/local/bin/run_tlprs.R:
+    exists: true
+    filetype: file
+  /usr/local/bin/plink:
+    exists: true
+    filetype: file
+  /usr/local/bin/goss:
+    exists: true
+    mode: "0755"
+    filetype: file
+
+command:
+  # R runtime present (matches native install: R 4.1.2)
+  "R --version":
+    exit-status: 0
+    stdout:
+      - "4.1.2"
+  # TLPRS + its dependencies (lassosum, data.table, Rcpp/RcppArmadillo) load cleanly
+  "R -q -e 'suppressMessages({library(TLPRS); library(lassosum); library(data.table)})'":
+    exit-status: 0
+  # TLPRS version matches the benchmarked install (1.0.0)
+  "R -q -e 'cat(as.character(packageVersion(\"TLPRS\")))'":
+    exit-status: 0
+    stdout:
+      - "1.0.0"
+  # plink 1.9 present (scoring)
+  "/usr/local/bin/plink --version":
+    exit-status: 0
+  # bundled usage helper runs and prints the tool banner
+  "/usr/local/bin/tl-prs-help":
+    exit-status: 0
+    stdout:
+      - "TL-PRS"
+      - "ZhangchenZhao/TLPRS"

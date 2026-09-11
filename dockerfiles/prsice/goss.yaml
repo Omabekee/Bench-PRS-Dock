@@ -1,0 +1,30 @@
+# goss spec - chiomab/prsice:v1.1 internal dependency validation
+# run: goss -g /goss.yaml validate   (bundled) OR external against the container
+file:
+  /usr/local/bin/PRSice:
+    exists: true
+    mode: "0755"
+    filetype: file
+  /usr/local/bin/PRSice.R:
+    exists: true
+    filetype: file
+  /usr/local/bin/prsice-help:
+    exists: true
+    mode: "0755"
+    filetype: file
+
+command:
+  # R runtime present (matches native install: R 4.1.2)
+  "R --version":
+    exit-status: 0
+    stdout:
+      - "4.1.2"
+  # PRSice's two R dependencies load cleanly
+  "R -q -e 'suppressMessages(library(data.table)); suppressMessages(library(ggplot2))'":
+    exit-status: 0
+  # the bundled usage helper runs and prints the tool banner
+  "/usr/local/bin/prsice-help":
+    exit-status: 0
+    stdout:
+      - "PRSice-2"
+      - "choishingwan.github.io/PRSice"

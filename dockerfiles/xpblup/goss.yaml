@@ -1,0 +1,38 @@
+# goss spec - chiomab/xpblup:v1.1 internal dependency validation
+file:
+  /usr/local/bin/xpblup-help:
+    exists: true
+    mode: "0755"
+    filetype: file
+  /xpblup/xpblup.sh:
+    exists: true
+    mode: "0755"
+    filetype: file
+  # gcta64 exits non-zero on --version (prints banner), so verify by presence + exec bit
+  /usr/local/bin/gcta64:
+    exists: true
+    mode: "0755"
+    filetype: file
+  /usr/local/bin/plink:
+    exists: true
+    filetype: file
+  /usr/local/bin/goss:
+    exists: true
+    mode: "0755"
+    filetype: file
+
+command:
+  # plink 1.9 present (XP-BLUP GRM/scoring)
+  "/usr/local/bin/plink --version":
+    exit-status: 0
+    stdout:
+      - "PLINK v1.9"
+  # bundled tool help runs
+  "sh -c 'cd /xpblup && ./xpblup.sh --help'":
+    exit-status: 0
+  # bundled usage helper runs and prints the tool banner
+  "/usr/local/bin/xpblup-help":
+    exit-status: 0
+    stdout:
+      - "XP-BLUP"
+      - "tanglab/XP-BLUP"

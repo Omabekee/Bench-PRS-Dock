@@ -1,0 +1,375 @@
+{
+ "prsice": {
+  "image": "chiomab/prsice:v1.0",
+  "mounts": [
+   "{base}:/data/sumstats.txt",
+   "{geno_dir}:/data/geno_dir",
+   "{pheno}:/data/pheno.txt",
+   "{DOCKER_OUT}:/output"
+  ],
+  "cmd": "Rscript /usr/local/bin/PRSice.R --dir /output --prsice /usr/local/bin/PRSice --base /data/sumstats.txt --target /data/geno_dir/AFR_geno --pheno /data/pheno.txt --pheno-col PHENO --binary-target T --stat BETA --beta --thread 4 --out /output/PRSice",
+  "vars": {
+   "base": "data/prsice/sumstats/AFR/AFR_sumstats.txt",
+   "geno_dir": "data/prsice/genotypes/AFR",
+   "target": "data/prsice/genotypes/AFR/AFR_geno",
+   "pheno": "data/prsice/phenotypes/pheno_bin_AFR.txt",
+   "prsice_dir": "{NATIVE_ENV}/prsice"
+  },
+  "consistency": {
+   "type": "sha",
+   "native_file": "{NATIVE_OUT}/PRSice.best",
+   "docker_file": "{DOCKER_OUT}/PRSice.best"
+  },
+  "deterministic": true
+ },
+ "prscsx": {
+  "image": "chiomab/prscsx:v1.2",
+  "mounts": [
+   "{ldref}:/ref",
+   "{geno_dir}:/geno",
+   "{sst_eur}:/sst_eur.txt",
+   "{sst_afr}:/sst_afr.txt",
+   "{DOCKER_OUT}:/out"
+  ],
+  "cmd": "python /PRS-CSx/PRScsx.py --ref_dir=/ref --bim_prefix=/geno/AFR_geno --sst_file=/sst_eur.txt,/sst_afr.txt --n_gwas=208808,7472 --pop=EUR,AFR --chrom=22 --phi=1e-04 --n_iter=200 --n_burnin=100 --seed=42 --out_dir=/out --out_name=prscsx",
+  "vars": {
+   "ldref": "reference/ld_ref",
+   "geno_dir": "data/prscsx/genotypes/AFR",
+   "bim": "data/prscsx/genotypes/AFR/AFR_geno",
+   "sst_eur": "data/prscsx/sumstats/EUR/EUR_sumstats.txt",
+   "sst_afr": "data/prscsx/sumstats/AFR/AFR_sumstats.txt",
+   "prscsx_dir": "{NATIVE_ENV}/prscsx"
+  },
+  "consistency": {
+   "type": "sha",
+   "native_file": "{NATIVE_OUT}/prscsx_AFR_pst_eff_a1_b0.5_phi1e-04_chr22.txt",
+   "docker_file": "{DOCKER_OUT}/prscsx_AFR_pst_eff_a1_b0.5_phi1e-04_chr22.txt"
+  },
+  "deterministic": false
+ },
+ "sdprx": {
+  "image": "chiomab/sdprx:v1.0",
+  "mounts": [
+   "{ldref}:/data/ld",
+   "{geno_dir}:/data/geno",
+   "{sst_eur}:/data/ss1.txt",
+   "{sst_afr}:/data/ss2.txt",
+   "{DOCKER_OUT}:/out"
+  ],
+  "cmd": "bash -lc 'source /opt/conda/etc/profile.d/conda.sh && conda activate sdprx_env && python /sdprx/SDPRX.py --ss1 /data/ss1.txt --ss2 /data/ss2.txt --N1 208808 --N2 7472 --force_shared TRUE --load_ld /data/ld --valid /data/geno/AFR_geno.bim --chr 22 --rho 0.8 --threads 4 --mcmc_samples 20 --burn 10 --out /out/results_chr22'",
+  "vars": {
+   "ldref": "reference/ld_ref/sdprx_ldref/SDPRX",
+   "geno_dir": "data/sdprx/genotypes/AFR",
+   "bim": "data/sdprx/genotypes/AFR/AFR_geno.bim",
+   "sst_eur": "data/sdprx/sumstats/EUR/EUR_sumstats.txt",
+   "sst_afr": "data/sdprx/sumstats/AFR/AFR_sumstats.txt",
+   "sdprx_dir": "{NATIVE_ENV}/sdprx",
+   "N1": "208808",
+   "N2": "7472",
+   "rho": "0.8"
+  },
+  "consistency": {
+   "type": "pearson",
+   "key_col": 0,
+   "val_col": 2,
+   "native_file": "{NATIVE_OUT}/results_chr22_2.txt",
+   "docker_file": "{DOCKER_OUT}/results_chr22_2.txt"
+  },
+  "deterministic": false
+ },
+ "tlprs": {
+  "image": "chiomab/tl-prs:v1.2",
+  "mounts": [
+   "{runR}:/work/run_tlprs.R",
+   "{base_ss}:/in/base.txt",
+   "{target_ss}:/in/target.txt",
+   "{ped}:/in/ped.txt",
+   "{geno_dir}:/geno",
+   "{pheno_score}:/in/pheno.txt",
+   "{DOCKER_OUT}:/out"
+  ],
+  "cmd": "bash -lc 'OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 Rscript /work/run_tlprs.R /in/ped.txt {covar} {yname} {ytype} /geno/AFR_geno_tlprs /geno/AFR_geno_tlprs /in/base.txt /in/target.txt {ldblocks} /usr/local/bin/plink /geno/AFR_geno_tlprs /in/pheno.txt /out/tlprs'",
+  "vars": {
+   "runR": "harness/run_tlprs.R",
+   "base_ss": "reference/tlprs/EUR_prscsx_phi1e02_base.txt",
+   "target_ss": "data/tlprs/sumstats/AFR/AFR_sumstats.txt",
+   "ped": "reference/tlprs/ped_AFR_01.txt",
+   "geno_dir": "reference/tlprs",
+   "geno": "reference/tlprs/AFR_geno_tlprs",
+   "pheno_score": "data/tlprs/phenotypes/pheno_bin_AFR.txt",
+   "ldblocks": "AFR.hg19",
+   "covar": "AGE_scaled",
+   "yname": "PHENO",
+   "ytype": "B",
+   "tlprs_dir": "{NATIVE_ENV}/tlprs"
+  },
+  "consistency": {
+   "type": "sha",
+   "native_file": "{NATIVE_OUT}/tlprs_scored.profile",
+   "docker_file": "{DOCKER_OUT}/tlprs_scored.profile"
+  },
+  "deterministic": false
+ },
+ "xpass": {
+  "image": "chiomab/xpass:v1.3",
+  "mounts": [
+   "{runR}:/work/run_xpass.R",
+   "{z1}:/in/z1.txt",
+   "{z2}:/in/z2.txt",
+   "{ref_dir}:/ref:ro",
+   "{DOCKER_OUT}:/out"
+  ],
+  "cmd": "bash -lc 'Rscript /work/run_xpass.R xpass /in/z1.txt /in/z2.txt /ref/AFR_pc_pruned2k /ref/EUR_pc_pruned2k /ref/AFR_pc_pruned2k {pop} {sd} NA /out/xpass'",
+  "vars": {
+   "runR": "harness/run_xpass.R",
+   "z1": "data/xpass_genomewide/sumstats/AFR/AFR_sumstats.txt",
+   "z2": "data/xpass_genomewide/sumstats/EUR/EUR_sumstats.txt",
+   "ref_dir": "reference/xpass",
+   "ref1": "reference/xpass/AFR_pc_pruned2k",
+   "ref2": "reference/xpass/EUR_pc_pruned2k",
+   "predg": "reference/xpass/AFR_pc_pruned2k",
+   "pop": "AFR",
+   "sd": "LD_block",
+   "xpass_dir": "{NATIVE_ENV}/xpass"
+  },
+  "consistency": {
+   "type": "sha",
+   "native_file": "{NATIVE_OUT}/xpass_PRS.txt",
+   "docker_file": "{DOCKER_OUT}/xpass_PRS.txt"
+  },
+  "deterministic": false
+ },
+ "xpass+": {
+  "image": "chiomab/xpass:v1.3",
+  "mounts": [
+   "{runR}:/work/run_xpass.R",
+   "{z1}:/in/z1.txt",
+   "{z2}:/in/z2.txt",
+   "{ref_dir}:/ref:ro",
+   "{DOCKER_OUT}:/out"
+  ],
+  "cmd": "bash -lc 'Rscript /work/run_xpass.R xpass_plus /in/z1.txt /in/z2.txt /ref/AFR_pc_pruned2k /ref/EUR_pc_pruned2k /ref/AFR_pc_pruned2k {pop} {sd} /usr/local/bin/plink /out/xpass_plus'",
+  "vars": {
+   "runR": "harness/run_xpass.R",
+   "z1": "data/xpass_genomewide/sumstats/AFR/AFR_sumstats.txt",
+   "z2": "data/xpass_genomewide/sumstats/EUR/EUR_sumstats.txt",
+   "ref_dir": "reference/xpass",
+   "ref1": "reference/xpass/AFR_pc_pruned2k",
+   "ref2": "reference/xpass/EUR_pc_pruned2k",
+   "predg": "reference/xpass/AFR_pc_pruned2k",
+   "pop": "AFR",
+   "sd": "LD_block",
+   "xpass_dir": "{NATIVE_ENV}/xpass"
+  },
+  "consistency": {
+   "type": "sha",
+   "native_file": "{NATIVE_OUT}/xpass_plus_PRS.txt",
+   "docker_file": "{DOCKER_OUT}/xpass_plus_PRS.txt"
+  },
+  "deterministic": false
+ },
+ "bridgeprs": {
+  "image": "chiomab/bridgeprs:v1.5",
+  "mounts": [
+   "{preprocessed_inputs}:/inputs",
+   "{ldref}:/ld",
+   "{DOCKER_OUT}:/work"
+  ],
+  "cmd": "bash -lc '/BridgePRS/bridgePRS tools check-pop -o /work --pop EUR --ld_path /ld --sumstats_prefix /inputs/sumstats/EUR/EUR_sumstats.txt --sumstats_size 208808 --genotype_prefix /inputs/genotypes/EUR/EUR_geno_shared_nodup --phenotype_file /inputs/phenotypes/pheno_bin_EUR_01.txt && /BridgePRS/bridgePRS tools check-pop -o /work --pop AFR --ld_path /ld --sumstats_prefix /inputs/sumstats/AFR/AFR_sumstats.txt --sumstats_size 3140 --genotype_prefix /inputs/genotypes/AFR/AFR_geno_shared --phenotype_file /inputs/phenotypes/pheno_bin_AFR_01.txt && /BridgePRS/bridgePRS pipeline go -o /work --config_files /work/save/AFR.target.config /work/save/EUR.target.config --phenotype PHENO --fst 0.1'",
+  "vars": {
+   "preprocessed_inputs": "data/bridgeprs_output",
+   "ldref": "reference/ld_ref/1000G_5P",
+   "sst_eur": "data/bridgeprs/sumstats/EUR/EUR_sumstats.txt",
+   "sst_afr": "data/bridgeprs/sumstats/AFR/AFR_sumstats.txt",
+   "geno_eur": "data/bridgeprs/genotypes/EUR/EUR_geno_shared_nodup",
+   "geno_afr": "data/bridgeprs/genotypes/AFR/AFR_geno_shared",
+   "pheno_eur": "data/bridgeprs/phenotypes/pheno_bin_EUR_01.txt",
+   "pheno_afr": "data/bridgeprs/phenotypes/pheno_bin_AFR_01.txt",
+   "n_eur": "208808",
+   "n_afr": "3140",
+   "fst": "0.1",
+   "bridgeprs_dir": "{NATIVE_ENV}/bridgeprs",
+   "launcher": "{NATIVE_ENV}/bridgeprs/bridgePRS"
+  },
+  "consistency": {
+   "type": "pearson",
+   "key_col": 0,
+   "val_col": 5,
+   "native_file": "{NATIVE_OUT}/prs-combined_AFR-EUR/AFR_weighted_combined_preds.dat",
+   "docker_file": "{DOCKER_OUT}/prs-combined_AFR-EUR/AFR_weighted_combined_preds.dat"
+  },
+  "deterministic": false
+ },
+ "xpblup": {
+  "image": "chiomab/xpblup:v1.0",
+  "mounts": [
+   "{pheno_dir}:/data/pheno",
+   "{geno_dir}:/data/geno",
+   "{snplist_dir}:/data/snplist",
+   "{DOCKER_OUT}:/output"
+  ],
+  "cmd": "bash -lc 'cd /xpblup && OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 ./xpblup.sh --pheno=/data/pheno/pheno_AFR_scaled.txt --train=/data/geno/AFR_seed44_valid --test=/data/geno/AFR_seed44_test --snplist=/data/snplist/snp_list.txt --plink=/usr/local/bin/plink --gcta=/usr/local/bin/gcta64 --outdir=/output --outprefix=xpblup'",
+  "vars": {
+   "pheno": "data/pheno/pheno_AFR_scaled.txt",
+   "pheno_dir": "data/pheno",
+   "geno_dir": "data/split/AFR/genotype",
+   "train": "data/split/AFR/genotype/AFR_seed44_valid",
+   "test": "data/split/AFR/genotype/AFR_seed44_test",
+   "snplist": "data/tlprs/phenotypes/snp_list.txt",
+   "snplist_dir": "data/tlprs/phenotypes",
+   "xpblup_dir": "{NATIVE_ENV}/xpblup"
+  },
+  "consistency": {
+   "type": "sha",
+   "key_col": 1,
+   "val_col": 5,
+   "native_file": "{NATIVE_OUT}/xpblup.predict.profile",
+   "docker_file": "{DOCKER_OUT}/xpblup.predict.profile"
+  },
+  "deterministic": false
+ },
+ "ctsleb": {
+  "image": "chiomab/ctsleb:v2.0",
+  "mounts": [
+   "{runR}:/work/run_ctsleb.R",
+   "{sum_dir}:/sumstats",
+   "{geno_dir}:/geno",
+   "{ldref_dir}:/ld",
+   "{DOCKER_OUT}:/out"
+  ],
+  "cmd": "bash -lc 'Rscript /work/run_ctsleb.R /sumstats/EUR/EUR_sumstats.txt /sumstats/AFR/AFR_sumstats.txt /geno/AFR_seed44_valid /geno/AFR_seed44_test /ld/EUR_ldref/EUR_chr /ld/AFR_ldref/AFR_chr /usr/local/bin/plink /usr/local/bin/plink2 /out 42'",
+  "vars": {
+   "runR": "harness/run_ctsleb.R",
+   "sum_dir": "data/ctsleb/sumstats",
+   "sum_eur": "data/ctsleb/sumstats/EUR/EUR_sumstats.txt",
+   "sum_afr": "data/ctsleb/sumstats/AFR/AFR_sumstats.txt",
+   "geno_dir": "data/split/AFR/genotype",
+   "tune": "data/split/AFR/genotype/AFR_seed44_valid",
+   "valid": "data/split/AFR/genotype/AFR_seed44_test",
+   "ldref_dir": "reference/ld_ref",
+   "eur_ref": "reference/ld_ref/EUR_ldref/EUR_chr",
+   "afr_ref": "reference/ld_ref/AFR_ldref/AFR_chr",
+   "seed": "42",
+   "ctsleb_dir": "{NATIVE_ENV}/ctsleb"
+  },
+  "consistency": {
+   "type": "pearson",
+   "key_col": 0,
+   "val_col": 2,
+   "native_file": "{NATIVE_OUT}/test_individuals.tsv",
+   "docker_file": "{DOCKER_OUT}/test_individuals.tsv"
+  },
+  "deterministic": false
+ },
+ "jointprs": {
+  "image": "chiomab/jointprs:v1.0",
+  "mounts": [
+   "{ldref}:/ref",
+   "{geno_dir}:/geno",
+   "{sst_eur}:/sst_eur.txt",
+   "{sst_afr}:/sst_afr.txt",
+   "{DOCKER_OUT}:/out"
+  ],
+  "cmd": "bash -lc 'python /jointprs/JointPRS.py --ref_dir=/ref --bim_prefix=/geno/AFR_geno --pop=EUR,AFR --rho_cons=1,1 --sst_file=/sst_eur.txt,/sst_afr.txt --n_gwas=208808,7472 --chrom=22 --phi=1e-04 --n_iter=200 --n_burnin=100 --seed=42 --out_dir=/out --out_name=jointprs'",
+  "vars": {
+   "ldref": "reference/ld_ref",
+   "geno_dir": "data/prscsx/genotypes/AFR",
+   "bim": "data/prscsx/genotypes/AFR/AFR_geno",
+   "sst_eur": "data/jointprs/sumstats/EUR_sumstat.txt",
+   "sst_afr": "data/jointprs/sumstats/AFR_sumstat.txt",
+   "n_eur": "208808",
+   "n_afr": "7472",
+   "jointprs_dir": "{NATIVE_ENV}/jointprs"
+  },
+  "consistency": {
+   "type": "pearson",
+   "key_col": 1,
+   "val_col": 5,
+   "native_file": "{NATIVE_OUT}/jointprs_AFR_pst_eff_a1_b0.5_phi1e-04_chr22.txt",
+   "docker_file": "{DOCKER_OUT}/jointprs_AFR_pst_eff_a1_b0.5_phi1e-04_chr22.txt"
+  },
+  "deterministic": false
+ },
+ "prscsx_gw": {
+  "image": "chiomab/prscsx:v1.2",
+  "mounts": [
+   "{ldref}:/ref",
+   "{geno_dir}:/geno",
+   "{sst_eur}:/sst_eur.txt",
+   "{sst_afr}:/sst_afr.txt",
+   "{DOCKER_OUT}:/out"
+  ],
+  "cmd": "bash -lc 'for c in $(seq 1 22); do python /PRS-CSx/PRScsx.py --ref_dir=/ref --bim_prefix=/geno/AFR_geno --sst_file=/sst_eur.txt,/sst_afr.txt --n_gwas=208808,7472 --pop=EUR,AFR --chrom=$c --phi=1e-04 --n_iter=200 --n_burnin=100 --seed=42 --out_dir=/out --out_name=prscsx || true; done && for c in $(seq 1 22); do cat /out/prscsx_AFR_pst_eff_a1_b0.5_phi1e-04_chr$c.txt 2>/dev/null; done > /out/prscsx_AFR_gw.txt'",
+  "vars": {
+   "ldref": "reference/ld_ref",
+   "geno_dir": "data/prscsx/genotypes/AFR",
+   "bim": "data/prscsx/genotypes/AFR/AFR_geno",
+   "sst_eur": "data/prscsx/sumstats/EUR/EUR_sumstats.txt",
+   "sst_afr": "data/prscsx/sumstats/AFR/AFR_sumstats.txt",
+   "prscsx_dir": "{NATIVE_ENV}/prscsx"
+  },
+  "consistency": {
+   "type": "sha",
+   "native_file": "{NATIVE_OUT}/prscsx_AFR_gw.txt",
+   "docker_file": "{DOCKER_OUT}/prscsx_AFR_gw.txt"
+  },
+  "deterministic": false
+ },
+ "jointprs_gw": {
+  "image": "chiomab/jointprs:v1.0",
+  "mounts": [
+   "{ldref}:/ref",
+   "{geno_dir}:/geno",
+   "{sst_eur}:/sst_eur.txt",
+   "{sst_afr}:/sst_afr.txt",
+   "{DOCKER_OUT}:/out"
+  ],
+  "cmd": "bash -lc 'for c in $(seq 1 22); do python /jointprs/JointPRS.py --ref_dir=/ref --bim_prefix=/geno/AFR_geno --pop=EUR,AFR --rho_cons=1,1 --sst_file=/sst_eur.txt,/sst_afr.txt --n_gwas=208808,7472 --chrom=$c --phi=1e-04 --n_iter=200 --n_burnin=100 --seed=42 --out_dir=/out --out_name=jointprs || true; done && for c in $(seq 1 22); do cat /out/jointprs_AFR_pst_eff_a1_b0.5_phi1e-04_chr$c.txt 2>/dev/null; done > /out/jointprs_AFR_gw.txt'",
+  "vars": {
+   "ldref": "reference/ld_ref",
+   "geno_dir": "data/prscsx/genotypes/AFR",
+   "bim": "data/prscsx/genotypes/AFR/AFR_geno",
+   "sst_eur": "data/jointprs/sumstats/EUR_sumstat.txt",
+   "sst_afr": "data/jointprs/sumstats/AFR_sumstat.txt",
+   "n_eur": "208808",
+   "n_afr": "7472",
+   "jointprs_dir": "{NATIVE_ENV}/jointprs"
+  },
+  "consistency": {
+   "type": "sha",
+   "native_file": "{NATIVE_OUT}/jointprs_AFR_gw.txt",
+   "docker_file": "{DOCKER_OUT}/jointprs_AFR_gw.txt"
+  },
+  "deterministic": false
+ },
+ "sdprx_gw": {
+  "image": "chiomab/sdprx:v1.0",
+  "mounts": [
+   "{ldref}:/data/ld",
+   "{geno_dir}:/data/geno",
+   "{sst_eur}:/data/ss1.txt",
+   "{sst_afr}:/data/ss2.txt",
+   "{DOCKER_OUT}:/out"
+  ],
+  "cmd": "bash -lc 'for c in $(seq 1 22); do source /opt/conda/etc/profile.d/conda.sh && conda activate sdprx_env && python /sdprx/SDPRX.py --ss1 /data/ss1.txt --ss2 /data/ss2.txt --N1 208808 --N2 7472 --force_shared TRUE --load_ld /data/ld --valid /data/geno/AFR_geno.bim --chr $c --rho 0.8 --threads 4 --mcmc_samples 20 --burn 10 --out /out/results_chr$c || true; done && cat /out/results_chr*_2.txt 2>/dev/null > /out/results_gw_2.txt'",
+  "vars": {
+   "ldref": "reference/ld_ref/sdprx_ldref/SDPRX",
+   "geno_dir": "data/sdprx/genotypes/AFR",
+   "bim": "data/sdprx/genotypes/AFR/AFR_geno.bim",
+   "sst_eur": "data/sdprx/sumstats/EUR/EUR_sumstats.txt",
+   "sst_afr": "data/sdprx/sumstats/AFR/AFR_sumstats.txt",
+   "sdprx_dir": "{NATIVE_ENV}/sdprx",
+   "N1": "208808",
+   "N2": "7472",
+   "rho": "0.8"
+  },
+  "consistency": {
+   "type": "pearson",
+   "key_col": 0,
+   "val_col": 2,
+   "native_file": "{NATIVE_OUT}/results_gw_2.txt",
+   "docker_file": "{DOCKER_OUT}/results_gw_2.txt"
+  },
+  "deterministic": false
+ }
+}

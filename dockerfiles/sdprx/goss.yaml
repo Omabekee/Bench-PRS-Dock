@@ -1,0 +1,33 @@
+# goss spec - chiomab/sdprx:v1.1 internal dependency validation
+file:
+  /usr/local/bin/sdprx-help:
+    exists: true
+    mode: "0755"
+    filetype: file
+  /sdprx/SDPRX.py:
+    exists: true
+    filetype: file
+  /opt/conda/envs/sdprx_env/bin/python:
+    exists: true
+  /usr/local/bin/goss:
+    exists: true
+    mode: "0755"
+    filetype: file
+
+command:
+  # SDPRX conda env python present (matches native install: Python 3.9.22)
+  "/opt/conda/envs/sdprx_env/bin/python --version":
+    exit-status: 0
+    stdout:
+      - "3.9.22"
+  # SDPRX Python deps load cleanly (numpy 1.26.4 / scipy 1.13.1 / pandas 1.1.5 / joblib)
+  "/opt/conda/envs/sdprx_env/bin/python -c 'import numpy, scipy, pandas, joblib; print(numpy.__version__)'":
+    exit-status: 0
+    stdout:
+      - "1.26.4"
+  # bundled usage helper runs and prints the tool banner
+  "/usr/local/bin/sdprx-help":
+    exit-status: 0
+    stdout:
+      - "SDPRX"
+      - "eldronzhou/SDPRX"

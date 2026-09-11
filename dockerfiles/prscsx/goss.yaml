@@ -1,0 +1,31 @@
+# goss spec - chiomab/prscsx:v1.3 internal dependency validation
+file:
+  /usr/local/bin/prscsx-help:
+    exists: true
+    mode: "0755"
+    filetype: file
+  /PRS-CSx/PRScsx.py:
+    exists: true
+    filetype: file
+  /usr/local/bin/goss:
+    exists: true
+    mode: "0755"
+    filetype: file
+
+command:
+  # Python runtime present (matches native install: Python 3.8)
+  "python3 --version":
+    exit-status: 0
+    stdout:
+      - "3.8"
+  # PRS-CSx Python deps load cleanly (numpy 1.24.4 / scipy 1.10.1 / h5py)
+  "python3 -c 'import numpy, scipy, h5py; print(numpy.__version__)'":
+    exit-status: 0
+    stdout:
+      - "1.24.4"
+  # bundled usage helper runs and prints the tool banner
+  "/usr/local/bin/prscsx-help":
+    exit-status: 0
+    stdout:
+      - "PRS-CSx"
+      - "getian107/PRScsx"

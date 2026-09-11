@@ -1,0 +1,14 @@
+tool,level,value,n,sha256_match,sha256,pearson_r,spearman_rho,max_abs_diff,spearman_within_env
+PRSice,per-individual,PRS,3140,YES,f1ba348aeab22b31afff53b3cbf9cfbc1f9d3960c96e31b528176fc626d121b8,1.0,1.0,0.0,1.000000 (reps byte-identical)
+PRS-CSx,per-SNP,posterior effect,192460,YES,e385cc68972dfb04b986bf004413e35b672d5968432e9c63452f40273752c5b5,1.0,1.0,0.0,1.000000 (reps byte-identical)
+PRS-CSx,per-individual,plink SCORE,3140,YES,,1.0,1.0,0.0,1.000000 (reps byte-identical)
+SDPRX,per-SNP,post_beta,131604,no,45b0e94841a4 / 82dec0a40733,0.8241635252445737,0.417021876120876,0.0453965266704226,"0.414857 [0.414083, 0.415441]"
+SDPRX,per-individual,plink SCORE,3140,no,,0.914574729727,0.906697162818,6.856e-06,"0.904524 [0.901770, 0.906707]"
+TL-PRS,per-individual,SCORE,3140,YES,5da1cd0fbaba5047679a7dacc212b4b70a6d7f601def85df6565474aa31579e9,0.9999999999999996,1.0,0.0,1.000000 (reps byte-identical)
+XPASS,per-individual,PRS_XPASS,2000,YES,1732525082a2795a36bd1206437c504c837908fcc20a2c4f9975a00d206ea3fe,1.0,1.0,0.0,1.000000 (reps byte-identical)
+XPASS+,per-individual,PRS_XPASS,2000,YES,fc59d7d126c9da3ab44e6ce5ee457017d5cfe007dfdefa85e44b3733d197c195,1.0,1.0,0.0,1.000000 (reps byte-identical)
+BridgePRS,per-individual,Weighted,1566,no,8c97d7673ed4 / 71bda75ae667,0.99999999999986,1.0,3.506381139883885e-07,"1.000000 [1.000000, 1.000000]"
+JointPRS,per-SNP,posterior effect,192460,YES,7bdc24538b18aaa1a48daf14a804e844cb918b1d149e08d098360b40039f9ca7,1.0,1.0,0.0,1.000000 (reps byte-identical)
+JointPRS,per-individual,plink SCORE,3140,YES,,1.0,1.0,0.0,1.000000 (reps byte-identical)
+CT-SLEB,per-individual,SCORE,1258,YES,722dd6a8cc8894fe440778e70f8b4e3e5bb23a6df6175caba5294e9a62fbe860,1.0,1.0,0.0,1.000000 (reps byte-identical)
+XP-BLUP,per-individual,SCORE,1258,no,5f057895ae41 / 629b5ffc88ab,0.9999999999922872,0.999999987944934,2.000000000002e-06,"1.000000 [1.000000, 1.000000]"

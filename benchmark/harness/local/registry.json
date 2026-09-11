@@ -1,0 +1,384 @@
+{
+ "_README": "Per-tool commands used by the docker-vs-native benchmark harness (obj1_bench.py). {NATIVE_OUT}/{DOCKER_OUT}/{NATIVE_ENV} are filled in at run time. Peak RAM = GNU `time -v` MaxRSS, the same instrument for native and docker. MCMC tools run genome-wide (all chromosomes) with identical reduced-iteration settings in both modes, so the docker/native ratio and peak RAM stay comparable.",
+ "tools": {
+  "prsice": {
+   "deterministic": true,
+   "vars": {
+    "base": "data/prsice/sumstats/AFR/AFR_sumstats.txt",
+    "geno_dir": "data/prsice/genotypes/AFR",
+    "target": "data/prsice/genotypes/AFR/AFR_geno",
+    "pheno": "data/prsice/phenotypes/pheno_bin_AFR.txt",
+    "prsice_dir": "{NATIVE_ENV}/prsice"
+   },
+   "exec": {
+    "native": "Rscript {prsice_dir}/PRSice.R --dir {prsice_dir} --prsice {prsice_dir}/PRSice_linux --base {base} --target {target} --pheno {pheno} --pheno-col PHENO --binary-target T --stat BETA --beta --thread 4 --out {NATIVE_OUT}/PRSice",
+    "docker": {
+     "image": "chiomab/prsice:v1.0",
+     "mounts": [
+      "{base}:/data/sumstats.txt",
+      "{geno_dir}:/data/geno_dir",
+      "{pheno}:/data/pheno.txt",
+      "{DOCKER_OUT}:/output"
+     ],
+     "cmd": "Rscript /usr/local/bin/PRSice.R --dir /output --prsice /usr/local/bin/PRSice --base /data/sumstats.txt --target /data/geno_dir/AFR_geno --pheno /data/pheno.txt --pheno-col PHENO --binary-target T --stat BETA --beta --thread 4 --out /output/PRSice"
+    }
+   },
+   "consistency": {
+    "type": "sha",
+    "native_file": "{NATIVE_OUT}/PRSice.best",
+    "docker_file": "{DOCKER_OUT}/PRSice.best"
+   },
+   "setup": {
+    "native": "rm -rf {prsice_dir} && mkdir -p {prsice_dir}/lib && cd {prsice_dir} && wget -q https://github.com/choishingwan/PRSice/releases/download/2.3.5/PRSice_linux.zip -O PRSice_linux.zip && unzip -oq PRSice_linux.zip && Rscript -e '.libPaths(\"{prsice_dir}/lib\"); install.packages(c(\"data.table\",\"ggplot2\"), lib=\"{prsice_dir}/lib\", repos=\"http://cran.rstudio.com/\")'",
+    "docker_pull": "chiomab/prsice:v1.0"
+   }
+  },
+  "prscsx": {
+   "deterministic": false,
+   "vars": {
+    "ldref": "data/ld_ref",
+    "geno_dir": "data/prscsx/genotypes/AFR",
+    "bim": "data/prscsx/genotypes/AFR/AFR_geno",
+    "sst_eur": "data/prscsx/sumstats/EUR/EUR_sumstats.txt",
+    "sst_afr": "data/prscsx/sumstats/AFR/AFR_sumstats.txt",
+    "prscsx_dir": "{NATIVE_ENV}/prscsx"
+   },
+   "exec": {
+    "native": "for c in $(seq 1 22); do {prscsx_dir}/condaenv/bin/python {prscsx_dir}/PRScsx/PRScsx.py --ref_dir={ldref} --bim_prefix={bim} --sst_file={sst_eur},{sst_afr} --n_gwas=208808,7472 --pop=EUR,AFR --chrom=$c --phi=1e-04 --n_iter=200 --n_burnin=100 --seed=42 --out_dir={NATIVE_OUT} --out_name=prscsx || true; done && for c in $(seq 1 22); do cat {NATIVE_OUT}/prscsx_AFR_pst_eff_a1_b0.5_phi1e-04_chr$c.txt 2>/dev/null; done > {NATIVE_OUT}/prscsx_AFR_gw.txt",
+    "docker": {
+     "image": "chiomab/prscsx:v1.2",
+     "mounts": [
+      "{ldref}:/ref",
+      "{geno_dir}:/geno",
+      "{sst_eur}:/sst_eur.txt",
+      "{sst_afr}:/sst_afr.txt",
+      "{DOCKER_OUT}:/out"
+     ],
+     "cmd": "bash -lc 'for c in $(seq 1 22); do python /PRS-CSx/PRScsx.py --ref_dir=/ref --bim_prefix=/geno/AFR_geno --sst_file=/sst_eur.txt,/sst_afr.txt --n_gwas=208808,7472 --pop=EUR,AFR --chrom=$c --phi=1e-04 --n_iter=200 --n_burnin=100 --seed=42 --out_dir=/out --out_name=prscsx || true; done && for c in $(seq 1 22); do cat /out/prscsx_AFR_pst_eff_a1_b0.5_phi1e-04_chr$c.txt 2>/dev/null; done > /out/prscsx_AFR_gw.txt'"
+    }
+   },
+   "consistency": {
+    "type": "sha",
+    "native_file": "{NATIVE_OUT}/prscsx_AFR_gw.txt",
+    "docker_file": "{DOCKER_OUT}/prscsx_AFR_gw.txt"
+   },
+   "setup": {
+    "native": "rm -rf {prscsx_dir} && mkdir -p {prscsx_dir} && $HOME/miniconda3/bin/mamba create -y -p {prscsx_dir}/condaenv -c conda-forge python=3.8.20 numpy=1.24.4 scipy=1.10.1 h5py=3.11.0 && git clone -q https://github.com/getian107/PRScsx.git {prscsx_dir}/PRScsx",
+    "docker_pull": "chiomab/prscsx:v1.2"
+   }
+  },
+  "sdprx": {
+   "deterministic": false,
+   "vars": {
+    "ldref": "data/ld_ref/sdprx_ldref/SDPRX",
+    "geno_dir": "data/sdprx/genotypes/AFR",
+    "bim": "data/sdprx/genotypes/AFR/AFR_geno.bim",
+    "sst_eur": "data/sdprx/sumstats/EUR/EUR_sumstats.txt",
+    "sst_afr": "data/sdprx/sumstats/AFR/AFR_sumstats.txt",
+    "sdprx_dir": "{NATIVE_ENV}/sdprx",
+    "N1": "208808",
+    "N2": "7472",
+    "rho": "0.8"
+   },
+   "exec": {
+    "native": "for c in $(seq 1 22); do {sdprx_dir}/condaenv/bin/python {sdprx_dir}/SDPRX/SDPRX.py --ss1 {sst_eur} --ss2 {sst_afr} --N1 {N1} --N2 {N2} --force_shared TRUE --load_ld {ldref} --valid {bim} --chr $c --rho {rho} --threads 4 --mcmc_samples 20 --burn 10 --out {NATIVE_OUT}/results_chr$c || true; done && cat {NATIVE_OUT}/results_chr*_2.txt 2>/dev/null > {NATIVE_OUT}/results_gw_2.txt",
+    "docker": {
+     "image": "chiomab/sdprx:v1.0",
+     "mounts": [
+      "{ldref}:/data/ld",
+      "{geno_dir}:/data/geno",
+      "{sst_eur}:/data/ss1.txt",
+      "{sst_afr}:/data/ss2.txt",
+      "{DOCKER_OUT}:/out"
+     ],
+     "cmd": "bash -lc 'for c in $(seq 1 22); do source /opt/conda/etc/profile.d/conda.sh && conda activate sdprx_env && python /sdprx/SDPRX.py --ss1 /data/ss1.txt --ss2 /data/ss2.txt --N1 208808 --N2 7472 --force_shared TRUE --load_ld /data/ld --valid /data/geno/AFR_geno.bim --chr $c --rho 0.8 --threads 4 --mcmc_samples 20 --burn 10 --out /out/results_chr$c || true; done && cat /out/results_chr*_2.txt 2>/dev/null > /out/results_gw_2.txt'"
+    }
+   },
+   "consistency": {
+    "type": "pearson",
+    "key_col": 0,
+    "val_col": 2,
+    "native_file": "{NATIVE_OUT}/results_gw_2.txt",
+    "docker_file": "{DOCKER_OUT}/results_gw_2.txt"
+   },
+   "setup": {
+    "native": "$HOME/miniconda3/bin/mamba clean -afy >/dev/null 2>&1; rm -rf {sdprx_dir} && mkdir -p {sdprx_dir} && $HOME/miniconda3/bin/mamba create -y -p {sdprx_dir}/condaenv -c conda-forge python=3.9.22 numpy=1.26.4 scipy=1.13.1 pandas=1.1.5 joblib=1.4.2 && git clone -q https://github.com/eldronzhou/SDPRX.git {sdprx_dir}/SDPRX",
+    "docker_pull": "chiomab/sdprx:v1.0"
+   }
+  },
+  "tlprs": {
+   "deterministic": false,
+   "vars": {
+    "runR": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/harness/run_tlprs.R",
+    "base_ss": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/refs/tlprs/EUR_prscsx_phi1e02_base.txt",
+    "target_ss": "data/tlprs/sumstats/AFR/AFR_sumstats.txt",
+    "ped": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/refs/tlprs/ped_AFR_01.txt",
+    "geno_dir": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/refs/tlprs",
+    "geno": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/refs/tlprs/AFR_geno_tlprs",
+    "pheno_score": "data/tlprs/phenotypes/pheno_bin_AFR.txt",
+    "ldblocks": "AFR.hg19",
+    "covar": "AGE_scaled",
+    "yname": "PHENO",
+    "ytype": "B",
+    "tlprs_dir": "{NATIVE_ENV}/tlprs"
+   },
+   "exec": {
+    "native": "PATH={tlprs_dir}:$PATH OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 {tlprs_dir}/condaenv/bin/Rscript {runR} {ped} {covar} {yname} {ytype} {geno} {geno} {base_ss} {target_ss} {ldblocks} {tlprs_dir}/plink {geno} {pheno_score} {NATIVE_OUT}/tlprs",
+    "docker": {
+     "image": "chiomab/tl-prs:v1.2",
+     "mounts": [
+      "{runR}:/work/run_tlprs.R",
+      "{base_ss}:/in/base.txt",
+      "{target_ss}:/in/target.txt",
+      "{ped}:/in/ped.txt",
+      "{geno_dir}:/geno",
+      "{pheno_score}:/in/pheno.txt",
+      "{DOCKER_OUT}:/out"
+     ],
+     "cmd": "bash -lc 'OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 Rscript /work/run_tlprs.R /in/ped.txt {covar} {yname} {ytype} /geno/AFR_geno_tlprs /geno/AFR_geno_tlprs /in/base.txt /in/target.txt {ldblocks} /usr/local/bin/plink /geno/AFR_geno_tlprs /in/pheno.txt /out/tlprs'"
+    }
+   },
+   "consistency": {
+    "type": "sha",
+    "native_file": "{NATIVE_OUT}/tlprs_scored.profile",
+    "docker_file": "{DOCKER_OUT}/tlprs_scored.profile"
+   },
+   "setup": {
+    "native": "source $HOME/miniconda3/etc/profile.d/conda.sh; $HOME/miniconda3/bin/mamba clean -afy >/dev/null 2>&1 || true; rm -rf {tlprs_dir} && mkdir -p {tlprs_dir} && $HOME/miniconda3/bin/mamba create -y -p {tlprs_dir}/condaenv -c conda-forge r-base=4.1.2 c-compiler cxx-compiler fortran-compiler make && conda activate {tlprs_dir}/condaenv && Rscript -e 'options(repos=\"https://cloud.r-project.org\"); install.packages(\"remotes\"); remotes::install_version(\"Rcpp\",\"1.1.0\",upgrade=\"never\"); remotes::install_version(\"RcppArmadillo\",\"14.6.0.1\",upgrade=\"never\"); remotes::install_version(\"Matrix\",\"1.4.0\",upgrade=\"never\"); remotes::install_version(\"data.table\",\"1.17.8\",upgrade=\"never\"); remotes::install_github(\"tshmak/lassosum@0e44b530c77e862f1b88f9e1fad88fdab44e7827\",upgrade=\"never\"); remotes::install_github(\"ZhangchenZhao/TLPRS@6c8d8905f91ce902f0cca8d5465f9952b0b3e274\",upgrade=\"never\")' && curl -sL https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20241013.zip -o {tlprs_dir}/plink.zip && cd {tlprs_dir} && unzip -oq plink.zip plink && chmod +x plink && ln -sf plink {tlprs_dir}/plink-1.9 && Rscript -e 'q(status=as.integer(!all(c(\"data.table\",\"lassosum\",\"TLPRS\") %in% rownames(installed.packages()))))'",
+    "docker_pull": "chiomab/tl-prs:v1.2"
+   }
+  },
+  "xpass": {
+   "deterministic": false,
+   "vars": {
+    "runR": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/harness/run_xpass.R",
+    "z1": "data/preprocessed_data/preprocessed_xpass_genomewide/sumstats/AFR/AFR_sumstats.txt",
+    "z2": "data/preprocessed_data/preprocessed_xpass_genomewide/sumstats/EUR/EUR_sumstats.txt",
+    "ref_dir": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/refs/xpass",
+    "ref1": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/refs/xpass/AFR_pc_pruned2k",
+    "ref2": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/refs/xpass/EUR_pc_pruned2k",
+    "predg": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/refs/xpass/AFR_pc_pruned2k",
+    "pop": "AFR",
+    "sd": "LD_block",
+    "xpass_dir": "{NATIVE_ENV}/xpass"
+   },
+   "exec": {
+    "native": "{xpass_dir}/condaenv/bin/Rscript {runR} xpass {z1} {z2} {ref1} {ref2} {predg} {pop} {sd} NA {NATIVE_OUT}/xpass",
+    "docker": {
+     "image": "chiomab/xpass:v1.3",
+     "mounts": [
+      "{runR}:/work/run_xpass.R",
+      "{z1}:/in/z1.txt",
+      "{z2}:/in/z2.txt",
+      "{ref_dir}:/ref:ro",
+      "{DOCKER_OUT}:/out"
+     ],
+     "cmd": "bash -lc 'Rscript /work/run_xpass.R xpass /in/z1.txt /in/z2.txt /ref/AFR_pc_pruned2k /ref/EUR_pc_pruned2k /ref/AFR_pc_pruned2k {pop} {sd} NA /out/xpass'"
+    }
+   },
+   "consistency": {
+    "type": "sha",
+    "native_file": "{NATIVE_OUT}/xpass_PRS.txt",
+    "docker_file": "{DOCKER_OUT}/xpass_PRS.txt"
+   },
+   "setup": {
+    "native": "source $HOME/miniconda3/etc/profile.d/conda.sh; $HOME/miniconda3/bin/mamba clean -afy >/dev/null 2>&1 || true; rm -rf {xpass_dir} && mkdir -p {xpass_dir} && $HOME/miniconda3/bin/mamba create -y -p {xpass_dir}/condaenv -c conda-forge r-base=4.1.2 c-compiler cxx-compiler fortran-compiler make && conda activate {xpass_dir}/condaenv && Rscript -e 'options(repos=\"https://cloud.r-project.org\"); install.packages(\"remotes\"); remotes::install_version(\"Rcpp\",\"1.1.0\",upgrade=\"never\"); remotes::install_version(\"RcppArmadillo\",\"14.6.0.1\",upgrade=\"never\"); remotes::install_version(\"data.table\",\"1.17.8\",upgrade=\"never\"); remotes::install_version(\"RhpcBLASctl\",\"0.23.42\",upgrade=\"never\"); remotes::install_version(\"ieugwasr\",\"1.1.0\",upgrade=\"never\"); remotes::install_github(\"YangLabHKUST/XPASS@65877ffba60dce69e0a6aa31c2e61045bf36dc40\",upgrade=\"never\")' && XD={xpass_dir}/condaenv/lib/R/library/XPASS/extdata && mkdir -p $XD && cid=$(docker create chiomab/xpass:v1.2) && docker cp $cid:/usr/local/lib/R/site-library/XPASS/extdata/. $XD/ && docker rm $cid && curl -sL https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20241013.zip -o {xpass_dir}/plink.zip && cd {xpass_dir} && unzip -oq plink.zip plink && chmod +x plink && Rscript -e 'q(status=as.integer(!all(c(\"XPASS\",\"ieugwasr\",\"data.table\") %in% rownames(installed.packages()))))'",
+    "docker_pull": "chiomab/xpass:v1.3"
+   }
+  },
+  "xpass+": {
+   "deterministic": false,
+   "vars": {
+    "runR": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/harness/run_xpass.R",
+    "z1": "data/preprocessed_data/preprocessed_xpass_genomewide/sumstats/AFR/AFR_sumstats.txt",
+    "z2": "data/preprocessed_data/preprocessed_xpass_genomewide/sumstats/EUR/EUR_sumstats.txt",
+    "ref_dir": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/refs/xpass",
+    "ref1": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/refs/xpass/AFR_pc_pruned2k",
+    "ref2": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/refs/xpass/EUR_pc_pruned2k",
+    "predg": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/refs/xpass/AFR_pc_pruned2k",
+    "pop": "AFR",
+    "sd": "LD_block",
+    "xpass_dir": "{NATIVE_ENV}/xpass"
+   },
+   "exec": {
+    "native": "{xpass_dir}/condaenv/bin/Rscript {runR} xpass_plus {z1} {z2} {ref1} {ref2} {predg} {pop} {sd} {xpass_dir}/plink {NATIVE_OUT}/xpass_plus",
+    "docker": {
+     "image": "chiomab/xpass:v1.3",
+     "mounts": [
+      "{runR}:/work/run_xpass.R",
+      "{z1}:/in/z1.txt",
+      "{z2}:/in/z2.txt",
+      "{ref_dir}:/ref:ro",
+      "{DOCKER_OUT}:/out"
+     ],
+     "cmd": "bash -lc 'Rscript /work/run_xpass.R xpass_plus /in/z1.txt /in/z2.txt /ref/AFR_pc_pruned2k /ref/EUR_pc_pruned2k /ref/AFR_pc_pruned2k {pop} {sd} /usr/local/bin/plink /out/xpass_plus'"
+    }
+   },
+   "consistency": {
+    "type": "sha",
+    "native_file": "{NATIVE_OUT}/xpass_plus_PRS.txt",
+    "docker_file": "{DOCKER_OUT}/xpass_plus_PRS.txt"
+   },
+   "setup": {
+    "native": "source $HOME/miniconda3/etc/profile.d/conda.sh; $HOME/miniconda3/bin/mamba clean -afy >/dev/null 2>&1 || true; rm -rf {xpass_dir} && mkdir -p {xpass_dir} && $HOME/miniconda3/bin/mamba create -y -p {xpass_dir}/condaenv -c conda-forge r-base=4.1.2 c-compiler cxx-compiler fortran-compiler make && conda activate {xpass_dir}/condaenv && Rscript -e 'options(repos=\"https://cloud.r-project.org\"); install.packages(\"remotes\"); remotes::install_version(\"Rcpp\",\"1.1.0\",upgrade=\"never\"); remotes::install_version(\"RcppArmadillo\",\"14.6.0.1\",upgrade=\"never\"); remotes::install_version(\"data.table\",\"1.17.8\",upgrade=\"never\"); remotes::install_version(\"RhpcBLASctl\",\"0.23.42\",upgrade=\"never\"); remotes::install_version(\"ieugwasr\",\"1.1.0\",upgrade=\"never\"); remotes::install_github(\"YangLabHKUST/XPASS@65877ffba60dce69e0a6aa31c2e61045bf36dc40\",upgrade=\"never\")' && XD={xpass_dir}/condaenv/lib/R/library/XPASS/extdata && mkdir -p $XD && cid=$(docker create chiomab/xpass:v1.2) && docker cp $cid:/usr/local/lib/R/site-library/XPASS/extdata/. $XD/ && docker rm $cid && curl -sL https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20241013.zip -o {xpass_dir}/plink.zip && cd {xpass_dir} && unzip -oq plink.zip plink && chmod +x plink && Rscript -e 'q(status=as.integer(!all(c(\"XPASS\",\"ieugwasr\",\"data.table\") %in% rownames(installed.packages()))))'",
+    "docker_pull": "chiomab/xpass:v1.3"
+   }
+  },
+  "bridgeprs": {
+   "deterministic": false,
+   "vars": {
+    "preprocessed_inputs": "data/bridgeprs",
+    "ldref": "data/ld_ref/1000G_5P",
+    "sst_eur": "data/bridgeprs/sumstats/EUR/EUR_sumstats.txt",
+    "sst_afr": "data/bridgeprs/sumstats/AFR/AFR_sumstats.txt",
+    "geno_eur": "data/bridgeprs/genotypes/EUR/EUR_geno_shared_nodup",
+    "geno_afr": "data/bridgeprs/genotypes/AFR/AFR_geno_shared",
+    "pheno_eur": "data/bridgeprs/phenotypes/pheno_bin_EUR_01.txt",
+    "pheno_afr": "data/bridgeprs/phenotypes/pheno_bin_AFR_01.txt",
+    "n_eur": "208808",
+    "n_afr": "3140",
+    "fst": "0.1",
+    "bridgeprs_dir": "{NATIVE_ENV}/bridgeprs",
+    "launcher": "{NATIVE_ENV}/bridgeprs/bridgePRS"
+   },
+   "exec": {
+    "native": "PATH={bridgeprs_dir}/condaenv/bin:$PATH {launcher} tools check-pop -o {NATIVE_OUT} --pop EUR --ld_path {ldref} --sumstats_prefix {sst_eur} --sumstats_size {n_eur} --genotype_prefix {geno_eur} --phenotype_file {pheno_eur} && PATH={bridgeprs_dir}/condaenv/bin:$PATH {launcher} tools check-pop -o {NATIVE_OUT} --pop AFR --ld_path {ldref} --sumstats_prefix {sst_afr} --sumstats_size {n_afr} --genotype_prefix {geno_afr} --phenotype_file {pheno_afr} && PATH={bridgeprs_dir}/condaenv/bin:$PATH {launcher} pipeline go -o {NATIVE_OUT} --config_files {NATIVE_OUT}/save/AFR.target.config {NATIVE_OUT}/save/EUR.target.config --phenotype PHENO --fst {fst} --debug_level 0",
+    "docker": {
+     "image": "chiomab/bridgeprs:v1.5",
+     "mounts": [
+      "{preprocessed_inputs}:/inputs",
+      "{ldref}:/ld",
+      "{DOCKER_OUT}:/work"
+     ],
+     "cmd": "bash -lc '/BridgePRS/bridgePRS tools check-pop -o /work --pop EUR --ld_path /ld --sumstats_prefix /inputs/sumstats/EUR/EUR_sumstats.txt --sumstats_size 208808 --genotype_prefix /inputs/genotypes/EUR/EUR_geno_shared_nodup --phenotype_file /inputs/phenotypes/pheno_bin_EUR_01.txt && /BridgePRS/bridgePRS tools check-pop -o /work --pop AFR --ld_path /ld --sumstats_prefix /inputs/sumstats/AFR/AFR_sumstats.txt --sumstats_size 3140 --genotype_prefix /inputs/genotypes/AFR/AFR_geno_shared --phenotype_file /inputs/phenotypes/pheno_bin_AFR_01.txt && /BridgePRS/bridgePRS pipeline go -o /work --config_files /work/save/AFR.target.config /work/save/EUR.target.config --phenotype PHENO --fst 0.1'"
+    }
+   },
+   "consistency": {
+    "type": "pearson",
+    "key_col": 0,
+    "val_col": 5,
+    "native_file": "{NATIVE_OUT}/prs-combined_AFR-EUR/AFR_weighted_combined_preds.dat",
+    "docker_file": "{DOCKER_OUT}/prs-combined_AFR-EUR/AFR_weighted_combined_preds.dat"
+   },
+   "setup": {
+    "native": "source $HOME/miniconda3/etc/profile.d/conda.sh; $HOME/miniconda3/bin/mamba clean -afy >/dev/null 2>&1 || true; rm -rf {bridgeprs_dir} && git clone -q https://github.com/clivehoggart/BridgePRS.git {bridgeprs_dir} && $HOME/miniconda3/bin/mamba create -y -p {bridgeprs_dir}/condaenv -c conda-forge r-base=4.1.2 r-matrix r-mass r-glmnet r-survival c-compiler cxx-compiler fortran-compiler make && PATH={bridgeprs_dir}/condaenv/bin:$PATH {bridgeprs_dir}/condaenv/bin/Rscript -e 'options(repos=\"https://cloud.r-project.org\"); install.packages(c(\"BEDMatrix\",\"LinkedMatrix\",\"data.table\",\"optparse\",\"doMC\",\"foreach\",\"boot\",\"R.utils\"))' && chmod +x {bridgeprs_dir}/bridgePRS {bridgeprs_dir}/src/Python/Xtra/plink && test -x {bridgeprs_dir}/bridgePRS && {bridgeprs_dir}/condaenv/bin/Rscript -e 'q(status=as.integer(!all(c(\"BEDMatrix\",\"LinkedMatrix\",\"data.table\",\"optparse\",\"glmnet\",\"doMC\",\"foreach\",\"boot\",\"MASS\",\"Matrix\") %in% rownames(installed.packages()))))'",
+    "docker_pull": "chiomab/bridgeprs:v1.5"
+   }
+  },
+  "xpblup": {
+   "deterministic": false,
+   "vars": {
+    "pheno": "data/preprocessed_data/preprocessed_pheno/pheno_AFR_scaled.txt",
+    "pheno_dir": "data/preprocessed_data/preprocessed_pheno",
+    "geno_dir": "data/pcancer_data/split/AFR/genotype",
+    "train": "data/pcancer_data/split/AFR/genotype/AFR_seed44_valid",
+    "test": "data/pcancer_data/split/AFR/genotype/AFR_seed44_test",
+    "snplist": "data/tlprs/phenotypes/snp_list.txt",
+    "snplist_dir": "data/tlprs/phenotypes",
+    "xpblup_dir": "{NATIVE_ENV}/xpblup"
+   },
+   "exec": {
+    "native": "cd {xpblup_dir} && OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 ./xpblup.sh --pheno={pheno} --train={train} --test={test} --snplist={snplist} --plink={xpblup_dir}/plink --gcta={xpblup_dir}/gcta64 --outdir={NATIVE_OUT} --outprefix=xpblup",
+    "docker": {
+     "image": "chiomab/xpblup:v1.0",
+     "mounts": [
+      "{pheno_dir}:/data/pheno",
+      "{geno_dir}:/data/geno",
+      "{snplist_dir}:/data/snplist",
+      "{DOCKER_OUT}:/output"
+     ],
+     "cmd": "bash -lc 'cd /xpblup && OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 ./xpblup.sh --pheno=/data/pheno/pheno_AFR_scaled.txt --train=/data/geno/AFR_seed44_valid --test=/data/geno/AFR_seed44_test --snplist=/data/snplist/snp_list.txt --plink=/usr/local/bin/plink --gcta=/usr/local/bin/gcta64 --outdir=/output --outprefix=xpblup'"
+    }
+   },
+   "consistency": {
+    "type": "sha",
+    "key_col": 1,
+    "val_col": 5,
+    "native_file": "{NATIVE_OUT}/xpblup.predict.profile",
+    "docker_file": "{DOCKER_OUT}/xpblup.predict.profile"
+   },
+   "setup": {
+    "native": "rm -rf {xpblup_dir} && mkdir -p {xpblup_dir} && git clone -q https://github.com/tanglab/XP-BLUP.git {xpblup_dir}/repo && git -C {xpblup_dir}/repo checkout -q 1e61724bed4b16f0a2287a18bcc03c4bd6b5e58f && cp -r {xpblup_dir}/repo/. {xpblup_dir}/ && chmod +x {xpblup_dir}/xpblup.sh && curl -sL https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20241013.zip -o {xpblup_dir}/plink.zip && cd {xpblup_dir} && unzip -oq plink.zip plink && chmod +x plink && curl -sL https://yanglab.westlake.edu.cn/software/gcta/bin/gcta-1.94.4-linux-kernel-3-x86_64.zip -o gcta.zip && unzip -oq gcta.zip && cp gcta-*/gcta64 {xpblup_dir}/gcta64 && chmod +x {xpblup_dir}/gcta64",
+    "docker_pull": "chiomab/xpblup:v1.0"
+   }
+  },
+  "ctsleb": {
+   "deterministic": false,
+   "vars": {
+    "runR": "data/adaptive_q_controller/trancesprs_ucb_2026/outputs/obj1_runtime_benchmarks/real/harness/run_ctsleb.R",
+    "sum_dir": "data/pcancer_data/results/preprocessed_data/preprocessed_ctsleb_output/sumstats",
+    "sum_eur": "data/pcancer_data/results/preprocessed_data/preprocessed_ctsleb_output/sumstats/EUR/EUR_sumstats.txt",
+    "sum_afr": "data/pcancer_data/results/preprocessed_data/preprocessed_ctsleb_output/sumstats/AFR/AFR_sumstats.txt",
+    "geno_dir": "data/pcancer_data/split/AFR/genotype",
+    "tune": "data/pcancer_data/split/AFR/genotype/AFR_seed44_valid",
+    "valid": "data/pcancer_data/split/AFR/genotype/AFR_seed44_test",
+    "ldref_dir": "data/ld_ref",
+    "eur_ref": "data/ld_ref/EUR_ldref/EUR_chr",
+    "afr_ref": "data/ld_ref/AFR_ldref/AFR_chr",
+    "seed": "42",
+    "ctsleb_dir": "{NATIVE_ENV}/ctsleb"
+   },
+   "exec": {
+    "native": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 {ctsleb_dir}/condaenv/bin/Rscript {runR} {sum_eur} {sum_afr} {tune} {valid} {eur_ref} {afr_ref} {ctsleb_dir}/plink {ctsleb_dir}/plink2 {NATIVE_OUT} {seed}",
+    "docker": {
+     "image": "chiomab/ctsleb:v2.0",
+     "mounts": [
+      "{runR}:/work/run_ctsleb.R",
+      "{sum_dir}:/sumstats",
+      "{geno_dir}:/geno",
+      "{ldref_dir}:/ld",
+      "{DOCKER_OUT}:/out"
+     ],
+     "cmd": "bash -lc 'Rscript /work/run_ctsleb.R /sumstats/EUR/EUR_sumstats.txt /sumstats/AFR/AFR_sumstats.txt /geno/AFR_seed44_valid /geno/AFR_seed44_test /ld/EUR_ldref/EUR_chr /ld/AFR_ldref/AFR_chr /usr/local/bin/plink /usr/local/bin/plink2 /out 42'"
+    }
+   },
+   "consistency": {
+    "type": "pearson",
+    "key_col": 0,
+    "val_col": 2,
+    "native_file": "{NATIVE_OUT}/test_individuals.tsv",
+    "docker_file": "{DOCKER_OUT}/test_individuals.tsv"
+   },
+   "setup": {
+    "native": "source $HOME/miniconda3/etc/profile.d/conda.sh; $HOME/miniconda3/bin/mamba clean -afy >/dev/null 2>&1 || true; rm -rf {ctsleb_dir} && mkdir -p {ctsleb_dir} && $HOME/miniconda3/bin/mamba create -y -p {ctsleb_dir}/condaenv -c conda-forge r-base=4.1.2 r-caret r-superlearner r-ranger r-glmnet r-matrix r-mass r-survival r-data.table r-dplyr r-proc r-remotes c-compiler cxx-compiler make && rm -rf {ctsleb_dir}/ctsleb_src && git clone -q https://github.com/andrewhaoyu/CTSLEB.git {ctsleb_dir}/ctsleb_src && cd {ctsleb_dir}/ctsleb_src && git checkout -q 4e3784607b7f0eab4d52d00387bc1d95292cce93 && sed -i '/devtools/d' DESCRIPTION && PATH={ctsleb_dir}/condaenv/bin:$PATH {ctsleb_dir}/condaenv/bin/R CMD INSTALL --no-test-load {ctsleb_dir}/ctsleb_src && cd {ctsleb_dir} && curl -sL https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20241013.zip -o {ctsleb_dir}/plink.zip && cd {ctsleb_dir} && unzip -oq plink.zip plink && chmod +x plink && curl -sL https://s3.amazonaws.com/plink2-assets/alpha6/plink2_linux_x86_64_20250129.zip -o {ctsleb_dir}/plink2.zip && unzip -oq plink2.zip plink2 && chmod +x plink2 && {ctsleb_dir}/condaenv/bin/Rscript -e 'q(status=as.integer(!all(c(\"CTSLEB\",\"SuperLearner\",\"ranger\",\"data.table\",\"glmnet\") %in% rownames(installed.packages()))))'",
+    "docker_pull": "chiomab/ctsleb:v1.0"
+   }
+  },
+  "jointprs": {
+   "deterministic": false,
+   "vars": {
+    "ldref": "data/ld_ref",
+    "geno_dir": "data/prscsx/genotypes/AFR",
+    "bim": "data/prscsx/genotypes/AFR/AFR_geno",
+    "sst_eur": "data/trancesprs/jointprs/sumstats/EUR_sumstat.txt",
+    "sst_afr": "data/trancesprs/jointprs/sumstats/AFR_sumstat.txt",
+    "n_eur": "208808",
+    "n_afr": "7472",
+    "jointprs_dir": "{NATIVE_ENV}/jointprs"
+   },
+   "exec": {
+    "native": "for c in $(seq 1 22); do {jointprs_dir}/condaenv/bin/python {jointprs_dir}/JointPRS.py --ref_dir={ldref} --bim_prefix={bim} --pop=EUR,AFR --rho_cons=1,1 --sst_file={sst_eur},{sst_afr} --n_gwas={n_eur},{n_afr} --chrom=$c --phi=1e-04 --n_iter=200 --n_burnin=100 --seed=42 --out_dir={NATIVE_OUT} --out_name=jointprs || true; done && for c in $(seq 1 22); do cat {NATIVE_OUT}/jointprs_AFR_pst_eff_a1_b0.5_phi1e-04_chr$c.txt 2>/dev/null; done > {NATIVE_OUT}/jointprs_AFR_gw.txt",
+    "docker": {
+     "image": "chiomab/jointprs:v1.0",
+     "mounts": [
+      "{ldref}:/ref",
+      "{geno_dir}:/geno",
+      "{sst_eur}:/sst_eur.txt",
+      "{sst_afr}:/sst_afr.txt",
+      "{DOCKER_OUT}:/out"
+     ],
+     "cmd": "bash -lc 'for c in $(seq 1 22); do python /jointprs/JointPRS.py --ref_dir=/ref --bim_prefix=/geno/AFR_geno --pop=EUR,AFR --rho_cons=1,1 --sst_file=/sst_eur.txt,/sst_afr.txt --n_gwas=208808,7472 --chrom=$c --phi=1e-04 --n_iter=200 --n_burnin=100 --seed=42 --out_dir=/out --out_name=jointprs || true; done && for c in $(seq 1 22); do cat /out/jointprs_AFR_pst_eff_a1_b0.5_phi1e-04_chr$c.txt 2>/dev/null; done > /out/jointprs_AFR_gw.txt'"
+    }
+   },
+   "consistency": {
+    "type": "sha",
+    "native_file": "{NATIVE_OUT}/jointprs_AFR_gw.txt",
+    "docker_file": "{DOCKER_OUT}/jointprs_AFR_gw.txt"
+   },
+   "setup": {
+    "native": "source $HOME/miniconda3/etc/profile.d/conda.sh; $HOME/miniconda3/bin/mamba clean -afy >/dev/null 2>&1 || true; rm -rf {jointprs_dir} && git clone -q https://github.com/LeqiXu/JointPRS.git {jointprs_dir} && $HOME/miniconda3/bin/mamba create -y -p {jointprs_dir}/condaenv -c conda-forge python=3.8 cython h5py numpy 'scipy<1.12' setuptools gcc_linux-64 gxx_linux-64 && {jointprs_dir}/condaenv/bin/python -m pip -q install --no-build-isolation -e . 2>/dev/null; cd {jointprs_dir} && CC={jointprs_dir}/condaenv/bin/x86_64-conda-linux-gnu-gcc {jointprs_dir}/condaenv/bin/python setup.py build_ext --inplace && {jointprs_dir}/condaenv/bin/python -c 'import sys; sys.argv=[\"x\"]; import JointPRS' 2>/dev/null; test -f {jointprs_dir}/JointPRS.py",
+    "docker_pull": "chiomab/jointprs:v1.0"
+   }
+  }
+ }
+}

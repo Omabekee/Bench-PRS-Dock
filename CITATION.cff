@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use these container images or benchmark results, please cite this repository."
+title: "PRS tool containers & Docker-vs-native benchmark"
+authors:
+  - family-names: Oselu
+    given-names: Chioma
+    email: chiomabonyido@gmail.com
+year: 2026
+license: MIT

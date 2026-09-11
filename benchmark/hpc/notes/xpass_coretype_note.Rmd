@@ -1,0 +1,93 @@
+---
+title: "XPASS and XPASS+ output differences between the laptop and the HPC"
+author: "Chioma Oselu"
+date: "2026-09-08"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+
+## Summary
+When we first ran XPASS and XPASS+ on the HPC, the results did not exactly match the
+laptop results, even though the run was the same in every way we control. After changing
+one setting, the HPC results became exactly identical to the laptop results, character
+for character. This note records what happened and why.
+
+
+## What we checked first
+Before looking for unusual explanations, we confirmed the obvious things matched:
+
+  Container image. Docker Hub reports chiomab/xpass:v1.3 as sha256:b845cb81... and that
+  is the same image identifier the laptop run recorded. Same image, not a rebuild.
+
+  Input files. All 64 inputs (6 summary statistic files, 58 reference panel files) were
+  checksummed on both machines before the run. All identical.
+
+  Command. Character for character the same.
+
+  Threads. Four on both machines.
+
+
+## What was actually different
+The processor. The laptop has an Intel Core i7-7600U. The HPC node has an Intel Xeon
+Gold 6248. These chips are from different generations and support different sets of maths
+instructions. The Xeon supports a newer, wider set called AVX-512. The laptop does not.
+
+
+## Why that changes the numbers
+XPASS is written in R and does its heavy maths through a library called OpenBLAS. When
+OpenBLAS starts, it inspects the processor and picks the fastest routine that processor
+supports. On the laptop it picks the AVX2 routine. On the HPC it picks the AVX-512 one.
+
+Both routines compute the same quantity, but they add the numbers up in a different
+order, because the wider instruction handles more numbers at once. Computers store
+decimals with limited precision and round at every step, so the order of addition can
+change the final digit.
+
+An everyday version of the same effect: imagine adding up amounts of money where each
+step is rounded to the nearest cent. Adding them one at a time can give a slightly
+different total than adding them in pairs first, even though the arithmetic is the same.
+The gap is tiny but real, and a checksum notices it, because a checksum reports any
+change at all no matter how small.
+
+
+## How big was the difference
+Very small. The two sets of scores agreed to a correlation of 1.000000000000, and the
+largest gap for any individual was about 0.000000000000001. One score read
+-0.117038894091906 on the laptop and -0.117038894091905 on the HPC. Nothing that could
+affect a downstream result.
+
+
+## The fix
+OpenBLAS accepts a setting, OPENBLAS_CORETYPE, that tells it which routine to use instead
+of choosing for itself. Setting OPENBLAS_CORETYPE=HASWELL on the HPC makes it use the
+same AVX2 routine the laptop uses.
+
+With that setting, three repeat runs of XPASS on the HPC all produced
+1732525082a2795a36bd1206437c504c837908fcc20a2c4f9975a00d206ea3fe, exactly the checksum
+from both the laptop native run and the laptop Docker run. XPASS+ matched likewise at
+fc59d7d126c9da3ab44e6ce5ee457017d5cfe007dfdefa85e44b3733d197c195.
+
+
+## The cost
+Forcing the older routine leaves the newer instructions unused, so the run is slower.
+XPASS averaged 86.8 seconds pinned against 78.8 seconds unpinned, about 10 percent.
+
+
+## A note on xp-blup
+XP-BLUP shows the same kind of difference for the same underlying reason, but it cannot
+be fixed the same way. XP-BLUP runs GCTA, a self-contained program that does its own
+processor check internally and offers no setting to override it. Tracing the pipeline
+step by step shows the difference is already present in the very first output, the
+genetic relationship matrix. The effect stays small: the fitted variance component reads
+0.176559 on the laptop and 0.176560 on the HPC, and the log likelihood and the likelihood
+ratio test are identical.
+
+
+## What this means
+Producing byte for byte identical output on a different machine is possible, but only
+when the software lets you fix which processor routine it uses. Where it does not, the
+results still agree to about fifteen decimal places, far beyond anything that affects a
+polygenic score.
+

@@ -1,78 +1,52 @@
-# PRS-CSx - Bench-PRS Dock Documentation
-**Image:** `chiomab/prscsx:v1.2`  
-**Tool Version:** 1.1.0  
-**Method Type:** Bayesian shrinkage model for multi-ancestry polygenic scoring
+# PRS-CSx
 
-**Authors:** Ruan, Y., Lin, Y. F., Feng, Y. A., Chen, C. Y., Lam, M., Guo, Z., Stanley Global Asia Initiatives, He, L., Sawa, A., Martin, A. R., Qin, S., Huang, H., & Ge, T.
- 
+**Image:** `chiomab/prscsx:v1.3`  
+**Method:** Bayesian continuous shrinkage (multi-ancestry)  
+**Authors:** Yunfeng Ruan, Yen-Feng Lin, Yen-Chen A. Feng, Chia-Yen Chen, Max Lam, Zhenglin Guo, Lin He, Akira Sawa, Alicia R. Martin, Shengying Qin, Hailiang Huang, Tian Ge  
 **GitHub:** https://github.com/getian107/PRScsx  
-**Published Paper:**  
-[Improving Polygenic Prediction in Ancestrally Diverse Populations](https://www.nature.com/articles/s41588-022-01054-7)  
+**Paper:** [Improving polygenic prediction in ancestrally diverse populations](https://www.nature.com/articles/s41588-022-01054-7)
 
----
+## Overview
+PRS-CSx integrates GWAS summary statistics and LD reference panels from multiple populations to improve cross-population polygenic prediction, using coupled continuous-shrinkage priors.
 
-## Maintainer (Bench-PRS Dock)
-**Chioma Blessing Onyido (Oselu)**
-- Email: chiomabonyido@gmail.com
-- LinkedIn: [Chioma Onyido](https://www.linkedin.com/in/chioma-onyido/)
-- Docker Hub: https://hub.docker.com/r/chiomab/prscsx
+## Included software
 
-Last updated: 2025-07-12
+| Component | Version |
+|-----------|---------|
+| PRS-CSx | 1.1.0 |
+| Python | 3.8 |
+| Python packages | numpy, scipy, h5py |
+| Utilities | PLINK 1.9 |
 
----
-## 1. Overview
-PRS-CSx is an extension of PRS-CS that models multi-ancestry GWAS data using a Bayesian shrinkage approach to generate more transferable polygenic scores across populations.
-
-
-Within **Bench-PRS Dock**, the container provides:
-- Fully reproducible environment  
-- Preinstalled dependencies  
-- Stable versioning 
-
----
-
-## 2. Included Software & Versions
-
-| Component | Version | 
-|-------|-------------|
-| **PRS-CSx** | 1.1.0 |
-| **Python** | 3+ |
-| **Python packages** | scipy, h5py |
-| **Utilities**| PLINK 1.9 |
-
----
-## 3. Pull the Image
-``` bash
-docker pull chiomab/prscsx:v1.2
+## Pull the image
+```bash
+docker pull chiomab/prscsx:v1.3
 ```
 
----
-
-## 4. Example Run
+## Usage
+The image bundles an executable usage helper, `prscsx-help.sh` - a usage guide adapted from the tool's original GitHub repository - set as the default command, so it prints when you run the image with no arguments:
+```bash
+docker run --rm chiomab/prscsx:v1.3
+```
+To run PRS-CSx on your own data, mount your input and output directories and call the tool:
 ```bash
 docker run --rm \
-  -v /ld_ref:/ld_ref \
-  -v $(pwd)/test_data:/test_data \
-  -v $(pwd)/results:/results \
-  chiomab/prscsx:v1.2 \
-  python PRScsx.py \
-  --ref_dir=/ld_ref \
-  --bim_prefix=test_data/test \
-  --sst_file=test_data/EUR_sumstats.txt,test_data/EAS_sumstats.txt  \
-  --n_gwas=200000,100000 \
-  --pop=EUR,EAS \
-  --chrom=22 \
-  --phi=1e-2 \
-  --out_dir=/results/prscsx \
-  --out_name=test \
-  --seed=1234
+  -v /path/ldref:/ref -v /path/sumstats:/in -v "$PWD/out":/out \
+  chiomab/prscsx:v1.3 \
+  bash -lc 'for c in $(seq 1 22); do \
+    python /PRS-CSx/PRScsx.py --ref_dir=/ref --bim_prefix=/ref/target \
+      --sst_file=/in/EUR_sumstats.txt,/in/AFR_sumstats.txt \
+      --n_gwas=208808,3140 --pop=EUR,AFR --chrom=$c \
+      --phi=1e-04 --out_dir=/out --out_name=my_prs --seed=42; done'
 ```
----
 
-## 5. Citation
-If you use this container, please cite both the original method and the Bench-PRS Dock resource.
+## Self-check
+```bash
+docker run --rm chiomab/prscsx:v1.3 goss -g /goss.yaml validate
+```
 
----
+## Citation
+If you use this image, please cite the original method: [Improving polygenic prediction in ancestrally diverse populations](https://www.nature.com/articles/s41588-022-01054-7).
 
-## 6. Related Resources
-Docker Hub page: https://hub.docker.com/r/chiomab/prscsx 
+## Maintainer
+Chioma Oselu - chiomabonyido@gmail.com  ·  Docker Hub: https://hub.docker.com/r/chiomab/prscsx

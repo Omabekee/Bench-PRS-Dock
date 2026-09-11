@@ -1,0 +1,45 @@
+# goss spec - chiomab/ctsleb:v2.1 internal dependency validation
+file:
+  /usr/local/bin/ctsleb-help:
+    exists: true
+    mode: "0755"
+    filetype: file
+  /usr/local/bin/run_ctsleb.R:
+    exists: true
+    filetype: file
+  /usr/local/bin/plink:
+    exists: true
+    filetype: file
+  /usr/local/bin/plink2:
+    exists: true
+    filetype: file
+  /usr/local/bin/goss:
+    exists: true
+    mode: "0755"
+    filetype: file
+
+command:
+  # R runtime present (matches native install: R 4.1.2)
+  "R --version":
+    exit-status: 0
+    stdout:
+      - "4.1.2"
+  # CTSLEB + the SuperLearner ensemble stack load cleanly
+  "R -q -e 'suppressMessages({library(CTSLEB); library(SuperLearner); library(ranger); library(glmnet); library(data.table); library(dplyr); library(caret); library(pROC)})'":
+    exit-status: 0
+  # CTSLEB version matches the benchmarked/native install (0.1.0)
+  "R -q -e 'cat(as.character(packageVersion(\"CTSLEB\")))'":
+    exit-status: 0
+    stdout:
+      - "0.1.0"
+  # plink 1.9 and plink2 present (clumping)
+  "/usr/local/bin/plink --version":
+    exit-status: 0
+  "/usr/local/bin/plink2 --version":
+    exit-status: 0
+  # bundled usage helper runs and prints the tool banner
+  "/usr/local/bin/ctsleb-help":
+    exit-status: 0
+    stdout:
+      - "CT-SLEB"
+      - "andrewhaoyu/CTSLEB"

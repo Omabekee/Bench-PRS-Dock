@@ -1,0 +1,11 @@
+tool,verdict,pearson_r,spearman_rho,top10pct_overlap,type
+PRSice,IDENTICAL,1.0,1.0,1.0,deterministic
+PRS-CSx,IDENTICAL,1.0,1.0,1.0,seeded MCMC
+SDPRX,DIFFER,0.913186,0.90409,0.7197,unseeded MCMC
+TL-PRS,IDENTICAL,1.0,1.0,1.0,deterministic
+XPASS,IDENTICAL,1.0,1.0,1.0,deterministic
+XPASS+,IDENTICAL,1.0,1.0,1.0,deterministic
+BridgePRS,DIFFER,1.0,1.0,1.0,stochastic (agrees to ~7 decimals)
+JointPRS,IDENTICAL,1.0,1.0,1.0,seeded MCMC
+CT-SLEB,IDENTICAL,1.0,1.0,1.0,seeded ensemble
+XP-BLUP,IDENTICAL,1.0,1.0,1.0,"deterministic (GCTA+plink, 1-thread)"

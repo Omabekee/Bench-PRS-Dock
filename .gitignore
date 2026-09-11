@@ -1,0 +1,28 @@
+# Controlled-access outputs. The target genotypes come from dbGaP phs001391.v1.p1 and
+# individual-level results may not be redistributed. Only their SHA-256 digests are
+# published, under benchmark/digests/.
+*.profile
+*.best
+*.sscore
+*_PRS.txt
+*preds.dat
+*individuals*.tsv
+*.pheno
+*.fam
+*.bed
+*.bim
+scored_profiles/
+**/scored_profiles/
+
+# Container images are pulled from Docker Hub, never committed
+*.sif
+*.tar
+*.tar.gz
+
+# Local data and run outputs
+data/
+runs/
+results/benchmark_runs/
+__pycache__/
+*.pyc
+.DS_Store
