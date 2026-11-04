@@ -10,7 +10,7 @@ All images are on Docker Hub under [`chiomab`](https://hub.docker.com/u/chiomab)
 
 ![Bench-PRS Dock images](docs/benchprs_dock_fig_1.png)
 
-## How it works
+## Flowchart
 
 ```mermaid
 flowchart TD
