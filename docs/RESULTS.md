@@ -79,7 +79,7 @@ same amount.
 
 ## Figures
 
-See [`../figures/`](../figures): setup and execution time comparisons (linear and log), and the
+See [`../benchmark/local/figures/`](../benchmark/local/figures): setup and execution time comparisons (linear and log), and the
 setup/execution efficiency-ratio bar charts. Regenerate them with
-[`../analysis/plot_obj1_benchmarks.py`](../analysis/plot_obj1_benchmarks.py); regenerate the CSVs in
-[`../results/`](../results) with [`../analysis/prep_master.py`](../analysis/prep_master.py).
+[`../benchmark/analysis/plot_obj1_benchmarks.py`](../benchmark/analysis/plot_obj1_benchmarks.py); regenerate the CSVs in
+[`../benchmark/local/results/`](../benchmark/local/results) with [`../benchmark/analysis/prep_master.py`](../benchmark/analysis/prep_master.py).
