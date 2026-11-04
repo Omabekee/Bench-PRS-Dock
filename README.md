@@ -8,7 +8,66 @@ Every image is **self-documenting**: a bare `docker run <image>` prints the tool
 **self-verifying**: `docker run <image> goss -g /goss.yaml validate` checks its internal dependencies.
 All images are on Docker Hub under [`chiomab`](https://hub.docker.com/u/chiomab).
 
-![Bench-PRS Dock images](docs/bench_prs_dock_overview.png)
+![Bench-PRS Dock images](docs/benchprs_dock_fig_1.png)
+
+## How it works
+
+```mermaid
+flowchart TD
+    src[("Tool sources<br/>10 multi-ancestry PRS tools")]
+    data[("Prostate cancer test data<br/>African target · European base")]
+
+    subgraph build["Image build · dockerfiles/&lt;tool&gt;/"]
+        df["Dockerfile<br/>pinned base image + tool release"]
+        helper["Usage helper<br/>self-documenting image"]
+        goss["goss spec<br/>self-verifying dependencies"]
+    end
+
+    hub[("Docker Hub<br/>chiomab/&lt;tool&gt;:vX.Y")]
+
+    subgraph prov["Build provenance · provenance/"]
+        lock["Dependency lockfiles<br/>conda · pip · R · system"]
+        sha["Image SHA-256, seeds<br/>and thread settings"]
+    end
+
+    subgraph bench["Benchmark · benchmark/harness/"]
+        native["Native install<br/>obj1_bench.py"]
+        docker["Docker run<br/>obj1_bench.py"]
+        hpc["Apptainer on HPC<br/>run_hpc.py + Slurm"]
+    end
+
+    measure["Measures<br/>setup and execution time<br/>peak memory<br/>output consistency"]
+
+    analysis["benchmark/analysis/<br/>tables and figures"]
+    results(["docs/RESULTS.md<br/>and benchmark figures"])
+
+    src --> df --> helper --> goss --> hub
+    df --> lock
+    hub --> sha
+    hub --> docker & hpc
+    src --> native
+    data --> bench
+    bench --> measure
+    measure --> analysis --> results
+
+    classDef dataset fill:#E5E7EB,stroke:#333,color:#000;
+    classDef buildc fill:#BFD7ED,stroke:#333,color:#000;
+    classDef reg fill:#D9C8F0,stroke:#333,color:#000;
+    classDef provc fill:#FDE68A,stroke:#333,color:#000;
+    classDef benchc fill:#A5DFCD,stroke:#333,color:#000;
+    classDef meas fill:#F7B267,stroke:#333,color:#000;
+    classDef output fill:#EF767A,stroke:#333,color:#000,font-weight:bold;
+    class src,data dataset;
+    class df,helper,goss buildc;
+    class hub reg;
+    class lock,sha provc;
+    class native,docker,hpc benchc;
+    class measure,analysis meas;
+    class results output;
+    style build fill:#F8FAFC,stroke:#9CA3AF
+    style prov fill:#F8FAFC,stroke:#9CA3AF
+    style bench fill:#F8FAFC,stroke:#9CA3AF
+```
 
 ## Tools
 
