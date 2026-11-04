@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use these container images or benchmark results, please cite this repository."
-title: "PRS tool containers & Docker-vs-native benchmark"
+title: "Bench-PRS Dock: A Containerised Collection of Multi-Ancestry Polygenic Risk Score Tools for Reproducible Deployment and Benchmarking"
 authors:
   - family-names: Oselu
     given-names: Chioma
